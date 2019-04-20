@@ -10,7 +10,7 @@ from rateMyCourse.models import User, Teacher, Course, Comment, MakeComment, Tea
 
 from db_checker import DBChecker
 from test_logger import log
-from login_status import LoginStatus
+from login_status import LoginStatus, getmd5
 
 
 class BackBasicTestCase(TestCase):
@@ -275,7 +275,7 @@ class BackAuthTC(BackBasicTestCase):
                 "/signIn/",
                 {
                     "username": "rbq",
-                    "password": "rbq"
+                    "password": getmd5("rbq")
                 }
             )
             sess_content = self.client.session.get("auth_sess")
@@ -289,7 +289,7 @@ class BackAuthTC(BackBasicTestCase):
             self.client.cookies = SimpleCookie(
                 {
                     "username": "rbq",
-                    "password": "rbq"
+                    "password": getmd5("rbq")
                 }
             )
             session = self.client.session

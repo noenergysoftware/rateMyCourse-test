@@ -1,5 +1,11 @@
 from django.test import Client
 from http.cookies import SimpleCookie
+import hashlib
+
+def getmd5(s):
+    md5 = hashlib.md5()
+    md5.update(s.encode("utf-8"))
+    return md5.hexdigest()
 
 class LoginStatus:
     def __init__(self, testcaseobj, username, password):
@@ -12,7 +18,7 @@ class LoginStatus:
         client.cookies = SimpleCookie(
             {
                 "username": self.username,
-                "password": self.password
+                "password": getmd5(self.password)
             }
         )
         session = client.session
