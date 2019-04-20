@@ -12,6 +12,8 @@ from db_checker import DBChecker
 from test_logger import log
 from login_status import LoginStatus, getmd5
 
+import os
+BACK_TEST_DIR = os.path.dirname(os.path.abspath(__file__))
 
 class BackBasicTestCase(TestCase):
     # Prepare the database by using fixture.
@@ -188,7 +190,7 @@ class BackGetCheckBodyTC(BackBasicTestCase):
 class BackCreateTC(BackPostCheckDBTC):
     @tag("auto")
     def test_auto(self):
-        self.autoTest("test/test_create.pd.json")
+        self.autoTest(os.path.join(BACK_TEST_DIR, "test_create.pd.json"))
 
     @tag("foreign")
     def test_add_teach_course(self):
@@ -239,7 +241,7 @@ class BackCreateTC(BackPostCheckDBTC):
 class BackUpdateTC(BackPostCheckDBTC):
     @tag("auto")
     def test_auto(self):
-        self.autoTest("test/test_update.pd.json")
+        self.autoTest(os.path.join(BACK_TEST_DIR, "test_update.pd.json"))
 
     @tag("foreign")
     def test_edit_comment(self):
@@ -264,7 +266,7 @@ class BackUpdateTC(BackPostCheckDBTC):
 class BackSearchTC(BackGetCheckBodyTC):
     @tag("auto")
     def test_auto(self):
-        self.autoTest("test/test_search.gb.json")
+        self.autoTest(os.path.join(BACK_TEST_DIR, "test_search.gb.json"))
 
 
 @tag("back")
