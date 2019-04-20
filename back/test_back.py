@@ -61,6 +61,34 @@ class BackCreateTC(BackPostCheckDBTC):
             ).exists()
         )
 
+    def test_sign_up_not_complete(self):
+        self.postErrorTest(
+            "/signUp/",
+            {
+                "username": "test"
+            }
+        )
+
+    def test_sign_up_dup_mail(self):
+        self.postErrorTest(
+            "/signUp/",
+            {
+                "username": "test_dup_mail",
+                "mail": "ming@test.com",
+                "password": "kkk"
+            }
+        )
+
+    def test_sign_up_dup_username(self):
+        self.postErrorTest(
+            "/signUp/",
+            {
+                "username": "ming",
+                "mail": "test_dup_username@test.com",
+                "password": "kkk"
+            }
+        )
+
 
 @tag("back")
 class BackUpdateTC(BackPostCheckDBTC):
@@ -84,6 +112,16 @@ class BackUpdateTC(BackPostCheckDBTC):
                 MakeComment.objects.filter(
                     comment__content="changed",
                 ).exists()
+            )
+
+    def test_update_user_not_complete(self):
+        with LoginStatus(self, "rbq", "rbq"):
+            self.postErrorTest(
+                "/updateUser/",
+                {
+                    "username": "rbq",
+                    "gender": "M"
+                }
             )
 
 
@@ -115,7 +153,7 @@ class BackSearchTC(BackGetCheckBodyTC):
 
 @tag("back")
 class BackAuthTC(BackBasicTestCase):
-    def test_sign_in(self):
+    def test_sign_in_with_username(self):
         try:
             self.postContainTest(
                 "/signIn/",
@@ -126,6 +164,72 @@ class BackAuthTC(BackBasicTestCase):
             )
             sess_content = self.client.session.get("auth_sess")
             self.assertEqual(sess_content, "rbq")
+        finally:
+            self.client.session.flush()
+            self.client = Client()
+
+    def test_sign_in_with_mail(self):
+        try:
+            self.postContainTest(
+                "/signIn/",
+                {
+                    "mail": "rbq@test.com",
+                    "password": getmd5("rbq")
+                }
+            )
+            sess_content = self.client.session.get("auth_sess")
+            self.assertEqual(sess_content, "rbq")
+        finally:
+            self.client.session.flush()
+            self.client = Client()
+
+    def test_sign_in_no_mail_username(self):
+        try:
+            self.postErrorTest(
+                "/signIn/",
+                {
+                    "password": getmd5("rbq")
+                }
+            )
+        finally:
+            self.client.session.flush()
+            self.client = Client()
+
+    def test_sign_in_username_not_exist(self):
+        try:
+            self.postErrorTest(
+                "/signIn/",
+                {
+                    "username": "test_username_not_exist",
+                    "password": getmd5("rbq")
+                }
+            )
+        finally:
+            self.client.session.flush()
+            self.client = Client()
+
+    def test_sign_in_mail_not_exist(self):
+        try:
+            self.postErrorTest(
+                "/signIn/",
+                {
+                    "mail": "test_mail_not_exist@test.com",
+                    "password": getmd5("rbq")
+                }
+            )
+        finally:
+            self.client.session.flush()
+            self.client = Client()
+
+    def test_sign_in_wrong_password(self):
+        try:
+            self.postErrorTest(
+                "/signIn/",
+                {
+                    "username": "ming",
+                    "password": getmd5("ming_wrong")
+                }
+            )
         finally:
             self.client.session.flush()
             self.client = Client()

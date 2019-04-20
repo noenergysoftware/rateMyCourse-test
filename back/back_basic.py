@@ -49,6 +49,9 @@ class BackBasicTestCase(TestCase):
             self.assertTrue(key in dicta.keys())
             self.assertEquals(dicta[key], dictb[key])
 
+    def response2JSON(self, response):
+        return json.loads(response.content)
+
     def postContainTest(self, url, form, text=""):
         # Send Request
         #   Specify the interface to test by assigning the url.
@@ -58,10 +61,21 @@ class BackBasicTestCase(TestCase):
         # Response Check
         #   Check the status code(default 200) 
         #   and whether contain text in body.
+        body = self.response2JSON(response)
         try:
-            body = json.loads(response.content)
             self.assertEqual(body["status"], 1)
             self.assertContains(response, text)
+        except Exception as e:
+            log.error("Error when checking response. The response is %s", response.content)
+            raise e
+        return response
+
+    def postErrorTest(self, url, form):
+        response = self.client.post(url, form)
+
+        body = self.response2JSON(response)
+        try:
+            self.assertLess(body["status"], 0)
         except Exception as e:
             log.error("Error when checking response. The response is %s", response.content)
             raise e

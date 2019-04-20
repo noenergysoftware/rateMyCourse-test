@@ -1,9 +1,12 @@
 # vscode
 .vscode
 
-# database
+# python
 *.pyc
 __pycache__/
 
 # test
 test.log
+
+# coverage
+coverage/
