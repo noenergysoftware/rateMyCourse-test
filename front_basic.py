@@ -30,4 +30,4 @@ class FrontBasicTC(TestCase):
         super().tearDownClass()
 
     def setUp(self):
-        self.domain = "127.0.0.1"
+        self.domain = "ratemycourse.tk"

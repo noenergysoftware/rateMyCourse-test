@@ -6,7 +6,6 @@ from page_objects import *
 from user_actions import *
 from front_basic import FrontBasicTC
 
-@tag("kkk")
 @tag("front")
 class FrontContentCheckTC(FrontBasicTC):
     def IDCheck(self, page, id_text_dict):

@@ -141,6 +141,7 @@ class FrontCommentGoLogicTC(FrontBasicTC):
             page = page.goPersonPage()
             page.checkIsSelf()
 
+    @tag("db_modify")
     def test_detail(self):
         # TODO This not pass, may somewhat wrong.
         page = HomePage(self.driver, self.domain)
