@@ -1,0 +1,9 @@
+# vscode
+.vscode
+
+# database
+*.pyc
+__pycache__/
+
+# test
+test.log
