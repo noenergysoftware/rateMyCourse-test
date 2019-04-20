@@ -6,7 +6,7 @@ from django.test import Client, tag
 from back_basic import BackBasicTestCase, BackGetCheckBodyTC, BackPostCheckDBTC
 from login_status import LoginStatus, getmd5
 from rateMyCourse.models import (Comment, Course, MakeComment, TeachCourse,
-                                 Teacher, User)
+                                 Teacher, User, Rank, MakeRank)
 
 BACK_TEST_DIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -89,6 +89,39 @@ class BackCreateTC(BackPostCheckDBTC):
             }
         )
 
+    @tag("foreign")
+    def test_make_rank(self):
+        with LoginStatus(self, "hong", "hong"):
+            self.postContainTest(
+                "/makeRank/",
+                {
+                    "username": "hong",
+                    "course_ID": "000000",
+                    "difficulty_score": 2,
+                    "funny_score": 2,
+                    "gain_score": 2,
+                    "recommend_score": 2
+                }
+            )
+        self.assertTrue(
+            Rank.objects.filter(
+                difficulty_score=2,
+                funny_score=2,
+                gain_score=2,
+                recommend_score=2,
+            ).exists()
+        )
+        self.assertTrue(
+            MakeRank.objects.filter(
+                user__username="hong",
+                course__course_ID="000000",
+                rank__difficulty_score=2,
+                rank__funny_score=2,
+                rank__gain_score=2,
+                rank__recommend_score=2,
+            ).exists()
+        )
+
 
 @tag("back")
 class BackUpdateTC(BackPostCheckDBTC):
@@ -124,6 +157,39 @@ class BackUpdateTC(BackPostCheckDBTC):
                 }
             )
 
+    @tag("foreign")
+    def test_make_rank(self):
+        with LoginStatus(self, "rbq", "rbq"):
+            self.postContainTest(
+                "/makeRank/",
+                {
+                    "username": "rbq",
+                    "course_ID": "000000",
+                    "difficulty_score": 4,
+                    "funny_score": 3,
+                    "gain_score": 2,
+                    "recommend_score": 1
+                }
+            )
+        self.assertTrue(
+            Rank.objects.filter(
+                difficulty_score=4,
+                funny_score=3,
+                gain_score=2,
+                recommend_score=1,
+            ).exists()
+        )
+        self.assertTrue(
+            MakeRank.objects.filter(
+                user__username="rbq",
+                course__course_ID="000000",
+                rank__difficulty_score=4,
+                rank__funny_score=3,
+                rank__gain_score=2,
+                rank__recommend_score=1,
+            ).exists()
+        )
+
 
 @tag("back")
 class BackSearchTC(BackGetCheckBodyTC):
@@ -146,6 +212,57 @@ class BackSearchTC(BackGetCheckBodyTC):
                 "role": "S",
                 "gender": "M",
                 "self_introduction": "mingming"
+            }
+        )
+
+    def test_get_rank_by_course_zero(self):
+        body, retdict, response = self.getJsonBody(
+            "/getRankByCourse/",
+            {
+                "course_ID": "0"
+            }
+        )
+        self.checkDictEntry(
+            retdict,
+            {
+                "difficulty_score": 0,
+                "funny_score": 0,
+                "gain_score": 0,
+                "recommend_score": 0,
+            }
+        )
+
+    def test_get_rank_by_course_single(self):
+        body, retdict, response = self.getJsonBody(
+            "/getRankByCourse/",
+            {
+                "course_ID": "110"
+            }
+        )
+        self.checkDictEntry(
+            retdict,
+            {
+                "difficulty_score": 5,
+                "funny_score": 5,
+                "gain_score": 5,
+                "recommend_score": 5,
+            }
+        )
+
+    def test_get_rank_by_course_multi(self):
+        body, retdict, response = self.getJsonBody(
+            "/getRankByCourse/",
+            {
+                "course_ID": "1"
+            }
+        )
+        self.checkDictEntry(
+            retdict,
+            {
+                "difficulty_score": 2,
+                "funny_score": 3,
+                "gain_score": 4,
+                "recommend_score": 5,
             }
         )
         

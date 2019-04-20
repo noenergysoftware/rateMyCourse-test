@@ -24,18 +24,6 @@ class BackBasicTestCase(TestCase):
         else:
             log.error("Test Fail. \n\t%s", error_msg)
 
-    def getJsonBody(self, url, form=None):
-        response = self.client.get(url, form)
-        try:
-            self.assertEqual(response.status_code, 200)
-            body = json.loads(response.content)
-            self.assertEqual(body["status"], 1)
-            retlist = body["body"]
-        except Exception as e:
-            log.error("Error when checking response. The response is %s", response.content)
-            raise e
-        return (body, retlist, response)
-
     def checkDictEntry(self, dicta, dictb):
         for key, value in dictb.items():
             if not key in dicta.keys():
@@ -44,13 +32,35 @@ class BackBasicTestCase(TestCase):
                 return False
         return True
 
+    def response2JSON(self, response):
+        return json.loads(response.content)
+
+    def getJsonBody(self, url, form=None):
+        response = self.client.get(url, form)
+        try:
+            self.assertEqual(response.status_code, 200)
+            body = self.response2JSON(response)
+            self.assertEqual(body["status"], 1)
+            retlist = body["body"]
+        except Exception as e:
+            log.error("Error when checking response. The response is %s", response.content)
+            raise e
+        return (body, retlist, response)
+
+    def getErrorTest(self, url, form=None):
+        response = self.client.get(url, form)
+        try:
+            body = self.response2JSON(response)
+            self.assertLess(body["status"], 0)
+        except Exception as e:
+            log.error("Error when checking response. The response is %s", response.content)
+            raise e
+        return response
+
     def assertDictEntry(self, dicta, dictb):
         for key, value in dictb.items():
             self.assertTrue(key in dicta.keys())
             self.assertEquals(dicta[key], dictb[key])
-
-    def response2JSON(self, response):
-        return json.loads(response.content)
 
     def postContainTest(self, url, form, text=""):
         # Send Request
@@ -61,8 +71,8 @@ class BackBasicTestCase(TestCase):
         # Response Check
         #   Check the status code(default 200) 
         #   and whether contain text in body.
-        body = self.response2JSON(response)
         try:
+            body = self.response2JSON(response)
             self.assertEqual(body["status"], 1)
             self.assertContains(response, text)
         except Exception as e:
@@ -73,8 +83,8 @@ class BackBasicTestCase(TestCase):
     def postErrorTest(self, url, form):
         response = self.client.post(url, form)
 
-        body = self.response2JSON(response)
         try:
+            body = self.response2JSON(response)
             self.assertLess(body["status"], 0)
         except Exception as e:
             log.error("Error when checking response. The response is %s", response.content)
