@@ -268,6 +268,25 @@ class BackSearchTC(BackGetCheckBodyTC):
     def test_auto(self):
         self.autoTest(os.path.join(BACK_TEST_DIR, "test_search.gb.json"))
 
+    def test_get_user_detail(self):
+        body, retdict, response = self.getJsonBody(
+            "/getUserDetail/",
+            {
+                "username": "ming"
+            }
+        )
+        self.checkDictEntry(
+            retdict,
+            {
+                "username": "ming",
+                "mail": "ming@test.com",
+                "role": "S",
+                "gender": "M",
+                "self_introduction": "mingming"
+            }
+        )
+        
+
 
 @tag("back")
 class BackAuthTC(BackBasicTestCase):

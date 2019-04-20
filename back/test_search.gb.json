@@ -80,6 +80,25 @@
                 "name": "论持久战"
             }
         ]
+    ],
+    [
+        "get_department",
+        "/getDepartment/",
+        {
+        },
+        3,
+        [
+            {
+                "name": "rbq"
+            },
+            {
+                "name": "派出所",
+                "website": "http://www.110.com"
+            },
+            {
+                "name": "Office"
+            }
+        ]
     ]
 
 
