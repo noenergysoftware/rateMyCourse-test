@@ -5,7 +5,7 @@ from contextlib import contextmanager
 def LogStatus(page, name, password):
     try:
         driver = page.driver
-        if not page is LoginPage:
+        if not isinstance(page, LoginPage):
             page = page.goLoginPage()
         yield page.logIn(name, password)
     finally:

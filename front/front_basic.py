@@ -7,6 +7,9 @@ from cover_saver import *
 
 PROXY_COVER = False # Still not avaliable.
 
+TAG_DB_MODIFY = "db_modify"
+TAG_FRONT = "front"
+
 class FrontBasicTC(TestCase):
     @classmethod
     def setUpClass(cls):

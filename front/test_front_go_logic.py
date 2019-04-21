@@ -4,9 +4,9 @@ from django.test import tag
 
 from page_objects import *
 from user_actions import *
-from front_basic import FrontBasicTC
+from front_basic import FrontBasicTC, TAG_DB_MODIFY, TAG_FRONT
 
-@tag("front")
+@tag(TAG_FRONT)
 class FrontHomeGoLogicTC(FrontBasicTC):
     def createInitPage(self):
         return HomePage(self.driver, self.domain)
@@ -21,9 +21,14 @@ class FrontHomeGoLogicTC(FrontBasicTC):
         registpage = page.goRegistPage()
         registpage.checkIsSelf()
 
-    def test_search(self):
+    def test_search_enter(self):
         page = self.createInitPage()
-        searchpage = page.search("rbq")
+        searchpage = page.searchEnter("rbq")
+        searchpage.checkIsSelf()
+
+    def test_search_button(self):
+        page = self.createInitPage()
+        searchpage = page.searchButton("rbq")
         searchpage.checkIsSelf()
 
     def test_person(self):
@@ -33,11 +38,11 @@ class FrontHomeGoLogicTC(FrontBasicTC):
             page.checkIsSelf()
 
 
-@tag("front")
+@tag(TAG_FRONT)
 class FrontSearchGoLogicTC(FrontBasicTC):
     def createInitPage(self):
         homepage = HomePage(self.driver, self.domain)
-        searchpage = homepage.search("rbq")
+        searchpage = homepage.searchEnter("rbq")
         searchpage.checkIsSelf()
         return searchpage
 
@@ -68,11 +73,11 @@ class FrontSearchGoLogicTC(FrontBasicTC):
             page.checkIsSelf()
 
 
-@tag("front")
+@tag(TAG_FRONT)
 class FrontDetailGoLogicTC(FrontBasicTC):
     def createInitPage(self):
         homepage = HomePage(self.driver, self.domain)
-        searchpage = homepage.search("rbq")
+        searchpage = homepage.searchEnter("rbq")
         detailpage = searchpage.goDetailPage("0")
         detailpage.checkIsSelf()
         return detailpage
@@ -108,7 +113,7 @@ class FrontDetailGoLogicTC(FrontBasicTC):
         commentpage.checkIsSelf()
 
 
-@tag("front")
+@tag(TAG_FRONT)
 class FrontCommentGoLogicTC(FrontBasicTC):
     def goInitPage(self, homepage):
         searchpage = homepage.search("rbq")
@@ -141,7 +146,7 @@ class FrontCommentGoLogicTC(FrontBasicTC):
             page = page.goPersonPage()
             page.checkIsSelf()
 
-    @tag("db_modify")
+    @tag(TAG_DB_MODIFY)
     def test_detail(self):
         # TODO This not pass, may somewhat wrong.
         page = HomePage(self.driver, self.domain)
@@ -153,7 +158,59 @@ class FrontCommentGoLogicTC(FrontBasicTC):
             page.checkIsSelf()
 
 
-@tag("front")
+@tag("kkk")
+@tag(TAG_FRONT)
+class FrontRegistGoLogicTC(FrontBasicTC):
+    def createInitPage(self):
+        homepage = HomePage(self.driver, self.domain)
+        return homepage.goRegistPage()
+
+    def test_home(self):
+        page = self.createInitPage()
+        page = page.goHomePage()
+        page.checkIsSelf()
+
+    def test_login_normal(self):
+        page = self.createInitPage()
+        page = page.goLoginPage()
+        page.checkIsSelf()
+
+    @tag(TAG_DB_MODIFY)
+    def test_login_submit(self):
+        page = self.createInitPage()
+        page.fillForm(
+            name="test_regist_login",
+            email="test_regist_login@test.com",
+            password="test_regist_login_233",
+            repassword="test_regist_login_233",
+        )
+        page = page.submit()
+        page.checkIsSelf()
+
+@tag("kkk")
+@tag(TAG_FRONT)
+class FrontLoginGoLogicTC(FrontBasicTC):
+    def createInitPage(self):
+        homepage = HomePage(self.driver, self.domain)
+        return homepage.goLoginPage()
+
+    def test_home_normal(self):
+        page = self.createInitPage()
+        page = page.goHomePage()
+        page.checkIsSelf()
+
+    def test_home_submit(self):
+        page = self.createInitPage()
+        with LogStatus(page, "rbq", "rbq") as page:
+            page.checkIsSelf()
+
+    def test_regist(self):
+        page = self.createInitPage()
+        page = page.goRegistPage()
+        page.checkIsSelf()
+
+
+@tag(TAG_FRONT)
 @skip
 class FrontPersonGoLogicTC(FrontBasicTC):
     def createInitPage(self):
@@ -163,5 +220,4 @@ class FrontPersonGoLogicTC(FrontBasicTC):
         return personpage
 
     # TODO I don't know this page's go logic
-    #       So do login&signin pages
     

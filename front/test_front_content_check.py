@@ -4,9 +4,9 @@ from django.test import tag
 
 from page_objects import *
 from user_actions import *
-from front_basic import FrontBasicTC
+from front_basic import FrontBasicTC, TAG_DB_MODIFY, TAG_FRONT
 
-@tag("front")
+@tag(TAG_FRONT)
 class FrontContentCheckTC(FrontBasicTC):
     def IDCheck(self, page, id_text_dict):
         for text_id, exp_text in id_text_dict.items():
@@ -16,7 +16,7 @@ class FrontContentCheckTC(FrontBasicTC):
 
     def test_detail_course(self):
         page = HomePage(self.driver, self.domain)
-        page = page.search("论持久战")
+        page = page.searchEnter("论持久战")
         page = page.goDetailPage(0)
         page.checkIsSelf()
 
@@ -48,7 +48,7 @@ class FrontContentCheckTC(FrontBasicTC):
 
     def test_detail_comment(self):
         page = HomePage(self.driver, self.domain)
-        page = page.search("论持久战")
+        page = page.searchEnter("论持久战")
         page = page.goDetailPage(0)
         page.checkIsSelf()
 

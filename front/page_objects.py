@@ -74,6 +74,7 @@ class HomePage(BasicPage):
         super().__init__(driver, url)
         self.search_box_id = "searchboxCourse"
         self.select_department_btn_id = "buttonSelectDepartment"
+        self.search_btn_id = "buttonSearchCourse"
 
     def checkIsSelf(self):
         check_ids = [
@@ -87,24 +88,45 @@ class HomePage(BasicPage):
         raise NotImplementedError
 
     def search(self, s):
+        self.searchEnter(s)
+
+    def searchEnter(self, s):
         box = self.waitAppear_ID(self.search_box_id)
         box.send_keys(s + "\n")
         return SearchResultPage(self.driver)
 
+    def searchButton(self, s):
+        box = self.waitAppear_ID(self.search_box_id)
+        box.send_keys(s)
+        btn = self.waitAppear_ID(self.search_btn_id)
+        btn.click()
+        return SearchResultPage(self.driver)
 
 class LoginPage(BasicPage):
     def __init__(self, driver, url=None):
         super().__init__(driver, url)
-        # IDs
-        self.login_btn_id = "login"
+        self.home_page_btn_xpath = "//a[@href='index.html']"
+        self.regist_page_btn_xpath = "//a[@href='signup.html']"
+
         self.name_text_id = "name"
         self.password_text_id = "password"
+        self.login_btn_id = "login"
 
     def checkIsSelf(self):
         self.waitAppear_ID(self.login_btn_id)
 
     def goLoginPage(self):
         raise NotImplementedError
+
+    def goHomePage(self):
+        btn = self.waitAppear_xpath(self.home_page_btn_xpath)
+        btn.click()
+        return HomePage(self.driver)
+
+    def goRegistPage(self):
+        btn = self.waitAppear_xpath(self.regist_page_btn_xpath)
+        btn.click()
+        return RegistPage(self.driver)
 
     def logIn(self, name, password):
         name_text = self.waitAppear_ID(self.name_text_id)
@@ -135,6 +157,13 @@ class SearchResultPage(BasicPage):
 class RegistPage(BasicPage):
     def __init__(self, driver, url=None):
         super().__init__(driver, url)
+        self.home_page_btn_xpath = "//a[@href='index.html']"
+        self.login_page_btn_xpath = "//a[@href='login.html']"
+
+        self.name_text_id = "name"
+        self.email_text_id = "email"
+        self.password_text_id = "passwd"
+        self.repassword_text_id = "repasswd"
         self.submit_signup_btn_id = "tos"
 
     def checkIsSelf(self):
@@ -143,6 +172,35 @@ class RegistPage(BasicPage):
     def goRegistPage(self):
         raise NotImplementedError
 
+    def goHomePage(self):
+        btn = self.waitAppear_xpath(self.home_page_btn_xpath)
+        btn.click()
+        return HomePage(self.driver)
+
+    def goLoginPage(self):
+        btn = self.waitAppear_xpath(self.login_page_btn_xpath)
+        btn.click()
+        return LoginPage(self.driver)
+
+    def fillForm(self, name=None, email=None, password=None, repassword=None):
+        if name:
+            text = self.waitAppear_ID(self.name_text_id)
+            text.send_keys(name)
+        if email:
+            text = self.waitAppear_ID(self.email_text_id)
+            text.send_keys(email)
+        if password:
+            text = self.waitAppear_ID(self.password_text_id)
+            text.send_keys(password)
+        if repassword:
+            text = self.waitAppear_ID(self.repassword_text_id)
+            text.send_keys(repassword)
+
+    def submit(self):
+        btn = self.waitAppear_ID(self.submit_signup_btn_id)
+        btn.click()
+        self.alertAccept()
+        return LoginPage(self.driver)
 
 class PersonPage(BasicPage):
     def __init__(self, driver, url=None):
