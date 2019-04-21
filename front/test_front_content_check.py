@@ -8,12 +8,6 @@ from front_basic import FrontBasicTC, TAG_DB_MODIFY, TAG_FRONT
 
 @tag(TAG_FRONT)
 class FrontContentCheckTC(FrontBasicTC):
-    def IDCheck(self, page, id_text_dict):
-        for text_id, exp_text in id_text_dict.items():
-            element = page.waitAppear_ID(text_id)
-            text = element.text
-            self.assertEqual(text, exp_text)
-
     def test_detail_course(self):
         page = HomePage(self.driver, self.domain)
         page = page.searchEnter("论持久战")
@@ -29,22 +23,6 @@ class FrontContentCheckTC(FrontBasicTC):
                 page.description_text_id: "猫真可爱"
             }
         )
-
-    @skip
-    def test_person(self):
-        page = HomePage(self.driver, self.domain)
-        with LogStatus(page, "ming", "ming") as page:
-            page.goPersonPage()
-            page.checkIsSelf()
-            # TODO 还不知道该页面是否会显示个人信息
-            self.IDCheck(page,
-                {
-                    page.name_text_id: "ming",
-                    page.role_text_id: "学生",
-                    page.gender_text_id: "男",
-                    page.intro_text_id: "mingming"
-                }
-            )
 
     def test_detail_comment(self):
         page = HomePage(self.driver, self.domain)

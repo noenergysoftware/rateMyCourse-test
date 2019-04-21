@@ -158,7 +158,6 @@ class FrontCommentGoLogicTC(FrontBasicTC):
             page.checkIsSelf()
 
 
-@tag("kkk")
 @tag(TAG_FRONT)
 class FrontRegistGoLogicTC(FrontBasicTC):
     def createInitPage(self):
@@ -187,7 +186,6 @@ class FrontRegistGoLogicTC(FrontBasicTC):
         page = page.submit()
         page.checkIsSelf()
 
-@tag("kkk")
 @tag(TAG_FRONT)
 class FrontLoginGoLogicTC(FrontBasicTC):
     def createInitPage(self):

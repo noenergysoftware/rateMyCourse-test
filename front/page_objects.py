@@ -23,6 +23,7 @@ class BasicPage:
         self.regist_page_btn_id = "signUp"
         self.home_page_btn_xpath = "//a[@href='index.html']"
         self.person_page_btn_id = "personalInfo"
+        self.logout_btn_id = "logOut"
 
     def clearCookies(self):
         self.driver.delete_all_cookies()
@@ -69,6 +70,12 @@ class BasicPage:
         btn.click()
         return PersonPage(self.driver)
 
+    def logout(self):
+        btn = self.waitAppear_ID(self.logout_btn_id)
+        btn.click()
+        self.alertAccept()
+        return HomePage(self.driver)
+
 class HomePage(BasicPage):
     def __init__(self, driver, url=None):
         super().__init__(driver, url)
@@ -88,7 +95,7 @@ class HomePage(BasicPage):
         raise NotImplementedError
 
     def search(self, s):
-        self.searchEnter(s)
+        return self.searchEnter(s)
 
     def searchEnter(self, s):
         box = self.waitAppear_ID(self.search_box_id)
@@ -219,21 +226,35 @@ class PersonPage(BasicPage):
         for id in check_ids:
             self.waitAppear_ID(id)
 
+    def getForm(self):
+        res = {}
+        text = self.waitAppear_ID(self.name_text_id)
+        res["name"] = text.get_attribute("value")
+        text = self.waitAppear_ID(self.role_text_id)
+        res["role"] = text.get_attribute("value")
+        text = self.waitAppear_ID(self.gender_text_id)
+        res["gender"] = text.get_attribute("value")
+        text = self.waitAppear_ID(self.intro_text_id)
+        res["intro"] = text.get_attribute("value")
+        return res
+
 
 class DetailPage(BasicPage):
     def __init__(self, driver, url=None):
         super().__init__(driver, url)
+        self.comment_divs = None
+
         self.name_text_id = "course_name"
         self.credit_text_id = "course_credit"
         self.school_text_id = "course_school"
         self.type_text_id = "course_type"
         self.description_text_id = "coursedescription"
 
-        self.comment_div_xpath = "//div[@id='{0}']"
-        self.comment_username_xpath = self.comment_div_xpath + "/div[1]/p"
-        self.comment_teachername_xpath = self.comment_div_xpath + "/table[1]/tbody/tr/td[2]/p"
-        self.comment_content_xpath = self.comment_div_xpath + "/div[2]/p"
-        self.comment_time_xpath = self.comment_div_xpath + "/div[3]/a[last()]/p"
+        self.comment_div_xpath = "//body/div[2]/div/div[position()>=3 and position() < last()]"
+        self.comment_username_xpath = "./div[1]/p"
+        self.comment_teachername_xpath = "./table[1]/tbody/tr/td[2]/p"
+        self.comment_content_xpath = "./div[2]/p"
+        self.comment_time_xpath = "./div[3]/a[last()]/p"
 
         self.comment_page_btn_id = "toComment"
 
@@ -248,6 +269,26 @@ class DetailPage(BasicPage):
         btn = self.waitAppear_ID(self.comment_page_btn_id)
         btn.click()
         return CommentPage(self.driver)
+
+    def getCommentNumber(self):
+        if not self.comment_divs:
+            self.comment_divs = self.driver.find_elements_by_xpath(self.comment_div_xpath)
+        return len(self.comment_divs)
+
+    def getCommentForm(self, index):
+        if not self.comment_divs:
+            self.comment_divs = self.driver.find_elements_by_xpath(self.comment_div_xpath)
+        div = self.comment_divs[index]
+        res = {}
+        temp = {
+            "username": self.comment_username_xpath,
+            "teachername": self.comment_teachername_xpath,
+            "content": self.comment_content_xpath,
+            "time": self.comment_time_xpath
+        }
+        for key, id in temp.items():
+            res[key] = div.find_element_by_xpath(id).text
+        return res
 
 
 class CommentPage(BasicPage):
