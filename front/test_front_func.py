@@ -5,7 +5,7 @@ from django.test import tag
 
 from page_objects import *
 from user_actions import *
-from front_basic import FrontBasicTC, TAG_DB_MODIFY, TAG_FRONT, rs
+from front_basic import FrontBasicTC, TAG_DB_MODIFY, TAG_FRONT, TAG_SPLIT, rs
 
 @tag(TAG_FRONT)
 class FrontFuncLogInTC(FrontBasicTC):
@@ -51,7 +51,7 @@ class FrontFuncLogInTC(FrontBasicTC):
             page.editComment(test_words)
             page.selectTeacher(0)
             page = page.submitComment()
-            comment_num = page.getCommentNumber()
+            comment_num = page.getCommentNum()
             exp_dict = {
                 "username": "hong",
                 "teachername": "rbq",
@@ -149,22 +149,10 @@ class FrontFuncLogOutTC(FrontBasicTC):
 @tag(TAG_FRONT)
 class FrontFuncSearchTC(FrontBasicTC):
     def checkCourseExist(self, page, course_name):
-        course_list = page.getCourseList()
-        for course in course_list:
-            if not "name" in course.keys():
-                continue
-            if course["name"] == course_name:
-                return True
-        return False
+        return page.searchCourseForIndex(course_name) != None
 
     def checkCourseNotExist(self, page, course_name):
-        course_list = page.getCourseList()
-        for course in course_list:
-            if not "name" in course.keys():
-                continue
-            if course["name"] == course_name:
-                return False
-        return True
+        return not self.checkCourseExist(page, course_name)
 
     def test_search_exist(self):
         page = HomePage(self.driver, self.domain)
@@ -209,3 +197,93 @@ class FrontFuncSearchTC(FrontBasicTC):
         page = page.search("如何进牢子")
         self.checkCourseExist(page, "如何进牢子")
         self.assertEqual(page.getCourseNum(), 0)
+
+
+@tag(TAG_SPLIT)
+@tag(TAG_FRONT)
+class FrontFuncSplitPageTC(FrontBasicTC):
+    def setUp(self):
+        super().setUp()
+
+    def checkShow(self, start, stop, min_index, max_index, check_func):
+        if start < min_index:
+            start = min_index
+        if start > max_index:
+            start = max_index
+        if stop < min_index:
+            stop = min_index
+        if stop > max_index:
+            stop = max_index
+
+        for i in range(min_index, start):
+            self.assertFalse(check_func(i))
+        for i in range(start, stop):
+            self.assertTrue(check_func(i))
+        for i in range(stop, max_index):
+            self.assertFalse(check_func(i))
+
+    def generalTest(self, num_per_page, max_num, check_func, next_func, prev_func, jump_func):
+        with self.subTest(case_name="init"):
+            self.checkShow(
+                0,
+                num_per_page,
+                0,
+                max_num,
+                check_func
+            )
+        with self.subTest(case_name="next_page"):
+            next_func()
+            self.checkShow(
+                num_per_page,
+                2 * num_per_page,
+                0,
+                max_num,
+                check_func
+            )
+        with self.subTest(case_name="prev_page"):
+            prev_func()
+            self.checkShow(
+                0,
+                num_per_page,
+                0,
+                max_num,
+                check_func
+            )
+        with self.subTest(case_name="jump_page"):
+            jump_func(3)
+            self.checkShow(
+                2 * num_per_page,
+                3 * num_per_page,
+                0,
+                max_num,
+                check_func
+            )
+
+    def test_search_page(self):
+        '''This testcase need at least three pages.
+        '''
+        page = HomePage(self.driver, self.domain)
+        page = page.search("")
+        self.generalTest(
+            num_per_page=5,
+            max_num=page.getCourseNum(),
+            check_func=page.isCourseShow,
+            next_func=page.nextPage,
+            prev_func=page.prevPage,
+            jump_func=page.jumpPage
+        )
+
+    def test_detail_page(self):
+        '''This testcase need at least three pages.
+        '''
+        page = HomePage(self.driver, self.domain)
+        page = page.search("rbq")
+        page = page.goDetailPage(0)
+        self.generalTest(
+            num_per_page=5,
+            max_num=page.getCommentNum(),
+            check_func=page.isCommentShow,
+            next_func=page.nextPage,
+            prev_func=page.prevPage,
+            jump_func=page.jumpPage
+        )

@@ -180,6 +180,13 @@ class SearchResultPage(BasicPage):
         self.course_gain_id = "gain_score_{0}"
         self.course_recommend_id = "recommend_score_{0}"
 
+        self.now_page_num_text_id = "pagenum"
+        self.total_page_num_text_id = "totalpage"
+        self.next_page_btn_xpath = "//li[@id='nextpage']/a"
+        self.prev_page_btn_xpath = "//li[@id='lastpage']/a"
+        self.jump_page_text_id = "jumpPage"
+        self.jump_page_btn_xpath = "//nobr[@id='jump']/button"
+
     def checkIsSelf(self):
         self.waitAppear_ID(self.course_num_id)
 
@@ -193,6 +200,20 @@ class SearchResultPage(BasicPage):
             self.course_num = int(self.waitAppear_ID(self.course_num_id).text)
         return self.course_num
 
+    def _getCourseDivs(self):
+        if not self.course_divs:
+            self.course_divs = self.driver.find_elements_by_xpath(self.course_divs_xpath)
+        return self.course_divs
+
+    def searchCourseForIndex(self, course_name):
+        course_list = self.getCourseList()
+        for i in range(len(course_list)):
+            if not "name" in course_list[i].keys():
+                continue
+            if course_list[i]["name"] == course_name:
+                return i
+        return None
+
     def getCourseDetail(self, index):
         if index >= self.getCourseNum():
             raise Exception("Too large index for getCourseDetail.")
@@ -200,9 +221,7 @@ class SearchResultPage(BasicPage):
         if self.course_list and len(self.course_list) > index:
             return self.course_list[index]
 
-        if not self.course_divs:
-            self.course_divs = self.driver.find_elements_by_xpath(self.course_divs_xpath)
-        div = self.course_divs[index]
+        div = self._getCourseDivs()[index]
 
         name = div.find_element_by_xpath(self.course_name_xpath).text
         school = div.find_element_by_xpath(self.course_school_xpath).text
@@ -223,6 +242,7 @@ class SearchResultPage(BasicPage):
             "department": department,
             "type": k_type,
             "credit": credit,
+            # TODO like above todo
             # "rank": rank,
             # "difficulty": difficulty,
             # "funny": funny,
@@ -239,6 +259,42 @@ class SearchResultPage(BasicPage):
             res_dict = self.getCourseDetail(i)
             self.course_list.append(res_dict)
         return self.course_list
+
+    def isCourseShow(self, index=None, name=None):
+        if index == None and name == None:
+            raise Exception("Must assign either index or name")
+        if index != None and name != None:
+            raise Exception("Cannot assign both index and name")
+
+        if name != None:
+            index = self.searchCourseForIndex(name)
+            if index == None:
+                raise Exception("Course {0} not exists.".format(name))
+
+        if index >= self.getCourseNum():
+            raise Exception("Index {0} is too large.".format(index))
+        div = self._getCourseDivs()[index]
+        return not ("none" in div.get_attribute("style"))
+            
+    def prevPage(self):
+        btn = self.waitAppear_xpath(self.prev_page_btn_xpath)
+        btn.click()
+
+    def nextPage(self):
+        btn = self.waitAppear_xpath(self.next_page_btn_xpath)
+        btn.click()
+
+    def getNowPageNum(self):
+        return self.waitAppear_ID(self.now_page_num_text_id).text
+
+    def getTotalPageNum(self):
+        return self.waitAppear_ID(self.total_page_num_text_id)
+
+    def jumpPage(self, index):
+        text = self.waitAppear_ID(self.jump_page_text_id)
+        text.send_keys(str(index))
+        btn = self.waitAppear_xpath(self.jump_page_btn_xpath)
+        btn.click()
 
 
 class RegistPage(BasicPage):
@@ -338,6 +394,13 @@ class DetailPage(BasicPage):
 
         self.comment_page_btn_id = "toComment"
 
+        self.now_page_num_text_id = "pagenum"
+        self.total_page_num_text_id = "totalpage"
+        self.next_page_btn_xpath = "//li[@id='nextpage']/a"
+        self.prev_page_btn_xpath = "//li[@id='lastpage']/a"
+        self.jump_page_text_id = "jumpPage"
+        self.jump_page_btn_xpath = "//nobr[@id='jump']/button"
+
     def checkIsSelf(self):
         check_ids = [
             self.credit_text_id,
@@ -350,15 +413,18 @@ class DetailPage(BasicPage):
         btn.click()
         return CommentPage(self.driver)
 
-    def getCommentNumber(self):
+    def getCommentNum(self):
         if not self.comment_divs:
             self.comment_divs = self.driver.find_elements_by_xpath(self.comment_div_xpath)
         return len(self.comment_divs)
 
-    def getCommentForm(self, index):
+    def _getCommentDivs(self):
         if not self.comment_divs:
             self.comment_divs = self.driver.find_elements_by_xpath(self.comment_div_xpath)
-        div = self.comment_divs[index]
+        return self.comment_divs
+
+    def getCommentForm(self, index):
+        div = self._getCommentDivs()[index]
         res = {}
         temp = {
             "username": self.comment_username_xpath,
@@ -369,6 +435,32 @@ class DetailPage(BasicPage):
         for key, id in temp.items():
             res[key] = div.find_element_by_xpath(id).text
         return res
+
+    def isCommentShow(self, index):
+        if index >= self.getCommentNum():
+            raise Exception("Index {0} is too large.".format(index))
+        div = self._getCommentDivs()[index]
+        return not ("none" in div.get_attribute("style"))
+            
+    def prevPage(self):
+        btn = self.waitAppear_xpath(self.prev_page_btn_xpath)
+        btn.click()
+
+    def nextPage(self):
+        btn = self.waitAppear_xpath(self.next_page_btn_xpath)
+        btn.click()
+
+    def getNowPageNum(self):
+        return self.waitAppear_ID(self.now_page_num_text_id).text
+
+    def getTotalPageNum(self):
+        return self.waitAppear_ID(self.total_page_num_text_id)
+
+    def jumpPage(self, index):
+        text = self.waitAppear_ID(self.jump_page_text_id)
+        text.send_keys(str(index))
+        btn = self.waitAppear_xpath(self.jump_page_btn_xpath)
+        btn.click()
 
 
 class CommentPage(BasicPage):

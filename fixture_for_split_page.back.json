@@ -1,0 +1,702 @@
+[
+{
+  "model": "rateMyCourse.department",
+  "pk": 1,
+  "fields": {
+    "name": "Office",
+    "website": ""
+  }
+},
+{
+  "model": "rateMyCourse.department",
+  "pk": 2,
+  "fields": {
+    "name": "\u6d3e\u51fa\u6240",
+    "website": "http://www.110.com"
+  }
+},
+{
+  "model": "rateMyCourse.department",
+  "pk": 3,
+  "fields": {
+    "name": "rbq",
+    "website": ""
+  }
+},
+{
+  "model": "rateMyCourse.teacher",
+  "pk": 1,
+  "fields": {
+    "name": "qiang",
+    "website": "http://www.qiang.com",
+    "title": "First Qiang"
+  }
+},
+{
+  "model": "rateMyCourse.teacher",
+  "pk": 2,
+  "fields": {
+    "name": "police",
+    "website": "http://www.110.com",
+    "title": "Dear Police"
+  }
+},
+{
+  "model": "rateMyCourse.teacher",
+  "pk": 3,
+  "fields": {
+    "name": "rbq",
+    "website": "",
+    "title": ""
+  }
+},
+{
+  "model": "rateMyCourse.user",
+  "pk": 1,
+  "fields": {
+    "username": "ming",
+    "mail": "ming@test.com",
+    "password": "95c90aa47733b9023c318d9914606339",
+    "role": "S",
+    "self_introduction": "mingming",
+    "gender": "M"
+  }
+},
+{
+  "model": "rateMyCourse.user",
+  "pk": 2,
+  "fields": {
+    "username": "hong",
+    "mail": "hong@test.com",
+    "password": "88163c52fdb7520d2da5295dcb52bff0",
+    "role": "S",
+    "self_introduction": "honghong",
+    "gender": "F"
+  }
+},
+{
+  "model": "rateMyCourse.user",
+  "pk": 3,
+  "fields": {
+    "username": "qiang",
+    "mail": "qiang@test.com",
+    "password": "fcdb06a72af0516502e5fdccc9181ee0",
+    "role": "T",
+    "self_introduction": "qiangqiang",
+    "gender": "M"
+  }
+},
+{
+  "model": "rateMyCourse.user",
+  "pk": 4,
+  "fields": {
+    "username": "slave",
+    "mail": "slave@test.com",
+    "password": "03158cf39c6f316f9ce98a4e034cdc28",
+    "role": "O",
+    "self_introduction": "slaveslave",
+    "gender": "A"
+  }
+},
+{
+  "model": "rateMyCourse.user",
+  "pk": 5,
+  "fields": {
+    "username": "police",
+    "mail": "police@test.com",
+    "password": "814989b983fd853fb374e1676a06ade4",
+    "role": "T",
+    "self_introduction": "policepolice",
+    "gender": "M"
+  }
+},
+{
+  "model": "rateMyCourse.user",
+  "pk": 6,
+  "fields": {
+    "username": "rbq",
+    "mail": "rbq@test.com",
+    "password": "9c92c67a42ff4cb9f48f096dba2fdcea",
+    "role": "O",
+    "self_introduction": "",
+    "gender": "A"
+  }
+},
+{
+  "model": "rateMyCourse.course",
+  "pk": 1,
+  "fields": {
+    "name": "\u8bba\u6301\u4e45\u6218",
+    "website": "http://www.longlong.com",
+    "course_ID": "0",
+    "description": "\u732b\u771f\u53ef\u7231",
+    "course_type": "\u5fc5\u4fee",
+    "credit": 1.0
+  }
+},
+{
+  "model": "rateMyCourse.course",
+  "pk": 2,
+  "fields": {
+    "name": "\u7b2c\u4e09\u6b21\u4e16\u754c\u5927\u6218",
+    "website": "http://www.ww3.com",
+    "course_ID": "1",
+    "description": "",
+    "course_type": "",
+    "credit": 1.0
+  }
+},
+{
+  "model": "rateMyCourse.course",
+  "pk": 3,
+  "fields": {
+    "name": "\u5982\u4f55\u8fdb\u7262\u5b50",
+    "website": "http://www.jubao.com",
+    "course_ID": "110",
+    "description": "\u5f88\u7b80\u5355",
+    "course_type": "\u5fc5\u4fee",
+    "credit": 3.0
+  }
+},
+{
+  "model": "rateMyCourse.course",
+  "pk": 4,
+  "fields": {
+    "name": "rbq",
+    "website": "http://www.rbq.com",
+    "course_ID": "000000",
+    "description": "",
+    "course_type": "",
+    "credit": 1.0
+  }
+},
+{
+  "model": "rateMyCourse.course",
+  "pk": 5,
+  "fields": {
+    "name": "1",
+    "website": "",
+    "course_ID": "08081",
+    "description": "",
+    "course_type": "",
+    "credit": 1.0
+  }
+},
+{
+  "model": "rateMyCourse.course",
+  "pk": 6,
+  "fields": {
+    "name": "2",
+    "website": "",
+    "course_ID": "08082",
+    "description": "",
+    "course_type": "",
+    "credit": 1.0
+  }
+},
+{
+  "model": "rateMyCourse.course",
+  "pk": 7,
+  "fields": {
+    "name": "3",
+    "website": "",
+    "course_ID": "08083",
+    "description": "",
+    "course_type": "",
+    "credit": 1.0
+  }
+},
+{
+  "model": "rateMyCourse.course",
+  "pk": 8,
+  "fields": {
+    "name": "4",
+    "website": "",
+    "course_ID": "08084",
+    "description": "",
+    "course_type": "",
+    "credit": 1.0
+  }
+},
+{
+  "model": "rateMyCourse.course",
+  "pk": 9,
+  "fields": {
+    "name": "5",
+    "website": "",
+    "course_ID": "08085",
+    "description": "",
+    "course_type": "",
+    "credit": 1.0
+  }
+},
+{
+  "model": "rateMyCourse.course",
+  "pk": 10,
+  "fields": {
+    "name": "6",
+    "website": "",
+    "course_ID": "08086",
+    "description": "",
+    "course_type": "",
+    "credit": 1.0
+  }
+},
+{
+  "model": "rateMyCourse.course",
+  "pk": 11,
+  "fields": {
+    "name": "7",
+    "website": "",
+    "course_ID": "08087",
+    "description": "",
+    "course_type": "",
+    "credit": 1.0
+  }
+},
+{
+  "model": "rateMyCourse.course",
+  "pk": 12,
+  "fields": {
+    "name": "8",
+    "website": "",
+    "course_ID": "08088",
+    "description": "",
+    "course_type": "",
+    "credit": 1.0
+  }
+},
+{
+  "model": "rateMyCourse.course",
+  "pk": 13,
+  "fields": {
+    "name": "9",
+    "website": "",
+    "course_ID": "08089",
+    "description": "",
+    "course_type": "",
+    "credit": 1.0
+  }
+},
+{
+  "model": "rateMyCourse.teachcourse",
+  "pk": 1,
+  "fields": {
+    "course": 1,
+    "department": 1,
+    "teachers": [
+      1
+    ]
+  }
+},
+{
+  "model": "rateMyCourse.teachcourse",
+  "pk": 2,
+  "fields": {
+    "course": 2,
+    "department": 1,
+    "teachers": [
+      1,
+      2
+    ]
+  }
+},
+{
+  "model": "rateMyCourse.teachcourse",
+  "pk": 3,
+  "fields": {
+    "course": 3,
+    "department": 2,
+    "teachers": [
+      2
+    ]
+  }
+},
+{
+  "model": "rateMyCourse.teachcourse",
+  "pk": 5,
+  "fields": {
+    "course": 4,
+    "department": 3,
+    "teachers": [
+      3
+    ]
+  }
+},
+{
+  "model": "rateMyCourse.rank",
+  "pk": 3,
+  "fields": {
+    "difficulty_score": 1.0,
+    "funny_score": 2.0,
+    "gain_score": 3.0,
+    "recommend_score": 4.0,
+    "edit_time": "2019-04-20T06:49:27.446Z"
+  }
+},
+{
+  "model": "rateMyCourse.rank",
+  "pk": 4,
+  "fields": {
+    "difficulty_score": 0.0,
+    "funny_score": 0.0,
+    "gain_score": 0.0,
+    "recommend_score": 0.0,
+    "edit_time": "2019-04-20T06:51:20.695Z"
+  }
+},
+{
+  "model": "rateMyCourse.makerank",
+  "pk": 3,
+  "fields": {
+    "user": 1,
+    "course": 2,
+    "rank": 3
+  }
+},
+{
+  "model": "rateMyCourse.makerank",
+  "pk": 4,
+  "fields": {
+    "user": 6,
+    "course": 4,
+    "rank": 4
+  }
+},
+{
+  "model": "rateMyCourse.comment",
+  "pk": 1,
+  "fields": {
+    "content": "\u6211\u6210\u529f\u8fdb\u53bb\u5566\uff01",
+    "create_time": "2019-04-15T04:10:00Z",
+    "edit_time": "2019-04-15T04:10:00Z",
+    "parent_comment": -1,
+    "teacher": 2
+  }
+},
+{
+  "model": "rateMyCourse.comment",
+  "pk": 2,
+  "fields": {
+    "content": "\u90a3\u4f60\u5f88\u68d2\u68d2\u54e6",
+    "create_time": "2019-04-15T08:33:00Z",
+    "edit_time": "2019-04-15T08:33:00Z",
+    "parent_comment": 1,
+    "teacher": 2
+  }
+},
+{
+  "model": "rateMyCourse.comment",
+  "pk": 3,
+  "fields": {
+    "content": "rbq",
+    "create_time": "2019-04-15T08:34:00Z",
+    "edit_time": "2019-04-15T08:34:00Z",
+    "parent_comment": -1,
+    "teacher": 1
+  }
+},
+{
+  "model": "rateMyCourse.comment",
+  "pk": 28,
+  "fields": {
+    "content": "1",
+    "create_time": "2019-04-22T04:59:00Z",
+    "edit_time": "2019-04-22T04:59:32.900Z",
+    "parent_comment": -1,
+    "teacher": 3
+  }
+},
+{
+  "model": "rateMyCourse.comment",
+  "pk": 29,
+  "fields": {
+    "content": "2",
+    "create_time": "2019-04-22T04:59:00Z",
+    "edit_time": "2019-04-22T04:59:39.478Z",
+    "parent_comment": -1,
+    "teacher": 3
+  }
+},
+{
+  "model": "rateMyCourse.comment",
+  "pk": 30,
+  "fields": {
+    "content": "3",
+    "create_time": "2019-04-22T04:59:00Z",
+    "edit_time": "2019-04-22T04:59:42.901Z",
+    "parent_comment": -1,
+    "teacher": 3
+  }
+},
+{
+  "model": "rateMyCourse.comment",
+  "pk": 31,
+  "fields": {
+    "content": "4",
+    "create_time": "2019-04-22T04:59:00Z",
+    "edit_time": "2019-04-22T04:59:47.852Z",
+    "parent_comment": -1,
+    "teacher": 3
+  }
+},
+{
+  "model": "rateMyCourse.comment",
+  "pk": 32,
+  "fields": {
+    "content": "5",
+    "create_time": "2019-04-22T04:59:00Z",
+    "edit_time": "2019-04-22T04:59:51.222Z",
+    "parent_comment": -1,
+    "teacher": 3
+  }
+},
+{
+  "model": "rateMyCourse.comment",
+  "pk": 33,
+  "fields": {
+    "content": "6",
+    "create_time": "2019-04-22T04:59:00Z",
+    "edit_time": "2019-04-22T04:59:54.868Z",
+    "parent_comment": -1,
+    "teacher": 3
+  }
+},
+{
+  "model": "rateMyCourse.comment",
+  "pk": 34,
+  "fields": {
+    "content": "7",
+    "create_time": "2019-04-22T04:59:00Z",
+    "edit_time": "2019-04-22T04:59:58.110Z",
+    "parent_comment": -1,
+    "teacher": 3
+  }
+},
+{
+  "model": "rateMyCourse.comment",
+  "pk": 35,
+  "fields": {
+    "content": "8",
+    "create_time": "2019-04-22T04:59:00Z",
+    "edit_time": "2019-04-22T05:00:00.998Z",
+    "parent_comment": -1,
+    "teacher": 3
+  }
+},
+{
+  "model": "rateMyCourse.comment",
+  "pk": 36,
+  "fields": {
+    "content": "9",
+    "create_time": "2019-04-22T05:00:00Z",
+    "edit_time": "2019-04-22T05:00:04.654Z",
+    "parent_comment": -1,
+    "teacher": 3
+  }
+},
+{
+  "model": "rateMyCourse.comment",
+  "pk": 37,
+  "fields": {
+    "content": "10",
+    "create_time": "2019-04-22T05:00:00Z",
+    "edit_time": "2019-04-22T05:00:08.901Z",
+    "parent_comment": -1,
+    "teacher": 3
+  }
+},
+{
+  "model": "rateMyCourse.makecomment",
+  "pk": 1,
+  "fields": {
+    "user": 4,
+    "course": 3,
+    "comment": 1
+  }
+},
+{
+  "model": "rateMyCourse.makecomment",
+  "pk": 2,
+  "fields": {
+    "user": 5,
+    "course": 3,
+    "comment": 2
+  }
+},
+{
+  "model": "rateMyCourse.makecomment",
+  "pk": 3,
+  "fields": {
+    "user": 6,
+    "course": 4,
+    "comment": 3
+  }
+},
+{
+  "model": "rateMyCourse.makecomment",
+  "pk": 28,
+  "fields": {
+    "user": 4,
+    "course": 4,
+    "comment": 28
+  }
+},
+{
+  "model": "rateMyCourse.makecomment",
+  "pk": 29,
+  "fields": {
+    "user": 4,
+    "course": 4,
+    "comment": 29
+  }
+},
+{
+  "model": "rateMyCourse.makecomment",
+  "pk": 30,
+  "fields": {
+    "user": 4,
+    "course": 4,
+    "comment": 30
+  }
+},
+{
+  "model": "rateMyCourse.makecomment",
+  "pk": 31,
+  "fields": {
+    "user": 4,
+    "course": 4,
+    "comment": 31
+  }
+},
+{
+  "model": "rateMyCourse.makecomment",
+  "pk": 32,
+  "fields": {
+    "user": 4,
+    "course": 4,
+    "comment": 32
+  }
+},
+{
+  "model": "rateMyCourse.makecomment",
+  "pk": 33,
+  "fields": {
+    "user": 4,
+    "course": 4,
+    "comment": 33
+  }
+},
+{
+  "model": "rateMyCourse.makecomment",
+  "pk": 34,
+  "fields": {
+    "user": 4,
+    "course": 4,
+    "comment": 34
+  }
+},
+{
+  "model": "rateMyCourse.makecomment",
+  "pk": 35,
+  "fields": {
+    "user": 4,
+    "course": 4,
+    "comment": 34
+  }
+},
+{
+  "model": "rateMyCourse.makecomment",
+  "pk": 36,
+  "fields": {
+    "user": 4,
+    "course": 4,
+    "comment": 36
+  }
+},
+{
+  "model": "rateMyCourse.makecomment",
+  "pk": 37,
+  "fields": {
+    "user": 4,
+    "course": 4,
+    "comment": 37
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$120000$8lvA2ch3SuqD$OVPXfzj4e8jMlP8O0DFkEXr4H9MkEw9QOVynCZqhF/4=",
+    "last_login": "2019-04-05T06:27:32.990Z",
+    "is_superuser": true,
+    "username": "admin",
+    "first_name": "",
+    "last_name": "",
+    "email": "437566830@qq.com",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2019-04-05T06:27:16.437Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 2,
+  "fields": {
+    "password": "pbkdf2_sha256$120000$f3GQxdZQUzdU$OgNHHvNa8VxIGlU7MKtb1nnnQ1WCUgIpcOSNGJbtLnk=",
+    "last_login": "2019-04-20T04:30:57.750Z",
+    "is_superuser": true,
+    "username": "root",
+    "first_name": "",
+    "last_name": "",
+    "email": "fd@fd.com",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2019-04-15T08:30:02.224Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "0bnimnfwgh074rvr84wmedvdnj7fhs3s",
+  "fields": {
+    "session_data": "ODQxZTNjN2FkMDAzN2I3ZWE5ZjM3MTQ5ZjY4YWY5M2U1ZTc2Yzc0NDp7ImF1dGhfc2VzcyI6InJicSIsIl9zZXNzaW9uX2V4cGlyeSI6NzIwMH0=",
+    "expire_date": "2019-04-20T06:34:29.081Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "pg99ji5ddm2dmr29uxnmkszxnklr4hk7",
+  "fields": {
+    "session_data": "MTU2YzQ1ZWI0NjEzZTRmYzgxOTllYTJiMjllZjMyM2I5NDlmNDU0ODp7Il9hdXRoX3VzZXJfaWQiOiIyIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI1NmZjMWJmYjk5M2M5MjhlYjNhYWMwYTY4YmQ5MzY1MjExMDc2ZmIwIn0=",
+    "expire_date": "2019-05-04T04:30:57.884Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "rzgb2ubveuvuygsgzegzu2m05t4pf8gm",
+  "fields": {
+    "session_data": "ODQxZTNjN2FkMDAzN2I3ZWE5ZjM3MTQ5ZjY4YWY5M2U1ZTc2Yzc0NDp7ImF1dGhfc2VzcyI6InJicSIsIl9zZXNzaW9uX2V4cGlyeSI6NzIwMH0=",
+    "expire_date": "2019-04-20T06:33:22.696Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "yjeubzxyr2u8wnj82pc4z7h91tm9m9fj",
+  "fields": {
+    "session_data": "ODQxZTNjN2FkMDAzN2I3ZWE5ZjM3MTQ5ZjY4YWY5M2U1ZTc2Yzc0NDp7ImF1dGhfc2VzcyI6InJicSIsIl9zZXNzaW9uX2V4cGlyeSI6NzIwMH0=",
+    "expire_date": "2019-04-20T06:33:57.964Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "ykgf7hf5u15baqm3fh1r1sjjfjoj6sv7",
+  "fields": {
+    "session_data": "ODQxZTNjN2FkMDAzN2I3ZWE5ZjM3MTQ5ZjY4YWY5M2U1ZTc2Yzc0NDp7ImF1dGhfc2VzcyI6InJicSIsIl9zZXNzaW9uX2V4cGlyeSI6NzIwMH0=",
+    "expire_date": "2019-04-20T06:35:06.309Z"
+  }
+}
+]

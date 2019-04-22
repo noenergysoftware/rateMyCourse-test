@@ -12,6 +12,7 @@ PROXY_COVER = False # Still not avaliable.
 
 TAG_DB_MODIFY = "db_modify"
 TAG_FRONT = "front"
+TAG_SPLIT = "split"
 
 def rs(min=1, max=5):
     '''randomly sleep for some time
