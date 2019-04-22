@@ -80,8 +80,10 @@ class HomePage(BasicPage):
     def __init__(self, driver, url=None):
         super().__init__(driver, url)
         self.search_box_id = "searchboxCourse"
-        self.select_department_btn_id = "buttonSelectDepartment"
         self.search_btn_id = "buttonSearchCourse"
+
+        self.select_department_btn_id = "buttonSelectDepartment"
+        self.department_list_id = "departments"
 
     def checkIsSelf(self):
         check_ids = [
@@ -93,6 +95,13 @@ class HomePage(BasicPage):
 
     def goHomePage(self):
         raise NotImplementedError
+
+    def selectDepartmentByText(self, depa_name):
+        btn = self.waitAppear_ID(self.select_department_btn_id)
+        btn.click()
+        depa_list = self.waitAppear_ID(self.department_list_id)
+        href = depa_list.find_element_by_link_text(depa_name)
+        href.click()
 
     def search(self, s):
         return self.searchEnter(s)
@@ -149,8 +158,27 @@ class LoginPage(BasicPage):
 class SearchResultPage(BasicPage):
     def __init__(self, driver, url=None):
         super().__init__(driver, url)
+        self.course_num = None
+        self.course_divs = None
+        self.course_list = None
+
         self.course_num_id = "serachedCourseNum"
+        self.course_div_id = "course{0}"
+
         self.course_detail_xpath = "//div[@id='course{0}']//a[@href='#']"
+
+        self.course_divs_xpath = "//div[starts-with(@id, 'course')]"
+        self.course_name_xpath = "./div[1]/a"
+        self.course_school_xpath = "./div[2]/div[1]//p"
+        self.course_department_xpath = "./div[2]/div[2]//p"
+        self.course_type_xpath = "./div[2]/div[3]//p"
+        self.course_credit_xpath = "./div[2]/div[4]//p"
+
+        self.course_rank_id = "rank_number_{0}"
+        self.course_difficulty_id = "difficulty_score_{0}"
+        self.course_funny_id = "funny_score_{0}"
+        self.course_gain_id = "gain_score_{0}"
+        self.course_recommend_id = "recommend_score_{0}"
 
     def checkIsSelf(self):
         self.waitAppear_ID(self.course_num_id)
@@ -159,6 +187,58 @@ class SearchResultPage(BasicPage):
         btn = self.waitAppear_xpath(self.course_detail_xpath.format(index))
         btn.click()
         return DetailPage(self.driver)
+
+    def getCourseNum(self):
+        if not self.course_num:
+            self.course_num = int(self.waitAppear_ID(self.course_num_id).text)
+        return self.course_num
+
+    def getCourseDetail(self, index):
+        if index >= self.getCourseNum():
+            raise Exception("Too large index for getCourseDetail.")
+
+        if self.course_list and len(self.course_list) > index:
+            return self.course_list[index]
+
+        if not self.course_divs:
+            self.course_divs = self.driver.find_elements_by_xpath(self.course_divs_xpath)
+        div = self.course_divs[index]
+
+        name = div.find_element_by_xpath(self.course_name_xpath).text
+        school = div.find_element_by_xpath(self.course_school_xpath).text
+        department = div.find_element_by_xpath(self.course_department_xpath).text
+        k_type = div.find_element_by_xpath(self.course_type_xpath).text
+        credit = float(div.find_element_by_xpath(self.course_credit_xpath).text)
+
+        # TODO Here still to be developed
+        # rank = int(div.find_element_by_id(self.course_rank_id.format(index)).text)
+        # difficulty = int(div.find_element_by_id(self.course_difficulty_id.format(index)).text)
+        # funny = int(div.find_element_by_id(self.course_funny_id.format(index)).text)
+        # gain = int(div.find_element_by_id(self.course_gain_id.format(index)).text)
+        # recommend = int(div.find_element_by_id(self.course_recommend_id.format(index)).text)
+
+        return {
+            "name": name,
+            "school": school,
+            "department": department,
+            "type": k_type,
+            "credit": credit,
+            # "rank": rank,
+            # "difficulty": difficulty,
+            # "funny": funny,
+            # "gain": gain,
+            # "recommend": recommend
+        }
+
+    def getCourseList(self):
+        if self.course_list:
+            return self.course_list
+
+        self.course_list = []
+        for i in range(self.getCourseNum()):
+            res_dict = self.getCourseDetail(i)
+            self.course_list.append(res_dict)
+        return self.course_list
 
 
 class RegistPage(BasicPage):
