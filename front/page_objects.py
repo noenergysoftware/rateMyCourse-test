@@ -11,13 +11,6 @@ class BasicPage:
     def __init__(self, driver, url=None):
         self.driver = driver
         if url:
-            if FS_COVER:
-                try:
-                    cover_saver.trySaveCoverageReport(driver)
-                except WebDriverException as e:
-                    # TODO The driver's first get must have such an exception presently,
-                    #   Try to remove this
-                    pass
             driver.get("http://" + url)
         self.login_page_btn_id = "signIn"
         self.regist_page_btn_id = "signUp"

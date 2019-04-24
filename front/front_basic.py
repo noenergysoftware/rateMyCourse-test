@@ -8,7 +8,9 @@ from cover_saver import *
 import random
 from time import sleep, time
 
-PROXY_COVER = False # Still not avaliable.
+PROXY_COVER = False 
+# We use Fiddler as our proxy, which is conflict with using JSCover as the proxy.
+# So unless we can set two levels of proxy, we will never be able to use JSCover's proxy service.
 
 TAG_DB_MODIFY = "db_modify"
 TAG_FRONT = "front"
@@ -25,7 +27,7 @@ class FrontBasicTC(TestCase):
     def setUpClass(cls):
         super().setUpClass()
         if PROXY_COVER:
-            cap = DesiredCapabilities.EDGE.copy()
+            cap = DesiredCapabilities.CHROME.copy()
             prox = Proxy()
             prox.proxy_type = ProxyType.MANUAL
             sock = "127.0.0.1:3128"
@@ -39,7 +41,7 @@ class FrontBasicTC(TestCase):
     @classmethod
     def tearDownClass(cls):
         if FS_COVER:
-            cover_saver.trySaveCoverageReport(cls.driver)
+            cover_saver.trySaveCoverageReport(cls.driver, name=cls.__name__)
         cls.driver.close()
         super().tearDownClass()
 
