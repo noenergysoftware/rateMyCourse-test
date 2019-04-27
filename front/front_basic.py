@@ -3,14 +3,12 @@ from unittest import TestCase
 from selenium import webdriver
 from selenium.webdriver.common.proxy import Proxy, ProxyType
 from selenium.webdriver import DesiredCapabilities
-from cover_saver import *
+from cover_saver import cover_saver
+
+from front_config import FS_COVER, PROXY_COVER
 
 import random
 from time import sleep, time
-
-PROXY_COVER = False 
-# We use Fiddler as our proxy, which is conflict with using JSCover as the proxy.
-# So unless we can set two levels of proxy, we will never be able to use JSCover's proxy service.
 
 TAG_DB_MODIFY = "db_modify"
 TAG_FRONT = "front"

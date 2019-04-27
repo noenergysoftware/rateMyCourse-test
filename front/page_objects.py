@@ -4,6 +4,7 @@ from selenium.webdriver.common.by import By
 from selenium.common.exceptions import WebDriverException
 from cover_saver import *
 
+from front_config import USING_HTTPS
 
 class BasicPage:
     cover_count = 0
@@ -11,7 +12,10 @@ class BasicPage:
     def __init__(self, driver, url=None):
         self.driver = driver
         if url:
-            driver.get("http://" + url)
+            if USING_HTTPS:
+                driver.get("https://" + url)
+            else:
+                driver.get("http://" + url)
         self.login_page_btn_id = "signIn"
         self.regist_page_btn_id = "signUp"
         self.home_page_btn_xpath = "//a[@href='index.html']"

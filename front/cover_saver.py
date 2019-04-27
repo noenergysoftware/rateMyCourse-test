@@ -1,9 +1,6 @@
 import os
 from personal_config import coverage_dir
 
-# Use JSCover
-FS_COVER = True
-
 class CoverSaver:
     def __init__(self):
         self.count = 0
