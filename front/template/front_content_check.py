@@ -4,7 +4,7 @@ from django.test import tag
 
 from page_objects import *
 from user_actions import *
-from front_basic import FrontBasicTC, TAG_DB_MODIFY, TAG_FRONT
+from .front_basic import FrontBasicTC, TAG_DB_MODIFY, TAG_FRONT
 
 @tag(TAG_FRONT)
 class FrontContentCheckTC(FrontBasicTC):

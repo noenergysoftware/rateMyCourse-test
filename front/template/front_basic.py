@@ -24,17 +24,8 @@ class FrontBasicTC(TestCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        if PROXY_COVER:
-            cap = DesiredCapabilities.CHROME.copy()
-            prox = Proxy()
-            prox.proxy_type = ProxyType.MANUAL
-            sock = "127.0.0.1:3128"
-            prox.http_proxy = sock
-            prox.add_to_capabilities(cap)
-            cls.driver = webdriver.Remote(desired_capabilities=cap)
-        else:
-            cls.driver = webdriver.Chrome()
-            cls.driver.implicitly_wait(20)
+        cls.initDriver()
+        cls.driver.implicitly_wait(20)
 
     @classmethod
     def tearDownClass(cls):

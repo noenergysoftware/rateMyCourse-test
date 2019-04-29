@@ -5,7 +5,7 @@ from django.test import tag
 
 from page_objects import *
 from user_actions import *
-from front_basic import FrontBasicTC, TAG_DB_MODIFY, TAG_FRONT, TAG_SPLIT, rs
+from .front_basic import FrontBasicTC, TAG_DB_MODIFY, TAG_FRONT, TAG_SPLIT, rs
 
 @tag(TAG_FRONT)
 class FrontFuncLogInTC(FrontBasicTC):
