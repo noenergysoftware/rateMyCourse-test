@@ -1,10 +1,19 @@
+from functools import wraps
+
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import WebDriverException
-from cover_saver import *
 
+from cover_saver import *
 from front_config import USING_HTTPS
+
+def navbar(f):
+    @wraps(f)
+    def wrap_func(self):
+        self.openNavBar()
+        return f(self)
+    return wrap_func
 
 class BasicPage:
     cover_count = 0
@@ -16,9 +25,11 @@ class BasicPage:
                 driver.get("https://" + url)
             else:
                 driver.get("http://" + url)
+
+        self.nav_bar_btn_xpath = "//div[@id='navbarContainer']/button"
         self.login_page_btn_id = "signIn"
         self.regist_page_btn_id = "signUp"
-        self.home_page_btn_xpath = "//a[@href='index.html']"
+        self.home_page_btn_xpath = "//div[@id='navbarContainer']/a[1]"
         self.person_page_btn_id = "personalInfo"
         self.logout_btn_id = "logOut"
 
@@ -28,6 +39,12 @@ class BasicPage:
     def waitAppear(self, locator):
         return WebDriverWait(self.driver, 10).until(
             ec.visibility_of_element_located(
+                locator
+        ))
+
+    def waitPresence(self, locator):
+        return WebDriverWait(self.driver, 10).until(
+            ec.presence_of_element_located(
                 locator
         ))
 
@@ -47,27 +64,36 @@ class BasicPage:
         alert = self.driver.switch_to.alert
         alert.accept()
 
+    def openNavBar(self):
+        dom = self.waitPresence((By.XPATH, self.nav_bar_btn_xpath))
+        if dom.is_displayed():
+            dom.click()
+
     def goHomePage(self):
         btn = self.waitAppear_xpath(self.home_page_btn_xpath)
         btn.click()
         return HomePage(self.driver)
 
+    @navbar
     def goLoginPage(self):
         btn = self.waitAppear_ID(self.login_page_btn_id)
         btn.click()
         return LoginPage(self.driver)
 
     def goRegistPage(self):
+        self.openNavBar()
         btn = self.waitAppear_ID(self.regist_page_btn_id)
         btn.click()
         return RegistPage(self.driver)
 
     def goPersonPage(self):
+        self.openNavBar()
         btn = self.waitAppear_ID(self.person_page_btn_id)
         btn.click()
         return PersonPage(self.driver)
 
     def logout(self):
+        self.openNavBar()
         btn = self.waitAppear_ID(self.logout_btn_id)
         btn.click()
         self.alertAccept()
