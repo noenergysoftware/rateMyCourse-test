@@ -80,20 +80,20 @@ class BasicPage:
         btn.click()
         return LoginPage(self.driver)
 
+    @navbar
     def goRegistPage(self):
-        self.openNavBar()
         btn = self.waitAppear_ID(self.regist_page_btn_id)
         btn.click()
         return RegistPage(self.driver)
 
+    @navbar
     def goPersonPage(self):
-        self.openNavBar()
         btn = self.waitAppear_ID(self.person_page_btn_id)
         btn.click()
         return PersonPage(self.driver)
 
+    @navbar
     def logout(self):
-        self.openNavBar()
         btn = self.waitAppear_ID(self.logout_btn_id)
         btn.click()
         self.alertAccept()
