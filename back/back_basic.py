@@ -12,7 +12,7 @@ from login_status import LoginStatus
 
 class BackBasicTestCase(TestCase):
     # Prepare the database by using fixture.
-    fixtures = ["fixture.json"]
+    fixtures = ["back_fixture.json"]
 
     def logError(self, error_msg, case_name=None, response=None):
         if case_name and response:

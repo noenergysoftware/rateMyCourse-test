@@ -17,22 +17,23 @@ class BackCreateTC(BackPostCheckDBTC):
     def test_auto(self):
         self.autoTest(os.path.join(BACK_TEST_DIR, "test_create.pd.json"))
 
-    @tag("foreign")
-    def test_add_teach_course(self):
-        with LoginStatus(self, "rbq", "rbq"):
-            self.postContainTest(
-                "/addTeachCourse/",
-                {
-                    "teacher_list": ["rbq"],
-                    "course": "rbq",
-                    "department": "rbq"
-                }
-            )
+    def test_sign_up(self):
+        self.postContainTest(
+        "/signUp/",
+            {
+            "username": "test",
+            "password": "123",
+            "mail": "test@test.com",
+            "Ticket": "0",
+            "Randstr": "0",
+            "IP": "127.0.0.1"
+            }
+        )
         self.assertTrue(
-            TeachCourse.objects.filter(
-                teachers__name="rbq",
-                course__name="rbq",
-                department__name="rbq"
+            User.objects.filter(
+                username="test",
+                password="123",
+                mail="test@test.com"
             ).exists()
         )
 
@@ -65,7 +66,10 @@ class BackCreateTC(BackPostCheckDBTC):
         self.postErrorTest(
             "/signUp/",
             {
-                "username": "test"
+                "username": "test",
+                "Ticket": "0",
+                "RandStr": "0",
+                "IP": "127.0.0.1"
             }
         )
 
@@ -75,7 +79,10 @@ class BackCreateTC(BackPostCheckDBTC):
             {
                 "username": "test_dup_mail",
                 "mail": "ming@test.com",
-                "password": "kkk"
+                "password": "kkk",
+                "Ticket": "0",
+                "RandStr": "0",
+                "IP": "127.0.0.1"
             }
         )
 
@@ -85,7 +92,10 @@ class BackCreateTC(BackPostCheckDBTC):
             {
                 "username": "ming",
                 "mail": "test_dup_username@test.com",
-                "password": "kkk"
+                "password": "kkk",
+                "Ticket": "0",
+                "RandStr": "0",
+                "IP": "127.0.0.1"
             }
         )
 
