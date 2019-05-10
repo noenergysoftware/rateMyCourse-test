@@ -76,6 +76,7 @@ class BasicPage:
                 ctl.click()
 
     def goHomePage(self):
+        from .home_page import HomePage
         btn = self.waitAppear_xpath(self.home_page_btn_xpath)
         btn.click()
         return HomePage(self.driver)
