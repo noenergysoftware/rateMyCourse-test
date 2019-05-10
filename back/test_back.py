@@ -3,8 +3,8 @@ from http.cookies import SimpleCookie
 
 from django.test import Client, tag
 
-from back_basic import BackBasicTestCase, BackGetCheckBodyTC, BackPostCheckDBTC
-from login_status import LoginStatus, getmd5
+from .back_basic import BackBasicTestCase, BackGetCheckBodyTC, BackPostCheckDBTC
+from .login_status import LoginStatus, getmd5
 from rateMyCourse.models import (Comment, Course, MakeComment, TeachCourse,
                                  Teacher, User, Rank, MakeRank)
 

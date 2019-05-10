@@ -5,9 +5,9 @@ import django.db
 from django.contrib.sessions.models import Session
 from django.test import Client, TestCase, tag
 
-from db_checker import DBChecker
-from test_logger import log
-from login_status import LoginStatus
+from .db_checker import DBChecker
+from .test_logger import log
+from .login_status import LoginStatus
 
 
 class BackBasicTestCase(TestCase):
