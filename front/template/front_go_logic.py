@@ -187,7 +187,6 @@ class FrontRegistGoLogicTC(FrontBasicTC):
         page.checkIsSelf()
 
 
-@tag("kkk")
 @tag(TAG_FRONT)
 class FrontLoginGoLogicTC(FrontBasicTC):
     def createInitPage(self):

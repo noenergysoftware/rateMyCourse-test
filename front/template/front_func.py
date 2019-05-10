@@ -41,6 +41,7 @@ class FrontFuncLogInTC(FrontBasicTC):
             self.assertEqual(form["gender"], "M")
             self.assertEqual(form["intro"], "mingming")
 
+    @tag("kkk")
     @tag(TAG_DB_MODIFY)
     def test_comment(self):
         test_words = "test_login_comment_is_mine"
@@ -54,11 +55,11 @@ class FrontFuncLogInTC(FrontBasicTC):
             page.selectTeacher(0)
             page = page.submitComment()
 
-            now_page_num = page.getNowPageNum()
-            total_page_num = page.getTotalPageNum()
+            now_index = page.getNowIndex()
+            max_index = page.getMaxIndex()
             global_exist_flag = False
-            while now_page_num <= total_page_num:
-                comment_num = page.getCommentNum()
+            while now_index <= max_index:
+                block_num = page.getBlockNum()
                 exp_dict = {
                     "username": "hong",
                     "teachername": "rbq",
@@ -66,8 +67,8 @@ class FrontFuncLogInTC(FrontBasicTC):
                 }
             
                 exist = False
-                for i in range(comment_num):
-                    form = page.getCommentForm(i)
+                for i in range(block_num):
+                    form = page.getBlockForm(i)
                     equal = True
                     for key, value in exp_dict.items():
                         if form[key] != value:
@@ -80,8 +81,8 @@ class FrontFuncLogInTC(FrontBasicTC):
                     global_exist_flag = True
                     break
                 
-                page.nextPage()
-                now_page_num += 1
+                page.nextSplit()
+                now_index += 1
             self.assertTrue(global_exist_flag, "Submitted Comment not Exist.")
 
 

@@ -10,11 +10,42 @@ from test.front.front_config import USING_HTTPS
 from test.front.util import rs
 
 from .basic_page import BasicPage
+from .split_base_page import SplitBasePage
 from .comment_page import CommentPage
 
-class DetailPage(BasicPage):
+class DetailPage(SplitBasePage):
     def __init__(self, driver, url=None):
-        super().__init__(driver, url)
+        self.comment_username_xpath = "./div[1]/p"
+        self.comment_teachername_xpath = "./table[1]/tbody/tr/td[2]/p"
+        self.comment_content_xpath = "./div[2]/p"
+        self.comment_time_xpath = "./div[3]/a[last()]/p"
+
+        def getForm(block):
+            res = {}
+            temp = {
+                "username": self.comment_username_xpath,
+                "teachername": self.comment_teachername_xpath,
+                "content": self.comment_content_xpath,
+                "time": self.comment_time_xpath
+            }
+            for key, xpath in temp.items():
+                res[key] = block.find_element_by_xpath(xpath).text
+            return res
+
+        super().__init__(
+            driver,
+            url,
+            prev_btn_loc=(By.XPATH, "//li[@id='lastpage']/a"),
+            next_btn_loc=(By.XPATH, "//li[@id='nextpage']/a"),
+            jump_text_loc=(By.ID, "jumpPage"),
+            jump_btn_loc=(By.XPATH, "//nobr[@id='jump']/button"),
+            now_index_text_loc=(By.ID, "pagenum"),
+            max_index_text_loc=(By.ID, "totalpage"),
+            block_div_loc=(By.ID, "comment"),
+            block_relative_loc=(By.XPATH, "./div"),
+            form_get_method=getForm,
+        )
+
         self.comment_divs = None
 
         self.name_text_id = "course_name"
@@ -23,28 +54,24 @@ class DetailPage(BasicPage):
         self.type_text_id = "course_type"
         self.description_text_id = "coursedescription"
 
-        self.comment_big_div_id = "comment"
-        self.comment_sub_divs_xpath = "./div"
-        self.comment_username_xpath = "./div[1]/p"
-        self.comment_teachername_xpath = "./table[1]/tbody/tr/td[2]/p"
-        self.comment_content_xpath = "./div[2]/p"
-        self.comment_time_xpath = "./div[3]/a[last()]/p"
+        # self.comment_big_div_id = 
+        # self.comment_sub_divs_xpath = 
 
         self.comment_page_btn_id = "toComment"
 
-        self.now_page_num_text_id = "pagenum"
-        self.total_page_num_text_id = "totalpage"
-        self.next_page_btn_xpath = "//li[@id='nextpage']/a"
-        self.prev_page_btn_xpath = "//li[@id='lastpage']/a"
-        self.jump_page_text_id = "jumpPage"
-        self.jump_page_btn_xpath = "//nobr[@id='jump']/button"
+        # self.now_page_num_text_id = "pagenum"
+        # self.total_page_num_text_id = "totalpage"
+        # self.next_page_btn_xpath = 
+        # self.prev_page_btn_xpath = 
+        # self.jump_page_text_id = "jumpPage"
+        # self.jump_page_btn_xpath = 
 
-    def splitedPageChange(f):
-        @wraps(f)
-        def wrap_func(self):
-            self.comment_divs = None
-            return f(self)
-        return wrap_func
+    # def splitedPageChange(f):
+        # @wraps(f)
+        # def wrap_func(self):
+            # self.comment_divs = None
+            # return f(self)
+        # return wrap_func
 
     def checkIsSelf(self):
         check_ids = [
@@ -58,27 +85,27 @@ class DetailPage(BasicPage):
         btn.click()
         return CommentPage(self.driver)
 
-    def _getCommentDivs(self):
-        if not self.comment_divs:
-            comment_div = self.waitAppear_ID(self.comment_big_div_id)
-            self.comment_divs = comment_div.find_elements_by_xpath(self.comment_sub_divs_xpath)
-        return self.comment_divs
+    # def _getCommentDivs(self):
+        # if not self.comment_divs:
+            # comment_div = self.waitAppear_ID(self.comment_big_div_id)
+            # self.comment_divs = comment_div.find_elements_by_xpath(self.comment_sub_divs_xpath)
+        # return self.comment_divs
 
-    def getCommentNum(self):
-        return len(self._getCommentDivs())
+    # def getCommentNum(self):
+        # return len(self._getCommentDivs())
 
-    def getCommentForm(self, index):
-        div = self._getCommentDivs()[index]
-        res = {}
-        temp = {
-            "username": self.comment_username_xpath,
-            "teachername": self.comment_teachername_xpath,
-            "content": self.comment_content_xpath,
-            "time": self.comment_time_xpath
-        }
-        for key, xpath in temp.items():
-            res[key] = div.find_element_by_xpath(xpath).text
-        return res
+    # def getCommentForm(self, index):
+        # div = self._getCommentDivs()[index]
+        # res = {}
+        # temp = {
+            # "username": self.comment_username_xpath,
+            # "teachername": self.comment_teachername_xpath,
+            # "content": self.comment_content_xpath,
+            # "time": self.comment_time_xpath
+        # }
+        # for key, xpath in temp.items():
+            # res[key] = div.find_element_by_xpath(xpath).text
+        # return res
 
     def isCommentShow(self, index):
         if index >= self.getCommentNum():
@@ -86,25 +113,25 @@ class DetailPage(BasicPage):
         div = self._getCommentDivs()[index]
         return not ("none" in div.get_attribute("style"))
             
-    @splitedPageChange
-    def prevPage(self):
-        btn = self.waitAppear_xpath(self.prev_page_btn_xpath)
-        btn.click()
+    # @splitedPageChange
+    # def prevPage(self):
+        # btn = self.waitAppear_xpath(self.prev_page_btn_xpath)
+        # btn.click()
 
-    @splitedPageChange
-    def nextPage(self):
-        btn = self.waitAppear_xpath(self.next_page_btn_xpath)
-        btn.click()
+    # @splitedPageChange
+    # def nextPage(self):
+        # btn = self.waitAppear_xpath(self.next_page_btn_xpath)
+        # btn.click()
 
-    @splitedPageChange
-    def jumpPage(self, index):
-        text = self.waitAppear_ID(self.jump_page_text_id)
-        text.send_keys(str(index))
-        btn = self.waitAppear_xpath(self.jump_page_btn_xpath)
-        btn.click()
+    # @splitedPageChange
+    # def jumpPage(self, index):
+        # text = self.waitAppear_ID(self.jump_page_text_id)
+        # text.send_keys(str(index))
+        # btn = self.waitAppear_xpath(self.jump_page_btn_xpath)
+        # btn.click()
 
-    def getNowPageNum(self):
-        return int(self.waitAppear_ID(self.now_page_num_text_id).text)
+    # def getNowPageNum(self):
+        # return int(self.waitAppear_ID(self.now_page_num_text_id).text)
 
-    def getTotalPageNum(self):
-        return int(self.waitAppear_ID(self.total_page_num_text_id).text)
+    # def getTotalPageNum(self):
+        # return int(self.waitAppear_ID(self.total_page_num_text_id).text)
