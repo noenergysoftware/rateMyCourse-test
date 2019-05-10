@@ -35,11 +35,11 @@ def chrome(cls):
 
 # Note: All of mobile tests are based on Chorme's [Mobile Emulation](https://sites.google.com/a/chromium.org/chromedriver/mobile-emulation), 
 #   which has its own shortcomings.
-@classmethod
-def mobile_iphone(cls):
-    mobileEmulation = {
-        "deviceName": "iPhone 6/7/8"
-    }
-    options = webdriver.ChromeOptions()
-    options.add_experimental_option("mobileEmulation", mobileEmulation)
-    cls.driver = webdriver.Chrome(chrome_options=options)
+# @classmethod
+# def mobile_iphone(cls):
+    # mobileEmulation = {
+        # "deviceName": "iPhone 6/7/8"
+    # }
+    # options = webdriver.ChromeOptions()
+    # options.add_experimental_option("mobileEmulation", mobileEmulation)
+    # cls.driver = webdriver.Chrome(chrome_options=options)

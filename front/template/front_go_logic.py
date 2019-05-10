@@ -6,12 +6,12 @@ from page_objects import *
 from user_actions import *
 from .front_basic import FrontBasicTC, TAG_DB_MODIFY, TAG_FRONT
 
+@tag("kkk")
 @tag(TAG_FRONT)
 class FrontHomeGoLogicTC(FrontBasicTC):
     def createInitPage(self):
         return HomePage(self.driver, self.domain)
 
-    @tag("kkk")
     def test_login(self):
         page = self.createInitPage()
         loginpage = page.goLoginPage()

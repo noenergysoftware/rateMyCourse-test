@@ -69,6 +69,18 @@ class BasicPage:
         if dom.is_displayed():
             dom.click()
 
+    def getRatioValue(self, id_dict):
+        for key, ctl_id in id_dict.items():
+            if self.waitAppear_ID(ctl_id).is_selected():
+                return key
+        return None
+
+    def setRatioValue(self, id_dict, value):
+        if value in id_dict.keys():
+            ctl = self.waitAppear_ID(id_dict[value])
+            if not ctl.is_selected():
+                ctl.click()
+
     def goHomePage(self):
         btn = self.waitAppear_xpath(self.home_page_btn_xpath)
         btn.click()
@@ -372,30 +384,75 @@ class PersonPage(BasicPage):
     def __init__(self, driver, url=None):
         super().__init__(driver, url)
         self.name_text_id = "name"
-        self.role_text_id = "role"
-        self.gender_text_id = "gender"
+        self.role_teacher_id = "role_teacher"
+        self.role_student_id = "role_student"
+        self.role_others_id = "role_others"
+        self.gender_male_id = "gender_male"
+        self.gender_female_id = "gender_female"
+        self.gender_secret_id = "gender_sercet"
         self.intro_text_id = "personalIntroduce"
+
+        self.role_dict = {
+                "T": self.role_teacher_id,
+                "S": self.role_student_id,
+                "O": self.role_others_id,
+        }        
+        self.gender_dict = {
+                "M": self.gender_male_id,
+                "F": self.gender_female_id,
+                "A": self.gender_secret_id,
+        }
 
     def checkIsSelf(self):
         check_ids = [
-            self.role_text_id,
-            self.gender_text_id,
+            self.role_teacher_id,
+            self.gender_male_id,
             self.intro_text_id
         ]
         for id in check_ids:
             self.waitAppear_ID(id)
 
+    def getRoleValue(self):
+        return self.getRatioValue(
+            self.role_dict
+        )
+
+    def getGenderValue(self):
+        return self.getRatioValue(
+            self.gender_dict
+        )
+
+    def setRoleValue(self, value):
+        self.setRatioValue(
+            self.role_dict,
+            value
+        )
+
+    def setGenderValue(self, value):
+        self.setRatioValue(
+            self.gender_dict,
+            value
+        )
+
     def getForm(self):
         res = {}
         text = self.waitAppear_ID(self.name_text_id)
         res["name"] = text.get_attribute("value")
-        text = self.waitAppear_ID(self.role_text_id)
-        res["role"] = text.get_attribute("value")
-        text = self.waitAppear_ID(self.gender_text_id)
-        res["gender"] = text.get_attribute("value")
+        res["role"] = self.getRoleValue()
+        res["gender"] = self.getGenderValue()
         text = self.waitAppear_ID(self.intro_text_id)
         res["intro"] = text.get_attribute("value")
         return res
+
+    def setForm(self, form):
+        if "name" in form.keys():
+            self.waitAppear_ID(self.name_text_id).set_attribute("value", form["name"])
+        if "role" in form.keys():
+            self.setRoleValue(form["role"])
+        if "gender" in form.keys():
+            self.setGenderValue(form["gender"])
+        if "intro" in form.keys():
+            self.waitAppear_ID(self.intro_text_id).set_attribute("value", form["intro"])
 
 
 class DetailPage(BasicPage):
