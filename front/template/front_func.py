@@ -3,9 +3,11 @@ from unittest import skip
 
 from django.test import tag
 
-from page_objects import *
-from user_actions import *
-from .front_basic import FrontBasicTC, TAG_DB_MODIFY, TAG_FRONT, TAG_SPLIT, rs
+from test.front.page_objects import *
+from test.front.user_actions import *
+from test.front.util import rs
+from .front_basic import FrontBasicTC, TAG_DB_MODIFY, TAG_FRONT, TAG_SPLIT
+
 
 @tag(TAG_FRONT)
 class FrontFuncLogInTC(FrontBasicTC):
@@ -51,25 +53,36 @@ class FrontFuncLogInTC(FrontBasicTC):
             page.editComment(test_words)
             page.selectTeacher(0)
             page = page.submitComment()
-            comment_num = page.getCommentNum()
-            exp_dict = {
-                "username": "hong",
-                "teachername": "rbq",
-                "content": test_words
-            }
+
+            now_page_num = page.getNowPageNum()
+            total_page_num = page.getTotalPageNum()
+            global_exist_flag = False
+            while now_page_num <= total_page_num:
+                comment_num = page.getCommentNum()
+                exp_dict = {
+                    "username": "hong",
+                    "teachername": "rbq",
+                    "content": test_words
+                }
             
-            exist = False
-            for i in range(comment_num):
-                form = page.getCommentForm(i)
-                equal = True
-                for key, value in exp_dict.items():
-                    if form[key] != value:
-                        equal = False
+                exist = False
+                for i in range(comment_num):
+                    form = page.getCommentForm(i)
+                    equal = True
+                    for key, value in exp_dict.items():
+                        if form[key] != value:
+                            equal = False
+                            break
+                    if equal:
+                        exist = True
                         break
-                if equal:
-                    exist = True
+                if exist:
+                    global_exist_flag = True
                     break
-            self.assertTrue(exist)
+                
+                page.nextPage()
+                now_page_num += 1
+            self.assertTrue(global_exist_flag, "Submitted Comment not Exist.")
 
 
 @tag(TAG_FRONT)
@@ -154,6 +167,9 @@ class FrontFuncSearchTC(FrontBasicTC):
     def checkCourseNotExist(self, page, course_name):
         return not self.checkCourseExist(page, course_name)
 
+    def checkNoResult(self, page):
+        return page.isNoResult()
+
     def test_search_exist(self):
         page = HomePage(self.driver, self.domain)
         page = page.search("rbq")
@@ -162,7 +178,7 @@ class FrontFuncSearchTC(FrontBasicTC):
     def test_search_not_exist(self):
         page = HomePage(self.driver, self.domain)
         page = page.search("test_course_not_exist")
-        self.checkCourseNotExist(page, "test_course_not_exist")
+        self.checkNoResult(page)
 
     def test_no_spec(self):
         page = HomePage(self.driver, self.domain)
@@ -195,11 +211,10 @@ class FrontFuncSearchTC(FrontBasicTC):
         page = HomePage(self.driver, self.domain)
         page.selectDepartmentByText("Office")
         page = page.search("如何进牢子")
-        self.checkCourseExist(page, "如何进牢子")
-        self.assertEqual(page.getCourseNum(), 0)
+        self.checkNoResult(page)
 
 
-@tag(TAG_SPLIT)
+@tag("ignore")
 @tag(TAG_FRONT)
 class FrontFuncSplitPageTC(FrontBasicTC):
     def setUp(self):

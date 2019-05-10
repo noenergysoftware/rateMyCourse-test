@@ -2,11 +2,10 @@ from unittest import skip
 
 from django.test import tag
 
-from page_objects import *
-from user_actions import *
+from test.front.page_objects import *
+from test.front.user_actions import *
 from .front_basic import FrontBasicTC, TAG_DB_MODIFY, TAG_FRONT
 
-@tag("kkk")
 @tag(TAG_FRONT)
 class FrontHomeGoLogicTC(FrontBasicTC):
     def createInitPage(self):
@@ -187,6 +186,8 @@ class FrontRegistGoLogicTC(FrontBasicTC):
         page = page.submit()
         page.checkIsSelf()
 
+
+@tag("kkk")
 @tag(TAG_FRONT)
 class FrontLoginGoLogicTC(FrontBasicTC):
     def createInitPage(self):

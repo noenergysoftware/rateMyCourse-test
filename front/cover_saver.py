@@ -1,5 +1,5 @@
 import os
-from personal_config import coverage_dir
+from test.front.personal_config import coverage_dir
 
 class CoverSaver:
     def __init__(self):

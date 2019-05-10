@@ -1,4 +1,4 @@
-from front_config import PROXY_COVER
+from test.front.front_config import PROXY_COVER
 
 from selenium import webdriver
 from selenium.webdriver.common.proxy import Proxy, ProxyType

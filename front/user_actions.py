@@ -1,4 +1,4 @@
-from page_objects import *
+from test.front.page_objects import *
 from contextlib import contextmanager
 
 @contextmanager

@@ -1,6 +1,6 @@
 import types
 
-from template import *
+from test.front.template import *
 
 cls_dict = {}
 
@@ -52,7 +52,7 @@ def __getattr__(name):
 
 
 # Search all TCFactor
-import driver_tcfactor
+from . import driver_tcfactor
 
 factor_module_list = [
     driver_tcfactor

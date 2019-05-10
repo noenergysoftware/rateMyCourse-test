@@ -1,0 +1,1 @@
+将DetailPage和SearchResultPage中同质的部分抽离出来作为一个单独实体存在

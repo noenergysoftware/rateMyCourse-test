@@ -3,22 +3,13 @@ from unittest import TestCase
 from selenium import webdriver
 from selenium.webdriver.common.proxy import Proxy, ProxyType
 from selenium.webdriver import DesiredCapabilities
-from cover_saver import cover_saver
 
-from front_config import FS_COVER, PROXY_COVER
-
-import random
-from time import sleep, time
+from test.front.cover_saver import cover_saver
+from test.front.front_config import FS_COVER, PROXY_COVER
 
 TAG_DB_MODIFY = "db_modify"
 TAG_FRONT = "front"
 TAG_SPLIT = "split"
-
-def rs(min=1, max=5):
-    '''randomly sleep for some time
-    '''
-    sleep_time = random.uniform(min, max)
-    sleep(sleep_time)
 
 class FrontBasicTC(TestCase):
     @classmethod

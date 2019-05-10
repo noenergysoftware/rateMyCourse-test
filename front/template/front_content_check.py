@@ -2,8 +2,8 @@ from unittest import skip
 
 from django.test import tag
 
-from page_objects import *
-from user_actions import *
+from test.front.page_objects import *
+from test.front.user_actions import *
 from .front_basic import FrontBasicTC, TAG_DB_MODIFY, TAG_FRONT
 
 @tag(TAG_FRONT)

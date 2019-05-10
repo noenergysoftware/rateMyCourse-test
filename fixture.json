@@ -171,6 +171,114 @@
   }
 },
 {
+  "model": "rateMyCourse.course",
+  "pk": 5,
+  "fields": {
+    "name": "1",
+    "website": "",
+    "course_ID": "08081",
+    "description": "",
+    "course_type": "",
+    "credit": 1.0
+  }
+},
+{
+  "model": "rateMyCourse.course",
+  "pk": 6,
+  "fields": {
+    "name": "2",
+    "website": "",
+    "course_ID": "08082",
+    "description": "",
+    "course_type": "",
+    "credit": 1.0
+  }
+},
+{
+  "model": "rateMyCourse.course",
+  "pk": 7,
+  "fields": {
+    "name": "3",
+    "website": "",
+    "course_ID": "08083",
+    "description": "",
+    "course_type": "",
+    "credit": 1.0
+  }
+},
+{
+  "model": "rateMyCourse.course",
+  "pk": 8,
+  "fields": {
+    "name": "4",
+    "website": "",
+    "course_ID": "08084",
+    "description": "",
+    "course_type": "",
+    "credit": 1.0
+  }
+},
+{
+  "model": "rateMyCourse.course",
+  "pk": 9,
+  "fields": {
+    "name": "5",
+    "website": "",
+    "course_ID": "08085",
+    "description": "",
+    "course_type": "",
+    "credit": 1.0
+  }
+},
+{
+  "model": "rateMyCourse.course",
+  "pk": 10,
+  "fields": {
+    "name": "6",
+    "website": "",
+    "course_ID": "08086",
+    "description": "",
+    "course_type": "",
+    "credit": 1.0
+  }
+},
+{
+  "model": "rateMyCourse.course",
+  "pk": 11,
+  "fields": {
+    "name": "7",
+    "website": "",
+    "course_ID": "08087",
+    "description": "",
+    "course_type": "",
+    "credit": 1.0
+  }
+},
+{
+  "model": "rateMyCourse.course",
+  "pk": 12,
+  "fields": {
+    "name": "8",
+    "website": "",
+    "course_ID": "08088",
+    "description": "",
+    "course_type": "",
+    "credit": 1.0
+  }
+},
+{
+  "model": "rateMyCourse.course",
+  "pk": 13,
+  "fields": {
+    "name": "9",
+    "website": "",
+    "course_ID": "08089",
+    "description": "",
+    "course_type": "",
+    "credit": 1.0
+  }
+},
+{
   "model": "rateMyCourse.teachcourse",
   "pk": 1,
   "fields": {
@@ -332,6 +440,132 @@
   }
 },
 {
+  "model": "rateMyCourse.rankcache",
+  "pk": 5,
+  "fields": {
+    "course": 5,
+    "count": 0,
+    "difficulty_score": 0.0,
+    "funny_score": 0.0,
+    "gain_score": 0.0,
+    "recommend_score": 0.0,
+    "position": -1.0,
+    "people": 0
+  }
+},
+{
+  "model": "rateMyCourse.rankcache",
+  "pk": 6,
+  "fields": {
+    "course": 6,
+    "count": 0,
+    "difficulty_score": 0.0,
+    "funny_score": 0.0,
+    "gain_score": 0.0,
+    "recommend_score": 0.0,
+    "position": -1.0,
+    "people": 0
+  }
+},
+{
+  "model": "rateMyCourse.rankcache",
+  "pk": 7,
+  "fields": {
+    "course": 7,
+    "count": 0,
+    "difficulty_score": 0.0,
+    "funny_score": 0.0,
+    "gain_score": 0.0,
+    "recommend_score": 0.0,
+    "position": -1.0,
+    "people": 0
+  }
+},
+{
+  "model": "rateMyCourse.rankcache",
+  "pk": 8,
+  "fields": {
+    "course": 8,
+    "count": 0,
+    "difficulty_score": 0.0,
+    "funny_score": 0.0,
+    "gain_score": 0.0,
+    "recommend_score": 0.0,
+    "position": -1.0,
+    "people": 0
+  }
+},
+{
+  "model": "rateMyCourse.rankcache",
+  "pk": 9,
+  "fields": {
+    "course": 9,
+    "count": 0,
+    "difficulty_score": 0.0,
+    "funny_score": 0.0,
+    "gain_score": 0.0,
+    "recommend_score": 0.0,
+    "position": -1.0,
+    "people": 0
+  }
+},
+{
+  "model": "rateMyCourse.rankcache",
+  "pk": 10,
+  "fields": {
+    "course": 10,
+    "count": 0,
+    "difficulty_score": 0.0,
+    "funny_score": 0.0,
+    "gain_score": 0.0,
+    "recommend_score": 0.0,
+    "position": -1.0,
+    "people": 0
+  }
+},
+{
+  "model": "rateMyCourse.rankcache",
+  "pk": 11,
+  "fields": {
+    "course": 11,
+    "count": 0,
+    "difficulty_score": 0.0,
+    "funny_score": 0.0,
+    "gain_score": 0.0,
+    "recommend_score": 0.0,
+    "position": -1.0,
+    "people": 0
+  }
+},
+{
+  "model": "rateMyCourse.rankcache",
+  "pk": 12,
+  "fields": {
+    "course": 12,
+    "count": 0,
+    "difficulty_score": 0.0,
+    "funny_score": 0.0,
+    "gain_score": 0.0,
+    "recommend_score": 0.0,
+    "position": -1.0,
+    "people": 0
+  }
+},
+{
+  "model": "rateMyCourse.rankcache",
+  "pk": 13,
+  "fields": {
+    "course": 13,
+    "count": 0,
+    "difficulty_score": 0.0,
+    "funny_score": 0.0,
+    "gain_score": 0.0,
+    "recommend_score": 0.0,
+    "position": -1.0,
+    "people": 0
+  }
+},
+{
   "model": "rateMyCourse.comment",
   "pk": 1,
   "fields": {
@@ -428,6 +662,126 @@
   }
 },
 {
+  "model": "rateMyCourse.comment",
+  "pk": 28,
+  "fields": {
+    "content": "1",
+    "create_time": "2019-04-22T04:59:00Z",
+    "edit_time": "2019-04-22T04:59:32.900Z",
+    "parent_comment": -1,
+    "rate": 0,
+    "teacher": 3
+  }
+},
+{
+  "model": "rateMyCourse.comment",
+  "pk": 29,
+  "fields": {
+    "content": "2",
+    "create_time": "2019-04-22T04:59:00Z",
+    "edit_time": "2019-04-22T04:59:39.478Z",
+    "parent_comment": -1,
+    "rate": 0,
+    "teacher": 3
+  }
+},
+{
+  "model": "rateMyCourse.comment",
+  "pk": 30,
+  "fields": {
+    "content": "3",
+    "create_time": "2019-04-22T04:59:00Z",
+    "edit_time": "2019-04-22T04:59:42.901Z",
+    "parent_comment": -1,
+    "rate": 0,
+    "teacher": 3
+  }
+},
+{
+  "model": "rateMyCourse.comment",
+  "pk": 31,
+  "fields": {
+    "content": "4",
+    "create_time": "2019-04-22T04:59:00Z",
+    "edit_time": "2019-04-22T04:59:47.852Z",
+    "parent_comment": -1,
+    "rate": 0,
+    "teacher": 3
+  }
+},
+{
+  "model": "rateMyCourse.comment",
+  "pk": 32,
+  "fields": {
+    "content": "5",
+    "create_time": "2019-04-22T04:59:00Z",
+    "edit_time": "2019-04-22T04:59:51.222Z",
+    "parent_comment": -1,
+    "rate": 0,
+    "teacher": 3
+  }
+},
+{
+  "model": "rateMyCourse.comment",
+  "pk": 33,
+  "fields": {
+    "content": "6",
+    "create_time": "2019-04-22T04:59:00Z",
+    "edit_time": "2019-04-22T04:59:54.868Z",
+    "parent_comment": -1,
+    "rate": 0,
+    "teacher": 3
+  }
+},
+{
+  "model": "rateMyCourse.comment",
+  "pk": 34,
+  "fields": {
+    "content": "7",
+    "create_time": "2019-04-22T04:59:00Z",
+    "edit_time": "2019-04-22T04:59:58.110Z",
+    "parent_comment": -1,
+    "rate": 0,
+    "teacher": 3
+  }
+},
+{
+  "model": "rateMyCourse.comment",
+  "pk": 35,
+  "fields": {
+    "content": "8",
+    "create_time": "2019-04-22T04:59:00Z",
+    "edit_time": "2019-04-22T05:00:00.998Z",
+    "parent_comment": -1,
+    "rate": 0,
+    "teacher": 3
+  }
+},
+{
+  "model": "rateMyCourse.comment",
+  "pk": 36,
+  "fields": {
+    "content": "9",
+    "create_time": "2019-04-22T05:00:00Z",
+    "edit_time": "2019-04-22T05:00:04.654Z",
+    "parent_comment": -1,
+    "rate": 0,
+    "teacher": 3
+  }
+},
+{
+  "model": "rateMyCourse.comment",
+  "pk": 37,
+  "fields": {
+    "content": "10",
+    "create_time": "2019-04-22T05:00:00Z",
+    "edit_time": "2019-04-22T05:00:08.901Z",
+    "parent_comment": -1,
+    "rate": 0,
+    "teacher": 3
+  }
+},
+{
   "model": "rateMyCourse.makecomment",
   "pk": 1,
   "fields": {
@@ -500,6 +854,96 @@
   }
 },
 {
+  "model": "rateMyCourse.makecomment",
+  "pk": 28,
+  "fields": {
+    "user": 4,
+    "course": 4,
+    "comment": 28
+  }
+},
+{
+  "model": "rateMyCourse.makecomment",
+  "pk": 29,
+  "fields": {
+    "user": 4,
+    "course": 4,
+    "comment": 29
+  }
+},
+{
+  "model": "rateMyCourse.makecomment",
+  "pk": 30,
+  "fields": {
+    "user": 4,
+    "course": 4,
+    "comment": 30
+  }
+},
+{
+  "model": "rateMyCourse.makecomment",
+  "pk": 31,
+  "fields": {
+    "user": 4,
+    "course": 4,
+    "comment": 31
+  }
+},
+{
+  "model": "rateMyCourse.makecomment",
+  "pk": 32,
+  "fields": {
+    "user": 4,
+    "course": 4,
+    "comment": 32
+  }
+},
+{
+  "model": "rateMyCourse.makecomment",
+  "pk": 33,
+  "fields": {
+    "user": 4,
+    "course": 4,
+    "comment": 33
+  }
+},
+{
+  "model": "rateMyCourse.makecomment",
+  "pk": 34,
+  "fields": {
+    "user": 4,
+    "course": 4,
+    "comment": 34
+  }
+},
+{
+  "model": "rateMyCourse.makecomment",
+  "pk": 35,
+  "fields": {
+    "user": 4,
+    "course": 4,
+    "comment": 35
+  }
+},
+{
+  "model": "rateMyCourse.makecomment",
+  "pk": 36,
+  "fields": {
+    "user": 4,
+    "course": 4,
+    "comment": 36
+  }
+},
+{
+  "model": "rateMyCourse.makecomment",
+  "pk": 37,
+  "fields": {
+    "user": 4,
+    "course": 4,
+    "comment": 37
+  }
+},
+{
   "model": "auth.user",
   "pk": 1,
   "fields": {
@@ -545,6 +989,14 @@
 },
 {
   "model": "sessions.session",
+  "pk": "0r4djfow6t22547r08dfwpyqgh3b3u8t",
+  "fields": {
+    "session_data": "ODQxZTNjN2FkMDAzN2I3ZWE5ZjM3MTQ5ZjY4YWY5M2U1ZTc2Yzc0NDp7ImF1dGhfc2VzcyI6InJicSIsIl9zZXNzaW9uX2V4cGlyeSI6NzIwMH0=",
+    "expire_date": "2019-05-10T04:39:49.054Z"
+  }
+},
+{
+  "model": "sessions.session",
   "pk": "5l1zp2oo8b6q7xup0bteb43jhnuaoact",
   "fields": {
     "session_data": "ODQxZTNjN2FkMDAzN2I3ZWE5ZjM3MTQ5ZjY4YWY5M2U1ZTc2Yzc0NDp7ImF1dGhfc2VzcyI6InJicSIsIl9zZXNzaW9uX2V4cGlyeSI6NzIwMH0=",
@@ -553,10 +1005,42 @@
 },
 {
   "model": "sessions.session",
+  "pk": "7djvkujmgko3qqucez9oacee9oir5xwo",
+  "fields": {
+    "session_data": "ODQxZTNjN2FkMDAzN2I3ZWE5ZjM3MTQ5ZjY4YWY5M2U1ZTc2Yzc0NDp7ImF1dGhfc2VzcyI6InJicSIsIl9zZXNzaW9uX2V4cGlyeSI6NzIwMH0=",
+    "expire_date": "2019-05-10T05:04:57.323Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "ahy729tfi64fe3uon61p3rky7iv6d838",
+  "fields": {
+    "session_data": "ODQxZTNjN2FkMDAzN2I3ZWE5ZjM3MTQ5ZjY4YWY5M2U1ZTc2Yzc0NDp7ImF1dGhfc2VzcyI6InJicSIsIl9zZXNzaW9uX2V4cGlyeSI6NzIwMH0=",
+    "expire_date": "2019-05-10T05:07:47.127Z"
+  }
+},
+{
+  "model": "sessions.session",
   "pk": "cove3up7fvfirebml1x3y1iwcymgiaqt",
   "fields": {
     "session_data": "ODQxZTNjN2FkMDAzN2I3ZWE5ZjM3MTQ5ZjY4YWY5M2U1ZTc2Yzc0NDp7ImF1dGhfc2VzcyI6InJicSIsIl9zZXNzaW9uX2V4cGlyeSI6NzIwMH0=",
     "expire_date": "2019-05-07T07:46:29.282Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "glfowzviv2cx5g44atkjlm13laex2zyl",
+  "fields": {
+    "session_data": "ODQxZTNjN2FkMDAzN2I3ZWE5ZjM3MTQ5ZjY4YWY5M2U1ZTc2Yzc0NDp7ImF1dGhfc2VzcyI6InJicSIsIl9zZXNzaW9uX2V4cGlyeSI6NzIwMH0=",
+    "expire_date": "2019-05-10T05:06:29.839Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "ho2fbdxv3lqye9s57pv4aqytk3q87hin",
+  "fields": {
+    "session_data": "ODQxZTNjN2FkMDAzN2I3ZWE5ZjM3MTQ5ZjY4YWY5M2U1ZTc2Yzc0NDp7ImF1dGhfc2VzcyI6InJicSIsIl9zZXNzaW9uX2V4cGlyeSI6NzIwMH0=",
+    "expire_date": "2019-05-10T04:42:05.070Z"
   }
 },
 {
@@ -581,6 +1065,14 @@
   "fields": {
     "session_data": "ODQxZTNjN2FkMDAzN2I3ZWE5ZjM3MTQ5ZjY4YWY5M2U1ZTc2Yzc0NDp7ImF1dGhfc2VzcyI6InJicSIsIl9zZXNzaW9uX2V4cGlyeSI6NzIwMH0=",
     "expire_date": "2019-04-20T06:33:22.696Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "t9hmb532kmwjtzrheqx6doevl6bv0d2r",
+  "fields": {
+    "session_data": "ODQxZTNjN2FkMDAzN2I3ZWE5ZjM3MTQ5ZjY4YWY5M2U1ZTc2Yzc0NDp7ImF1dGhfc2VzcyI6InJicSIsIl9zZXNzaW9uX2V4cGlyeSI6NzIwMH0=",
+    "expire_date": "2019-05-10T04:33:27.745Z"
   }
 },
 {
