@@ -34,9 +34,9 @@ class SplitBasePage(BasicPage):
 
     def splitChanged(f):
         @wraps(f)
-        def wrap_func(self):
+        def wrap_func(self, *args, **kwargs):
             self.block_cache = None
-            return f(self)
+            return f(self, *args, *kwargs)
         return wrap_func
 
     def getBlocks(self):

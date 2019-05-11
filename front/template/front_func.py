@@ -41,7 +41,6 @@ class FrontFuncLogInTC(FrontBasicTC):
             self.assertEqual(form["gender"], "M")
             self.assertEqual(form["intro"], "mingming")
 
-    @tag("kkk")
     @tag(TAG_DB_MODIFY)
     def test_comment(self):
         test_words = "test_login_comment_is_mine"
@@ -163,7 +162,8 @@ class FrontFuncLogOutTC(FrontBasicTC):
 @tag(TAG_FRONT)
 class FrontFuncSearchTC(FrontBasicTC):
     def checkCourseExist(self, page, course_name):
-        return page.searchCourseForIndex(course_name) != None
+        # TODO change split to check all results
+        return page.searchBlockByCourseName(course_name) != None
 
     def checkCourseNotExist(self, page, course_name):
         return not self.checkCourseExist(page, course_name)
@@ -215,65 +215,42 @@ class FrontFuncSearchTC(FrontBasicTC):
         self.checkNoResult(page)
 
 
-@tag("ignore")
 @tag(TAG_FRONT)
 class FrontFuncSplitPageTC(FrontBasicTC):
     def setUp(self):
         super().setUp()
 
-    def checkShow(self, start, stop, min_index, max_index, check_func):
-        if start < min_index:
-            start = min_index
-        if start > max_index:
-            start = max_index
-        if stop < min_index:
-            stop = min_index
-        if stop > max_index:
-            stop = max_index
+    def getBlockForms(self, page:SplitBasePage):
+        res = []
+        for i in range(page.getBlockNum()):
+            res.append(page.getBlockForm(i))
+        return res
 
-        for i in range(min_index, start):
-            self.assertFalse(check_func(i))
-        for i in range(start, stop):
-            self.assertTrue(check_func(i))
-        for i in range(stop, max_index):
-            self.assertFalse(check_func(i))
+    def generalTest(self, num_per_page:int, page:SplitBasePage):
+        block_forms_1 = []
+        block_forms_2 = []
+        block_forms_3 = []
 
-    def generalTest(self, num_per_page, max_num, check_func, next_func, prev_func, jump_func):
         with self.subTest(case_name="init"):
-            self.checkShow(
-                0,
-                num_per_page,
-                0,
-                max_num,
-                check_func
-            )
+            self.assertEquals(page.getBlockNum(), num_per_page)
+            block_forms_1 = self.getBlockForms(page)
+
         with self.subTest(case_name="next_page"):
-            next_func()
-            self.checkShow(
-                num_per_page,
-                2 * num_per_page,
-                0,
-                max_num,
-                check_func
-            )
+            page.nextSplit()
+            self.assertEquals(page.getBlockNum(), num_per_page)
+            block_forms_2 = self.getBlockForms(page)
+            self.assertNotEquals(block_forms_1, block_forms_2)
+
         with self.subTest(case_name="prev_page"):
-            prev_func()
-            self.checkShow(
-                0,
-                num_per_page,
-                0,
-                max_num,
-                check_func
-            )
+            page.prevSplit()
+            block_forms = self.getBlockForms(page)
+            self.assertEquals(block_forms_1, block_forms)
+
         with self.subTest(case_name="jump_page"):
-            jump_func(3)
-            self.checkShow(
-                2 * num_per_page,
-                3 * num_per_page,
-                0,
-                max_num,
-                check_func
-            )
+            page.jumpSplit(3)
+            block_forms_3 = self.getBlockForms(page)
+            self.assertNotEquals(block_forms_1, block_forms_3)
+            self.assertNotEquals(block_forms_2, block_forms_3)
 
     def test_search_page(self):
         '''This testcase need at least three pages.
@@ -282,11 +259,7 @@ class FrontFuncSplitPageTC(FrontBasicTC):
         page = page.search("")
         self.generalTest(
             num_per_page=5,
-            max_num=page.getCourseNum(),
-            check_func=page.isCourseShow,
-            next_func=page.nextPage,
-            prev_func=page.prevPage,
-            jump_func=page.jumpPage
+            page=page,
         )
 
     def test_detail_page(self):
@@ -297,9 +270,5 @@ class FrontFuncSplitPageTC(FrontBasicTC):
         page = page.goDetailPage(0)
         self.generalTest(
             num_per_page=5,
-            max_num=page.getCommentNum(),
-            check_func=page.isCommentShow,
-            next_func=page.nextPage,
-            prev_func=page.prevPage,
-            jump_func=page.jumpPage
+            page=page,
         )

@@ -43,15 +43,15 @@ class DetailPage(SplitBasePage):
         super().__init__(
             driver,
             url,
-            prev_btn_loc        =(By.XPATH, "//li[@id='lastpage']/a"),
-            next_btn_loc        =(By.XPATH, "//li[@id='nextpage']/a"),
-            jump_text_loc       =(By.ID, "jumpPage"),
-            jump_btn_loc        =(By.XPATH, "//nobr[@id='jump']/button"),
-            now_index_text_loc  =(By.ID, "pagenum"),
-            max_index_text_loc  =(By.ID, "totalpage"),
-            block_div_loc       =(By.ID, "comment"),
-            block_relative_loc  =(By.XPATH, "./div"),
-            form_get_method     =getForm,
+            prev_btn_loc        = (By.XPATH, "//li[@id='lastpage']/a"),
+            next_btn_loc        = (By.XPATH, "//li[@id='nextpage']/a"),
+            jump_text_loc       = (By.ID, "jumpPage"),
+            jump_btn_loc        = (By.XPATH, "//nobr[@id='jump']/button"),
+            now_index_text_loc  = (By.ID, "pagenum"),
+            max_index_text_loc  = (By.ID, "totalpage"),
+            block_div_loc       = (By.ID, "comment"),
+            block_relative_loc  = (By.XPATH, "./div"),
+            form_get_method     = getForm,
         )
 
 
@@ -66,9 +66,3 @@ class DetailPage(SplitBasePage):
         btn = self.waitAppear_ID(self.comment_page_btn_id)
         btn.click()
         return CommentPage(self.driver)
-
-    def isCommentShow(self, index):
-        if index >= self.getBlockNum():
-            raise Exception("Index {0} is too large.".format(index))
-        block = self.getBlocks()[index]
-        return not ("none" in block.get_attribute("style"))
