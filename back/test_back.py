@@ -6,7 +6,8 @@ from django.test import Client, tag
 from .back_basic import BackBasicTestCase, BackGetCheckBodyTC, BackPostCheckDBTC
 from .login_status import LoginStatus, getmd5
 from rateMyCourse.models import (Comment, Course, MakeComment, TeachCourse,
-                                 Teacher, User, Rank, MakeRank)
+                                 Teacher, User, Rank, MakeRank, RankCache, 
+                                 RateComment, )
 
 BACK_TEST_DIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -157,6 +158,101 @@ class BackUpdateTC(BackPostCheckDBTC):
                 ).exists()
             )
 
+    def test_rate_comment(self):
+        comment_ID = Comment.objects.get(content="rbq").id
+
+        def checkRate(username, password, rtype, comment_rate, rate_rate):
+            with LoginStatus(self, username, password):
+                self.postContainTest(
+                    "/rateComment/",
+                    {
+                        "username": username,
+                        "comment_ID": comment_ID,
+                        "type": rtype,
+                    }
+                )
+            self.assertTrue(
+                RateComment.objects.filter(
+                    user__username=username,
+                    comment__id=comment_ID,
+                    comment__rate=comment_rate,
+                    rate=rate_rate,
+                )
+            )
+
+        with self.subTest(case_name="create"):
+            checkRate(
+                "rbq",
+                "rbq",
+                "agree",
+                1,
+                1
+            )
+        
+        with self.subTest(case_name="another_agree"):
+            checkRate(
+                "ming",
+                "ming",
+                "agree",
+                2,
+                1
+            )
+
+        with self.subTest(case_name="reverse_agree2disagree"):
+            checkRate(
+                "rbq",
+                "rbq",
+                "disagree",
+                0,
+                -1
+            )
+
+        with self.subTest(case_name="cancel_disagree"):
+            checkRate(
+                "rbq",
+                "rbq",
+                "disagree",
+                1,
+                0
+            )
+
+        with self.subTest(case_name="agree_again"):
+            checkRate(
+                "rbq",
+                "rbq",
+                "agree",
+                2,
+                1
+            )
+
+        with self.subTest(case_name="cancel_agree"):
+            checkRate(
+                "rbq",
+                "rbq",
+                "agree",
+                1,
+                0
+            )
+
+        with self.subTest(case_name="disagree_again"):
+            checkRate(
+                "rbq",
+                "rbq",
+                "disagree",
+                0,
+                -1
+            )
+        
+        with self.subTest(case_name="reverse_disagree2agree"):
+            checkRate(
+                "rbq",
+                "rbq",
+                "agree",
+                2,
+                1
+            )
+        
+
     def test_update_user_not_complete(self):
         with LoginStatus(self, "rbq", "rbq"):
             self.postErrorTest(
@@ -275,7 +371,115 @@ class BackSearchTC(BackGetCheckBodyTC):
                 "recommend_score": 5,
             }
         )
+
+    def checkRankDictComplete(self, rank_dict):
+        key_list = [
+            "difficulty_score",
+            "funny_score",
+            "gain_score",
+            "recommend_score",
+            "rank_number",
+        ]
+        for key in key_list:
+            self.assertTrue(key in rank_dict.keys())
+
+    def test_get_all_rank(self):
+        body, retdict, response = self.getJsonBody(
+            "/getAllRank/",
+        )
+        # Note here we do not check whether rank is correctly calculated,
+        #   that part is checked in BackCalRankTC.
+        self.assertEquals(len(retdict), 4)
+        id_list = [
+            "000000",
+            "110",
+            "1",
+            "0",
+        ]
+        for id in id_list:
+            self.assertTrue(id in retdict.keys())
+            rank_dict = retdict[id]
+            self.checkRankDictComplete(rank_dict)
         
+    def test_get_rank_by_sorted_course(self):
+        body, retdict, response = self.getJsonBody(
+            "/getRankBySortedCourse/",
+        )
+        # TODO 
+        
+    def test_get_rank_by_sorted_teacher(self):
+        body, retdict, response = self.getJsonBody(
+            "/getRankBySortedTeacher/",
+        )
+        # TODO 
+
+    def test_get_rate_comment(self):
+        comment_ID = Comment.objects.get(content="我成功进去啦！").id
+        body, retdict, response = self.getJsonBody(
+            "/getRateComment/",
+            {
+                "comment_ID": comment_ID,
+            }
+        )
+        self.assertEquals(retdict["rate"], 0)
+
+
+@tag("back")
+class BackHotCommentTC(BackGetCheckBodyTC):
+    def test_get_hot_comment(self):
+        course_ID = "110"
+
+        with self.subTest(case_name="<3"):
+            body, retlist, response = self.getJsonBody(
+                "/getHotComment/",
+                {
+                    "course_ID": course_ID,
+                }
+            )
+            self.assertTrue(len(retlist), 1)
+            self.checkDictEntry(
+                retlist[0],
+                {
+                    "username": "police",
+                    "content": "那你很棒棒哦",
+                    "commentID": 2,
+                    "teacher": "police",
+                    "parent_comment": 1,
+                    "rate": 1
+                }
+            )
+
+        course_ID = "000000"
+        for i in range(5):
+            comment = Comment.objects.create(
+                content=str(i),
+                rate=6,
+                teacher=Teacher.objects.get(name="rbq")
+            )
+            MakeComment.objects.create(
+                user=User.objects.get(username="rbq"),
+                course=Course.objects.get(course_ID=course_ID),
+                comment=comment
+            )
+
+        with self.subTest(case_name=">3"):
+            body, retlist, response = self.getJsonBody(
+                "/getHotComment/",
+                {
+                    "course_ID": course_ID,
+                }
+            )
+            self.assertTrue(len(retlist), 3)
+            for item in retlist:
+                self.checkDictEntry(
+                    item,
+                    {
+                        "username": "rbq",
+                        "teacher": "rbq",
+                        "parent_comment": -1,
+                        "rate": 6
+                    }
+                )
 
 
 @tag("back")
@@ -384,3 +588,24 @@ class BackAuthTC(BackBasicTestCase):
         finally:
             self.client.session.flush()
             self.client = Client()
+
+
+@tag("back")
+class BackCalRankTC(BackBasicTestCase):
+    def test_simple_flush_rank(self):
+        course_ID = "165486"
+        course = Course.objects.create(
+            name="flush_course",
+            course_ID=course_ID,
+            credit=2,
+        )
+        self.client.get(
+            "/flushRank/"
+        )
+        self.assertTrue(
+            RankCache.objects.filter(
+                course__course_ID=course_ID,
+            ).exists()
+        )
+
+    # TODO more specific test

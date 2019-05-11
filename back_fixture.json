@@ -337,7 +337,7 @@
   "fields": {
     "content": "\u6211\u6210\u529f\u8fdb\u53bb\u5566\uff01",
     "create_time": "2019-04-15T04:10:00Z",
-    "edit_time": "2019-04-15T04:10:00Z",
+    "edit_time": "2019-05-11T08:24:40.146Z",
     "parent_comment": -1,
     "rate": 0,
     "teacher": 2
@@ -349,9 +349,9 @@
   "fields": {
     "content": "\u90a3\u4f60\u5f88\u68d2\u68d2\u54e6",
     "create_time": "2019-04-15T08:33:00Z",
-    "edit_time": "2019-04-15T08:33:00Z",
+    "edit_time": "2019-05-11T08:25:34.103Z",
     "parent_comment": 1,
-    "rate": 0,
+    "rate": 1,
     "teacher": 2
   }
 },
@@ -365,66 +365,6 @@
     "parent_comment": -1,
     "rate": 0,
     "teacher": 1
-  }
-},
-{
-  "model": "rateMyCourse.comment",
-  "pk": 4,
-  "fields": {
-    "content": "efgesrgedsnets",
-    "create_time": "2019-05-07T05:48:27.098Z",
-    "edit_time": "2019-05-07T05:48:27.145Z",
-    "parent_comment": -1,
-    "rate": 0,
-    "teacher": 3
-  }
-},
-{
-  "model": "rateMyCourse.comment",
-  "pk": 5,
-  "fields": {
-    "content": "efgesrgedsnets",
-    "create_time": "2019-05-07T05:49:06.196Z",
-    "edit_time": "2019-05-07T05:49:06.199Z",
-    "parent_comment": -1,
-    "rate": 0,
-    "teacher": 3
-  }
-},
-{
-  "model": "rateMyCourse.comment",
-  "pk": 6,
-  "fields": {
-    "content": "wbascvqeadsvdsv",
-    "create_time": "2019-05-07T06:05:02.134Z",
-    "edit_time": "2019-05-07T06:05:02.137Z",
-    "parent_comment": -1,
-    "rate": 0,
-    "teacher": 3
-  }
-},
-{
-  "model": "rateMyCourse.comment",
-  "pk": 7,
-  "fields": {
-    "content": "wegfweafawefa",
-    "create_time": "2019-05-07T07:19:54.888Z",
-    "edit_time": "2019-05-07T07:19:54.892Z",
-    "parent_comment": -1,
-    "rate": 0,
-    "teacher": 3
-  }
-},
-{
-  "model": "rateMyCourse.comment",
-  "pk": 8,
-  "fields": {
-    "content": "wegfweafawefa",
-    "create_time": "2019-05-07T07:21:55.936Z",
-    "edit_time": "2019-05-07T07:22:03.532Z",
-    "parent_comment": -1,
-    "rate": 0,
-    "teacher": 3
   }
 },
 {
@@ -455,48 +395,48 @@
   }
 },
 {
-  "model": "rateMyCourse.makecomment",
+  "model": "rateMyCourse.ratecomment",
+  "pk": 3,
+  "fields": {
+    "user": 1,
+    "comment": 1,
+    "rate": 1
+  }
+},
+{
+  "model": "rateMyCourse.ratecomment",
   "pk": 4,
   "fields": {
-    "user": 6,
-    "course": 4,
-    "comment": 4
+    "user": 2,
+    "comment": 1,
+    "rate": -1
   }
 },
 {
-  "model": "rateMyCourse.makecomment",
+  "model": "rateMyCourse.ratecomment",
   "pk": 5,
   "fields": {
-    "user": 6,
-    "course": 4,
-    "comment": 5
+    "user": 1,
+    "comment": 2,
+    "rate": -1
   }
 },
 {
-  "model": "rateMyCourse.makecomment",
+  "model": "rateMyCourse.ratecomment",
   "pk": 6,
   "fields": {
-    "user": 6,
-    "course": 4,
-    "comment": 6
+    "user": 2,
+    "comment": 2,
+    "rate": 1
   }
 },
 {
-  "model": "rateMyCourse.makecomment",
+  "model": "rateMyCourse.ratecomment",
   "pk": 7,
   "fields": {
-    "user": 6,
-    "course": 4,
-    "comment": 7
-  }
-},
-{
-  "model": "rateMyCourse.makecomment",
-  "pk": 8,
-  "fields": {
-    "user": 6,
-    "course": 4,
-    "comment": 8
+    "user": 3,
+    "comment": 2,
+    "rate": 1
   }
 },
 {
@@ -522,7 +462,7 @@
   "pk": 2,
   "fields": {
     "password": "pbkdf2_sha256$120000$f3GQxdZQUzdU$OgNHHvNa8VxIGlU7MKtb1nnnQ1WCUgIpcOSNGJbtLnk=",
-    "last_login": "2019-05-07T08:27:16.807Z",
+    "last_login": "2019-05-11T08:18:14.592Z",
     "is_superuser": true,
     "username": "root",
     "first_name": "",
@@ -537,66 +477,10 @@
 },
 {
   "model": "sessions.session",
-  "pk": "0bnimnfwgh074rvr84wmedvdnj7fhs3s",
-  "fields": {
-    "session_data": "ODQxZTNjN2FkMDAzN2I3ZWE5ZjM3MTQ5ZjY4YWY5M2U1ZTc2Yzc0NDp7ImF1dGhfc2VzcyI6InJicSIsIl9zZXNzaW9uX2V4cGlyeSI6NzIwMH0=",
-    "expire_date": "2019-04-20T06:34:29.081Z"
-  }
-},
-{
-  "model": "sessions.session",
-  "pk": "5l1zp2oo8b6q7xup0bteb43jhnuaoact",
-  "fields": {
-    "session_data": "ODQxZTNjN2FkMDAzN2I3ZWE5ZjM3MTQ5ZjY4YWY5M2U1ZTc2Yzc0NDp7ImF1dGhfc2VzcyI6InJicSIsIl9zZXNzaW9uX2V4cGlyeSI6NzIwMH0=",
-    "expire_date": "2019-05-07T09:18:54.237Z"
-  }
-},
-{
-  "model": "sessions.session",
-  "pk": "cove3up7fvfirebml1x3y1iwcymgiaqt",
-  "fields": {
-    "session_data": "ODQxZTNjN2FkMDAzN2I3ZWE5ZjM3MTQ5ZjY4YWY5M2U1ZTc2Yzc0NDp7ImF1dGhfc2VzcyI6InJicSIsIl9zZXNzaW9uX2V4cGlyeSI6NzIwMH0=",
-    "expire_date": "2019-05-07T07:46:29.282Z"
-  }
-},
-{
-  "model": "sessions.session",
-  "pk": "nwmw5blmtv5htcsodcw8rniwbzaxyfaf",
+  "pk": "e2e4jjjwt8t1phrls0fl16t735w3ufso",
   "fields": {
     "session_data": "MTU2YzQ1ZWI0NjEzZTRmYzgxOTllYTJiMjllZjMyM2I5NDlmNDU0ODp7Il9hdXRoX3VzZXJfaWQiOiIyIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI1NmZjMWJmYjk5M2M5MjhlYjNhYWMwYTY4YmQ5MzY1MjExMDc2ZmIwIn0=",
-    "expire_date": "2019-05-21T08:27:17.134Z"
-  }
-},
-{
-  "model": "sessions.session",
-  "pk": "pg99ji5ddm2dmr29uxnmkszxnklr4hk7",
-  "fields": {
-    "session_data": "MTU2YzQ1ZWI0NjEzZTRmYzgxOTllYTJiMjllZjMyM2I5NDlmNDU0ODp7Il9hdXRoX3VzZXJfaWQiOiIyIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiI1NmZjMWJmYjk5M2M5MjhlYjNhYWMwYTY4YmQ5MzY1MjExMDc2ZmIwIn0=",
-    "expire_date": "2019-05-04T04:30:57.884Z"
-  }
-},
-{
-  "model": "sessions.session",
-  "pk": "rzgb2ubveuvuygsgzegzu2m05t4pf8gm",
-  "fields": {
-    "session_data": "ODQxZTNjN2FkMDAzN2I3ZWE5ZjM3MTQ5ZjY4YWY5M2U1ZTc2Yzc0NDp7ImF1dGhfc2VzcyI6InJicSIsIl9zZXNzaW9uX2V4cGlyeSI6NzIwMH0=",
-    "expire_date": "2019-04-20T06:33:22.696Z"
-  }
-},
-{
-  "model": "sessions.session",
-  "pk": "yjeubzxyr2u8wnj82pc4z7h91tm9m9fj",
-  "fields": {
-    "session_data": "ODQxZTNjN2FkMDAzN2I3ZWE5ZjM3MTQ5ZjY4YWY5M2U1ZTc2Yzc0NDp7ImF1dGhfc2VzcyI6InJicSIsIl9zZXNzaW9uX2V4cGlyeSI6NzIwMH0=",
-    "expire_date": "2019-04-20T06:33:57.964Z"
-  }
-},
-{
-  "model": "sessions.session",
-  "pk": "ykgf7hf5u15baqm3fh1r1sjjfjoj6sv7",
-  "fields": {
-    "session_data": "ODQxZTNjN2FkMDAzN2I3ZWE5ZjM3MTQ5ZjY4YWY5M2U1ZTc2Yzc0NDp7ImF1dGhfc2VzcyI6InJicSIsIl9zZXNzaW9uX2V4cGlyeSI6NzIwMH0=",
-    "expire_date": "2019-04-20T06:35:06.309Z"
+    "expire_date": "2019-05-25T08:18:14.710Z"
   }
 }
 ]
