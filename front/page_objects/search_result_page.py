@@ -17,10 +17,10 @@ class SearchResultPage(SplitBasePage):
 
         self.course_divs_xpath = "//div[starts-with(@id, 'course')]"
         self.course_name_xpath = "./div[1]/a"
-        self.course_school_xpath = "./div[2]/div[1]//p"
-        self.course_department_xpath = "./div[2]/div[2]//p"
-        self.course_type_xpath = "./div[2]/div[3]//p"
-        self.course_credit_xpath = "./div[2]/div[4]//p"
+        self.course_school_xpath = "./div[2]/div[1]/div[1]/div[2]"
+        self.course_department_xpath = "./div[2]/div[1]/div[2]/div[2]"
+        self.course_type_xpath = "./div[2]/div[1]/div[3]/div[2]"
+        self.course_credit_xpath = "./div[2]/div[1]/div[4]/div[2]"
 
         self.course_rank_id = "rank_number_{0}"
         self.course_difficulty_id = "difficulty_score_{0}"

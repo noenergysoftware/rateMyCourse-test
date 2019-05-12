@@ -262,6 +262,7 @@ class FrontFuncSplitPageTC(FrontBasicTC):
             page=page,
         )
 
+    @tag("kkk")
     def test_detail_page(self):
         '''This testcase need at least three pages.
         '''
