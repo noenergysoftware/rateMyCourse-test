@@ -217,6 +217,9 @@ class FrontFuncSearchTC(FrontBasicTC):
 
 @tag(TAG_FRONT)
 class FrontFuncSplitPageTC(FrontBasicTC):
+    '''This testcase need at least 9 pages.
+    '''
+
     def setUp(self):
         super().setUp()
 
@@ -227,34 +230,86 @@ class FrontFuncSplitPageTC(FrontBasicTC):
         return res
 
     def generalTest(self, num_per_page:int, page:SplitBasePage):
-        block_forms_1 = []
-        block_forms_2 = []
-        block_forms_3 = []
+        block_forms_list = {}
 
         with self.subTest(case_name="init"):
             self.assertEquals(page.getBlockNum(), num_per_page)
-            block_forms_1 = self.getBlockForms(page)
+            block_forms_list[1] = self.getBlockForms(page)
+
+            page.checkBtnShow()
 
         with self.subTest(case_name="next_page"):
+            # Operation
             page.nextSplit()
+
+            # Content Check
             self.assertEquals(page.getBlockNum(), num_per_page)
-            block_forms_2 = self.getBlockForms(page)
-            self.assertNotEquals(block_forms_1, block_forms_2)
+            block_forms_list[2] = self.getBlockForms(page)
+            self.assertNotEquals(block_forms_list[1], block_forms_list[2])
+
+            # Split btn show check
+            page.checkBtnShow()
 
         with self.subTest(case_name="prev_page"):
             page.prevSplit()
+
             block_forms = self.getBlockForms(page)
-            self.assertEquals(block_forms_1, block_forms)
+            self.assertEquals(block_forms_list[1], block_forms)
 
-        with self.subTest(case_name="jump_page"):
-            page.jumpSplit(3)
-            block_forms_3 = self.getBlockForms(page)
-            self.assertNotEquals(block_forms_1, block_forms_3)
-            self.assertNotEquals(block_forms_2, block_forms_3)
+            page.checkBtnShow()
 
+        # with self.subTest(case_name="jump_page"):
+            # page.jumpSplit(3)
+            # block_forms_3 = self.getBlockForms(page)
+            # self.assertNotEquals(block_forms_1, block_forms_3)
+            # self.assertNotEquals(block_forms_2, block_forms_3)
+        
+        with self.subTest(case_name="first2last_page"):
+            page.jumpSplit(page.getMaxIndex())
+
+            block_forms_list[page.getMaxIndex()] = self.getBlockForms(page)
+            self.assertNotEquals(block_forms_list[page.getMaxIndex()], block_forms_list[1])
+
+            page.checkBtnShow()
+
+        with self.subTest(case_name="last2first_page"):
+            page.jumpSplit(1)
+
+            block_forms = self.getBlockForms(page)
+            self.assertEquals(block_forms, block_forms_list[1])
+
+            page.checkBtnShow()
+
+        with self.subTest(case_name="middle_page"):
+            page.jumpSplit(5)
+
+            block_forms_list[5] = self.getBlockForms(page)
+            for index, forms in block_forms_list.items():
+                if index == 5:
+                    continue
+                self.assertNotEquals(forms, block_forms_list[5])
+
+            page.checkBtnShow()
+
+        with self.subTest(case_name="middle2first_page"):
+            page.jumpSplit(1)
+
+            block_forms = self.getBlockForms(page)
+            self.assertEquals(block_forms, block_forms_list[1])
+
+            page.checkBtnShow()
+
+        with self.subTest(case_name="middle2last_page"):
+            page.jumpSplit(5)
+            page.jumpSplit(page.getMaxIndex())
+
+            block_forms_list[page.getMaxIndex()] = self.getBlockForms(page)
+            self.assertNotEquals(block_forms_list[page.getMaxIndex()], block_forms_list[1])
+
+            page.checkBtnShow()
+
+    @tag("kkk")
     def test_search_page(self):
-        '''This testcase need at least three pages.
-        '''
         page = HomePage(self.driver, self.domain)
         page = page.search("")
         self.generalTest(
@@ -262,10 +317,7 @@ class FrontFuncSplitPageTC(FrontBasicTC):
             page=page,
         )
 
-    @tag("kkk")
     def test_detail_page(self):
-        '''This testcase need at least three pages.
-        '''
         page = HomePage(self.driver, self.domain)
         page = page.search("rbq")
         page = page.goDetailPage(0)
