@@ -308,7 +308,6 @@ class FrontFuncSplitPageTC(FrontBasicTC):
 
             page.checkBtnShow()
 
-    @tag("kkk")
     def test_search_page(self):
         page = HomePage(self.driver, self.domain)
         page = page.search("")

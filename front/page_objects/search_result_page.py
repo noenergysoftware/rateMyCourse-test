@@ -22,11 +22,11 @@ class SearchResultPage(SplitBasePage):
         self.course_type_xpath = "./div[2]/div[1]/div[3]/div[2]"
         self.course_credit_xpath = "./div[2]/div[1]/div[4]/div[2]"
 
-        self.course_rank_id = "rank_number_{0}"
-        self.course_difficulty_id = "difficulty_score_{0}"
-        self.course_funny_id = "funny_score_{0}"
-        self.course_gain_id = "gain_score_{0}"
-        self.course_recommend_id = "recommend_score_{0}"
+        # self.course_rank_id = "rank_number_{0}"
+        self.course_difficulty_id = "difficulty_score_"
+        self.course_funny_id = "funny_score_"
+        self.course_gain_id = "gain_score_"
+        self.course_recommend_id = "recommend_score_"
 
         def getForm(block):
             res = {}
@@ -40,12 +40,25 @@ class SearchResultPage(SplitBasePage):
                 res[key] = block.find_element_by_xpath(xpath).text
             res["credit"] = float(block.find_element_by_xpath(self.course_credit_xpath).text)
 
-            # TODO Here still to be developed
-            # rank = int(div.find_element_by_id(self.course_rank_id.format(index)).text)
-            # difficulty = int(div.find_element_by_id(self.course_difficulty_id.format(index)).text)
-            # funny = int(div.find_element_by_id(self.course_funny_id.format(index)).text)
-            # gain = int(div.find_element_by_id(self.course_gain_id.format(index)).text)
-            # recommend = int(div.find_element_by_id(self.course_recommend_id.format(index)).text)
+            def getScore(div):
+                stars = div.find_elements_by_xpath("./img")
+                score = 0
+                for star in stars:
+                    src_attr = star.get_attribute("src")
+                    if "on" in src_attr:
+                        score += 1
+                    elif not "off" in src_attr:
+                        raise Exception("a src without on and off: {0}".foramt(src_attr))
+                return score
+
+            rank_dict = {
+                "difficulty": self.course_difficulty_id,
+                "funny": self.course_funny_id,
+                "gain": self.course_gain_id,
+                "recommend": self.course_recommend_id,
+            }
+            for key, ctl_id in rank_dict.items():
+                res[key] = getScore(block.find_element_by_xpath("//div[starts-with(@id, \"{0}\")]".format(ctl_id)))
 
             return res
 

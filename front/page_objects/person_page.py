@@ -69,7 +69,7 @@ class PersonPage(BasicPage):
         rs()
         res = {}
         text = self.waitAppear_ID(self.name_text_id)
-        res["name"] = text.get_attribute("value")
+        res["name"] = text.text
         res["role"] = self.getRoleValue()
         res["gender"] = self.getGenderValue()
         text = self.waitAppear_ID(self.intro_text_id)

@@ -49,6 +49,8 @@ class DetailPage(SplitBasePage):
             # jump_btn_loc        = (By.XPATH, "//nobr[@id='jump']/button"),
             split_btn_loc_temp  = (By.ID, "page{0}"),
             split_btn_div_loc   = (By.ID, "c_pagination"),
+            prev_dot_loc        = (By.ID, "page_dot"),
+            next_dot_loc        = (By.ID, "page_dot2"),
             now_index_text_loc  = (By.ID, "pagenum"),
             max_index_text_loc  = (By.ID, "totalpage"),
             block_div_loc       = (By.ID, "comment"),
