@@ -28,8 +28,7 @@ class FrontBasicTC(TestCase):
     def setUp(self):
         self.domain = "ratemycourse.tk"
 
-    def IDCheck(self, page, id_text_dict):
-        for text_id, exp_text in id_text_dict.items():
-            element = page.waitAppear_ID(text_id)
-            text = element.text
-            self.assertEqual(text, exp_text)
+    def assertDictEntry(self, dict_to_check, dict_should_contain):
+        for key, value in dict_should_contain.items():
+            self.assertTrue(key in dict_to_check.keys())
+            self.assertEquals(dict_to_check[key], dict_should_contain[key])

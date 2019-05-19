@@ -140,6 +140,23 @@ class BackUpdateTC(BackPostCheckDBTC):
     def test_auto(self):
         self.autoTest(os.path.join(BACK_TEST_DIR, "test_update.pd.json"))
 
+    def test_update_user_profile_photo(self):
+        url = "https://www.example.com"
+        with LoginStatus(self, "rbq", "rbq"):
+            self.postContainTest(
+                "/updateUserProfilePhoto/",
+                {
+                    "username": "rbq",
+                    "profile_photo": url,
+                }
+            )
+        self.assertTrue(
+            User.objects.filter(
+                username="rbq",
+                profile_photo=url,
+            ).exists()
+        )
+
     @tag("foreign")
     def test_edit_comment(self):
         comment_ID = Comment.objects.get(content="rbq").id
@@ -302,6 +319,21 @@ class BackSearchTC(BackGetCheckBodyTC):
     @tag("auto")
     def test_auto(self):
         self.autoTest(os.path.join(BACK_TEST_DIR, "test_search.gb.json"))
+
+    def test_get_user_profile_photo(self):
+        with LoginStatus(self, "ming", "ming"):
+            body, retdict, response = self.getJsonBody(
+                "/getUserProfilePhoto/",
+                {
+                    "username": "ming"
+                }
+            )
+            self.checkDictEntry(
+                retdict,
+                {
+                    "profile_photo": "https://i.loli.net/2019/05/19/5ce0ea8b787c711513.jpg",
+                }
+            )
 
     def test_get_user_detail(self):
         body, retdict, response = self.getJsonBody(

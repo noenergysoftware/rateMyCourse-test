@@ -1,4 +1,4 @@
-
+from contextlib import contextmanager
 from unittest import skip
 
 from django.test import tag
@@ -41,6 +41,7 @@ class FrontFuncLogInTC(FrontBasicTC):
             self.assertEqual(form["gender"], "M")
             self.assertEqual(form["intro"], "mingming")
 
+    @skip
     @tag(TAG_DB_MODIFY)
     def test_comment(self):
         test_words = "test_login_comment_is_mine"
@@ -124,39 +125,40 @@ class FrontFuncLogOutTC(FrontBasicTC):
     def checkIsLogOut(self, page):
         btn = page.waitAppear_ID(page.login_page_btn_id)
 
+    @contextmanager
+    def LogAndCheckLogOut(self, name="rbq", password="rbq") -> HomePage:
+        try:
+            page = HomePage(self.driver, self.domain)
+            with LogStatus(page, name, password) as page:
+                yield page
+                page = page.logout()
+                page.checkIsSelf()
+                self.checkIsLogOut(page)
+        finally:
+            pass
+
     def test_home(self):
-        page = HomePage(self.driver, self.domain)
-        with LogStatus(page, "rbq", "rbq") as page:
-            page = page.logout()
-            page.checkIsSelf()
-            self.checkIsLogOut(page)
+        with self.LogAndCheckLogOut() as page:
+            pass
 
     def test_search(self):
-        page = HomePage(self.driver, self.domain)
-        with LogStatus(page, "rbq", "rbq") as page:
+        with self.LogAndCheckLogOut() as page:
             page = page.search("rbq")
-            page = page.logout()
-            page.checkIsSelf()
-            self.checkIsLogOut(page)
 
     def test_detail(self):
-        page = HomePage(self.driver, self.domain)
-        with LogStatus(page, "rbq", "rbq") as page:
+        with self.LogAndCheckLogOut() as page:
             page = page.search("rbq")
             page = page.goDetailPage(0)
-            page = page.logout()
-            page.checkIsSelf()
-            self.checkIsLogOut(page)
 
     def test_comment(self):
-        page = HomePage(self.driver, self.domain)
-        with LogStatus(page, "rbq", "rbq") as page:
+        with self.LogAndCheckLogOut() as page:
             page = page.search("rbq")
             page = page.goDetailPage(0)
             page = page.goCommentPage()
-            page = page.logout()
-            page.checkIsSelf()
-            self.checkIsLogOut(page)
+
+    def test_person(self):
+        with self.LogAndCheckLogOut() as page:
+            page = page.goPersonPage()
 
 
 @tag(TAG_FRONT)
@@ -190,6 +192,7 @@ class FrontFuncSearchTC(FrontBasicTC):
             "第三次世界大战",
             "如何进牢子"
         ]
+        rs()
         for course_name in course_names_list:
             self.checkCourseExist(page, course_name)
 
@@ -316,6 +319,7 @@ class FrontFuncSplitPageTC(FrontBasicTC):
             page=page,
         )
 
+    @skip
     def test_detail_page(self):
         page = HomePage(self.driver, self.domain)
         page = page.search("rbq")
@@ -324,3 +328,47 @@ class FrontFuncSplitPageTC(FrontBasicTC):
             num_per_page=5,
             page=page,
         )
+
+
+class FrontFuncPersonInfoTC(FrontBasicTC):
+    def test_modify_form(self):
+        page = HomePage(self.driver, self.domain)
+        with LogStatus(page, "rbq", "rbq") as page:
+            page = page.goPersonPage()
+
+            old_form = page.getForm()
+            test_form = {
+                "role": "S",
+                "gender": "M",
+                "intro": "__test_modify_form__"
+            }
+
+            page.setForm(test_form)
+            page.submit()
+            self.assertDictEntry(page.getForm(), test_form)
+
+            page.setForm(old_form)
+            page.submit()
+            self.assertDictEntry(page.getForm(), old_form)
+
+    @tag("kkk")
+    @tag(TAG_DB_MODIFY)
+    def test_modify_photo(self):
+        page = HomePage(self.driver, self.domain)
+        with LogStatus(page, "rbq", "rbq") as page:
+            page = page.goPersonPage()
+
+            rs()
+            old_url = page.getImageURL()
+            test_path = "D:/code_concerned/ruangong/rateMyCourse_back/test/front/test_image.png" # TODO Move out
+
+            page.uploadPage_wholeProcess(test_path)
+            rs()
+            new_url = page.getImageURL()
+
+            self.assertIsNotNone(old_url)
+            self.assertIsNotNone(new_url)
+            self.assertNotEquals(old_url, new_url)
+            # Maybe We can check photo's content. 
+            # However the photo may be editted or compressed, 
+            # so it seems impossible.

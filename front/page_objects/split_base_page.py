@@ -1,5 +1,6 @@
 from .basic_page import BasicPage
 from functools import wraps
+from test.front.util import rs
 
 import copy
 
@@ -59,6 +60,8 @@ class SplitBasePage(BasicPage):
                 self.now_index += 1
             elif func_comp(f, SplitBasePage.jumpSplit):
                 self.now_index = args[0]
+
+            rs()
             return res
         return wrap_func
 
@@ -105,6 +108,7 @@ class SplitBasePage(BasicPage):
     def getMaxIndex(self):
         div = self.waitAppear(self.split_btn_div_loc)
         btn_list = div.find_elements_by_xpath("./*")
+
         return len(btn_list) - 4
         # return int(self.waitAppear(self.max_index_text_loc).text)
 

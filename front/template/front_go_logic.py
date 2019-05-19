@@ -1,4 +1,5 @@
 from unittest import skip
+from contextlib import contextmanager
 
 from django.test import tag
 
@@ -210,13 +211,28 @@ class FrontLoginGoLogicTC(FrontBasicTC):
 
 
 @tag(TAG_FRONT)
-@skip
 class FrontPersonGoLogicTC(FrontBasicTC):
-    def createInitPage(self):
-        homepage = HomePage(self.driver, self.domain)
-        personpage = None
-        # TDOO need login
-        return personpage
+    @contextmanager
+    def LogAndOpenPerson(self, name, password):
+        try:
+            page = HomePage(self.driver, self.domain)
+            with LogStatus(page, name, password) as page:
+                yield page.goPersonPage()
+        finally:
+            pass
 
-    # TODO I don't know this page's go logic
+    def test_home(self):
+        with self.LogAndOpenPerson("ming", "ming") as page:
+            page = page.goHomePage()
+            page.checkIsSelf()
+
+    def test_self_normal(self):
+        with self.LogAndOpenPerson("ming", "ming") as page:
+            page = page.goPersonPage()
+            page.checkIsSelf()
+
+    def test_self_submit(self):
+        with self.LogAndOpenPerson("ming", "ming") as page:
+            page.submit()
+            page.checkIsSelf()
     

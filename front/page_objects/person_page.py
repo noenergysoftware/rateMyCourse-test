@@ -22,6 +22,14 @@ class PersonPage(BasicPage):
         self.gender_female_id = "gender_female"
         self.gender_secret_id = "gender_secret"
         self.intro_text_id = "personalIntroduce"
+        self.submit_btn_id = "modify"
+
+        self.photo_exhibit_img_loc = (By.ID, "user_profile_photo")
+        self.photo_open_dialog_btn_id = "show_modal"
+        self.photo_open_file_input_id = "photoInput"
+        self.photo_cancel_cross_btn_id = "close_modal"
+        self.photo_submit_btn_xpath = "//div[@id='changeModal']//button[text()='提交']"
+        self.photo_cancel_text_btn_id = "//div[@id='changeModal']//button[text()='取消']"
 
         self.role_dict = {
                 "T": self.role_teacher_id,
@@ -77,11 +85,34 @@ class PersonPage(BasicPage):
         return res
 
     def setForm(self, form):
-        if "name" in form.keys():
-            self.waitAppear_ID(self.name_text_id).set_attribute("value", form["name"])
         if "role" in form.keys():
             self.setRoleValue(form["role"])
         if "gender" in form.keys():
             self.setGenderValue(form["gender"])
         if "intro" in form.keys():
-            self.waitAppear_ID(self.intro_text_id).set_attribute("value", form["intro"])
+            text = self.waitAppear_ID(self.intro_text_id)
+            text.clear()
+            text.send_keys(form["intro"])
+
+    def submit(self):
+        btn = self.waitAppear_ID(self.submit_btn_id)
+        btn.click()
+        self.alertAccept()
+
+    def uploadPage_wholeProcess(self, image_path):
+        btn = self.waitAppear_ID(self.photo_open_dialog_btn_id)
+        btn.click()
+
+        file_ctl = self.waitAppear_ID(self.photo_open_file_input_id)
+        file_ctl.send_keys(image_path)
+
+        rs()
+
+        btn = self.waitAppear_xpath(self.photo_submit_btn_xpath)
+        btn.click()
+        self.alertAccept()
+
+    def getImageURL(self) -> str:
+        img_ctl = self.waitAppear(self.photo_exhibit_img_loc)
+        src_text = img_ctl.get_attribute("src")
+        return src_text
