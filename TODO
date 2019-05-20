@@ -2,3 +2,5 @@
 * 为所有函数增加类型提示和docstring
 * 将所有subTest改成失败的话，直接整个TC都fail，因为我除了auto以外，所有的SubTest都只是表示的一个线性操作序列而已。
 * 为前测试点置换TestRunner，使得我不需要每次测试前后都手动flush数据库
+* 更进一步完善js覆盖率的检测体制
+    * 把FS_COVER这个config去掉，使得可以自动检测？

@@ -385,7 +385,6 @@ class FrontFuncRateCommentTC(FrontBasicTC):
         self.assertEquals(page.isThumbDown(index), is_down)
         self.assertEquals(page.getCommentRateRank(index), rate_rank)
 
-    @tag("kkk")
     @tag(TAG_DB_MODIFY)
     def test_rate_comment(self):
         '''This testcase takes very long time, at least 20s'''

@@ -23,13 +23,13 @@ class DetailPage(SplitBasePage):
         self.description_text_id = "coursedescription"
 
         self.comment_page_btn_id = "toComment"
-        self.comment_username_xpath = "./div[1]/p"
-        self.comment_teachername_xpath = "./table[1]/tbody/tr/td[2]/p"
+        self.comment_username_xpath = "./div[1]/p[1]"
+        self.comment_teachername_xpath = "./div[1]/p[3]"
         self.comment_content_xpath = "./div[2]/p"
-        self.comment_time_xpath = "./div[3]/a[last()]/p"
-        self.comment_thumb_up_btn_loc = (By.XPATH, "./div[3]/a[1]/i[1]")
-        self.comment_thumb_down_btn_loc = (By.XPATH, "./div[3]/a[1]/i[2]")
-        self.comment_rate_num_nobr_loc = (By.XPATH, "./div[3]/a[1]/nobr")
+        self.comment_time_xpath = "./div[3]/a[1]/p"
+        self.comment_thumb_up_btn_loc = (By.XPATH, "./div[3]/a[3]/i[1]")
+        self.comment_thumb_down_btn_loc = (By.XPATH, "./div[3]/a[3]/i[2]")
+        self.comment_rate_num_nobr_loc = (By.XPATH, "./div[3]/a[3]/nobr")
 
         def getForm(block):
             res = {}
