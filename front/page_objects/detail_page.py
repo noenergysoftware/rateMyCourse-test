@@ -27,6 +27,9 @@ class DetailPage(SplitBasePage):
         self.comment_teachername_xpath = "./table[1]/tbody/tr/td[2]/p"
         self.comment_content_xpath = "./div[2]/p"
         self.comment_time_xpath = "./div[3]/a[last()]/p"
+        self.comment_thumb_up_btn_loc = (By.XPATH, "./div[3]/a[1]/i[1]")
+        self.comment_thumb_down_btn_loc = (By.XPATH, "./div[3]/a[1]/i[2]")
+        self.comment_rate_num_nobr_loc = (By.XPATH, "./div[3]/a[1]/nobr")
 
         def getForm(block):
             res = {}
@@ -70,3 +73,37 @@ class DetailPage(SplitBasePage):
         btn = self.waitAppear_ID(self.comment_page_btn_id)
         btn.click()
         return CommentPage(self.driver)
+
+    def clickThumbUp(self, index):
+        block = self.getBlock(index)
+        btn = block.find_element(*self.comment_thumb_up_btn_loc)
+        btn.click()
+
+    def clickThumbDown(self, index):
+        block = self.getBlock(index)
+        btn = block.find_element(*self.comment_thumb_down_btn_loc)
+        btn.click()
+
+    def _isThumbClicked(self, ctl):
+        ctl_cls = ctl.get_attribute("class")
+        is_clicked = not "-o-" in ctl_cls
+        return is_clicked
+
+    def isThumbUp(self, index:int) -> bool:
+        block = self.getBlock(index)
+        btn = block.find_element(*self.comment_thumb_up_btn_loc)
+        return self._isThumbClicked(btn)
+
+    def isThumbDown(self, index:int) -> bool:
+        block = self.getBlock(index)
+        btn = block.find_element(*self.comment_thumb_down_btn_loc)
+        return self._isThumbClicked(btn)
+
+    def getCommentRateRank(self, index:int) -> int:
+        block = self.getBlock(index)
+        nobr_ctl = block.find_element(*self.comment_rate_num_nobr_loc)
+        rate_rank = 0
+        if len(nobr_ctl.text) > 0:
+            rate_rank = int(nobr_ctl.text)
+        return rate_rank
+

@@ -235,6 +235,7 @@ class FrontFuncSplitPageTC(FrontBasicTC):
     def generalTest(self, num_per_page:int, page:SplitBasePage):
         block_forms_list = {}
 
+        rs()
         with self.subTest(case_name="init"):
             self.assertEquals(page.getBlockNum(), num_per_page)
             block_forms_list[1] = self.getBlockForms(page)
@@ -331,6 +332,7 @@ class FrontFuncSplitPageTC(FrontBasicTC):
 
 
 class FrontFuncPersonInfoTC(FrontBasicTC):
+    @tag(TAG_DB_MODIFY)
     def test_modify_form(self):
         page = HomePage(self.driver, self.domain)
         with LogStatus(page, "rbq", "rbq") as page:
@@ -351,7 +353,6 @@ class FrontFuncPersonInfoTC(FrontBasicTC):
             page.submit()
             self.assertDictEntry(page.getForm(), old_form)
 
-    @tag("kkk")
     @tag(TAG_DB_MODIFY)
     def test_modify_photo(self):
         page = HomePage(self.driver, self.domain)
@@ -372,3 +373,120 @@ class FrontFuncPersonInfoTC(FrontBasicTC):
             # Maybe We can check photo's content. 
             # However the photo may be editted or compressed, 
             # so it seems impossible.
+
+class FrontFuncRateCommentTC(FrontBasicTC):
+    def goDetailPage(self, page:HomePage) -> DetailPage:
+        page = page.search("rbq")
+        page = page.goDetailPage(0)
+        return page
+
+    def checkRateState(self, page:DetailPage, index:int, is_up:bool, is_down:bool, rate_rank:int):
+        self.assertEquals(page.isThumbUp(index), is_up)
+        self.assertEquals(page.isThumbDown(index), is_down)
+        self.assertEquals(page.getCommentRateRank(index), rate_rank)
+
+    @tag("kkk")
+    @tag(TAG_DB_MODIFY)
+    def test_rate_comment(self):
+        '''This testcase takes very long time, at least 20s'''
+        page = HomePage(self.driver, self.domain)
+        with LogStatus(page, "rbq", "rbq") as page:
+            page = self.goDetailPage(page)
+            tci = 0 # target comment index
+
+            with self.subTest(case_name="init"):
+                self.checkRateState(
+                    page,
+                    tci,
+                    False,
+                    False,
+                    0
+                )
+
+            with self.subTest(case_name="agree_no2agree"):
+                page.clickThumbUp(tci)
+                rs()
+                self.checkRateState(
+                    page,
+                    tci,
+                    True,
+                    False,
+                    1
+                )
+
+            with self.subTest(case_name="agree_agree2no"):
+                page.clickThumbUp(tci)
+                rs()
+                self.checkRateState(
+                    page,
+                    tci,
+                    False,
+                    False,
+                    0
+                )
+
+            with self.subTest(case_name="disagree_no2disagree"):
+                page.clickThumbDown(tci)
+                rs()
+                self.checkRateState(
+                    page,
+                    tci,
+                    False,
+                    True,
+                    -1
+                )
+
+            with self.subTest(case_name="disagree_disagree2no"):
+                page.clickThumbDown(tci)
+                rs()
+                self.checkRateState(
+                    page,
+                    tci,
+                    False,
+                    False,
+                    0
+                )
+
+            with self.subTest(case_name="agree_again_no2agree"):
+                page.clickThumbUp(tci)
+                rs()
+                self.checkRateState(
+                    page,
+                    tci,
+                    True,
+                    False,
+                    1
+                )
+
+            with self.subTest(case_name="disagree_agree2disagree"):
+                page.clickThumbDown(tci)
+                rs()
+                self.checkRateState(
+                    page,
+                    tci,
+                    False,
+                    True,
+                    -1
+                )
+
+            with self.subTest(case_name="agree_disagree2agree"):
+                page.clickThumbUp(tci)
+                rs()
+                self.checkRateState(
+                    page,
+                    tci,
+                    True,
+                    False,
+                    1
+                )
+
+            with self.subTest(case_name="agree_reset_agree2no"):
+                page.clickThumbUp(tci)
+                rs()
+                self.checkRateState(
+                    page,
+                    tci,
+                    False,
+                    False,
+                    0
+                )

@@ -71,13 +71,16 @@ class SplitBasePage(BasicPage):
             self.block_cache = block_div.find_elements(*self.block_relative_loc)
         return self.block_cache
 
+    def getBlock(self, index):
+        if index >= self.getBlockNum():
+            raise Exception("Index {0} is too large.".format(index))
+        return self.getBlocks()[index]
+
     def getBlockNum(self):
         return len(self.getBlocks())
 
     def getBlockForm(self, index):
-        if index >= self.getBlockNum():
-            raise Exception("Index {0} is too large.".format(index))
-        block = self.getBlocks()[index]
+        block = self.getBlock(index)
         return self.form_get_method(block)
 
     @splitChanged
