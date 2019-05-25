@@ -1,6 +1,8 @@
 import copy
 import json
 
+# 该文件被创建用于自动生成一个json文件，这个文件中包含大量的可以被移进fixture中的课程模型。
+
 def gen(num):
     temp_course = {
         "model": "rateMyCourse.course",

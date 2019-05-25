@@ -149,7 +149,6 @@ class FrontCommentGoLogicTC(FrontBasicTC):
 
     @tag(TAG_DB_MODIFY)
     def test_detail(self):
-        # TODO This not pass, may somewhat wrong.
         page = HomePage(self.driver, self.domain)
         with LogStatus(page, "rbq", "rbq") as page:
             page = self.goInitPage(page)

@@ -1,3 +1,5 @@
+**本文档待废弃，该方法过于不灵活，需要换成一个更灵活的方式**
+
 # 类层次结构
     BackBasicTestCase
         - BackPostCheckDBTC

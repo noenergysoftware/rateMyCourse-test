@@ -1,7 +1,10 @@
+# 问题描述
+因为我们使用了腾讯验证码作为安全措施，但这个措施会导致自动测试的不可行。解决方案是本地架设了一台假的腾讯验证码服务器，然后利用Fiddler劫持一切发送给真的腾讯验证码服务器上的请求给假的上面去，从而确保自动化测试的可行性。
+
 # 基本构图
 就不画画了。
 
-将Fiddler设为浏览器，Python的代理，然后劫持所有发到ssl.captcha.qq.com的请求，使用本地的假的腾讯验证码服务器来处理。假的服务器的代码托管在了[这里](https://github.com/noenergysoftware/faketx).
+将Fiddler设为浏览器、Python的代理，然后劫持所有发到ssl.captcha.qq.com的请求，使用本地的假的腾讯验证码服务器来处理。假的服务器的代码托管在了[这里](https://github.com/noenergysoftware/faketx).
 
 劫持的内容很简单，主要是如何达到本地劫持的效果会要费点脑子。
 

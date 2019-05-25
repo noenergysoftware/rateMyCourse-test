@@ -88,6 +88,7 @@ class FrontFuncLogInTC(FrontBasicTC):
 
 @tag(TAG_FRONT)
 class FrontFuncRegistTC(FrontBasicTC):
+    @tag(TAG_DB_MODIFY)
     def test_regist_exist_user(self):
         page = HomePage(self.driver, self.domain)
         page = page.goRegistPage()
@@ -173,17 +174,7 @@ class FrontFuncSearchTC(FrontBasicTC):
     def checkNoResult(self, page):
         return page.isNoResult()
 
-    def test_search_exist(self):
-        page = HomePage(self.driver, self.domain)
-        page = page.search("rbq")
-        self.checkCourseExist(page, "rbq")
-
-    def test_search_not_exist(self):
-        page = HomePage(self.driver, self.domain)
-        page = page.search("test_course_not_exist")
-        self.checkNoResult(page)
-
-    def test_no_spec(self):
+    def test_spec_no(self):
         page = HomePage(self.driver, self.domain)
         page = page.search("")
         course_names_list = [
@@ -196,7 +187,7 @@ class FrontFuncSearchTC(FrontBasicTC):
         for course_name in course_names_list:
             self.checkCourseExist(page, course_name)
 
-    def test_only_spec_department(self):
+    def test_spec_depa_exist(self):
         page = HomePage(self.driver, self.domain)
         page.selectDepartmentByText("派出所")
         page = page.search("")
@@ -204,18 +195,28 @@ class FrontFuncSearchTC(FrontBasicTC):
         self.checkCourseNotExist(page, "rbq")
         self.checkCourseNotExist(page, "论持久战")
 
-    def test_spec_depa_and_name_exist(self):
+    def test_spec_name_not_exist(self):
+        page = HomePage(self.driver, self.domain)
+        page = page.search("test_course_not_exist")
+        self.checkNoResult(page)
+
+    def test_spec_name_exist_single(self):
+        page = HomePage(self.driver, self.domain)
+        page = page.search("rbq")
+        self.checkCourseExist(page, "rbq")
+
+    def test_spec_depa_name_not_exist_not_belong(self):
+        page = HomePage(self.driver, self.domain)
+        page.selectDepartmentByText("Office")
+        page = page.search("如何进牢子")
+        self.checkNoResult(page)
+
+    def test_spec_depa_name_exist_single(self):
         page = HomePage(self.driver, self.domain)
         page.selectDepartmentByText("Office")
         page = page.search("第三次世界大战")
         self.checkCourseExist(page, "第三次世界大战")
         self.assertEqual(page.getCourseNum(), 1)
-
-    def test_spec_depa_and_name_not_exist(self):
-        page = HomePage(self.driver, self.domain)
-        page.selectDepartmentByText("Office")
-        page = page.search("如何进牢子")
-        self.checkNoResult(page)
 
 
 @tag(TAG_FRONT)
