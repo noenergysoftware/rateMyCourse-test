@@ -27,6 +27,9 @@ class BasicPage:
         self.person_page_btn_id = "personalInfo"
         self.logout_btn_id = "logOut"
 
+    def refresh(self):
+        self.driver.refresh()
+
     def clearCookies(self):
         self.driver.delete_all_cookies()
 

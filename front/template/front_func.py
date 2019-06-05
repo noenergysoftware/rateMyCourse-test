@@ -490,3 +490,38 @@ class FrontFuncRateCommentTC(FrontBasicTC):
                     False,
                     0
                 )
+
+    
+class FrontFuncChildCommentTC(FrontBasicTC):
+    def test_check_exist(self):
+        page = HomePage(self.driver, self.domain)
+        page = page.search("如何进牢子")
+        page = page.goDetailPage(0)
+        page.clickChildCommentBtn(0)
+        form = page.getChildCommentForm(0, 0)
+        self.assertDictEntry(form, {
+            "username": "police",
+            "content": "那你很棒棒哦",
+        })
+
+    @tag(TAG_DB_MODIFY)
+    def test_create_new(self):
+        page = HomePage(self.driver, self.domain)
+        with LogStatus(page, "rbq", "rbq") as page:
+            page = page.search("rbq")
+            page = page.goDetailPage(0)
+            page.clickChildCommentBtn(0)
+
+            comment_text = "test_child_comment_create_new"
+            page.fillChildCommentTextarea(0, comment_text)
+            page.submitChildComment(0)
+            
+        page = HomePage(self.driver, self.domain)
+        page = page.search("rbq")
+        page = page.goDetailPage(0)
+        page.clickChildCommentBtn(0)
+        form = page.getChildCommentForm(0, 0)
+        self.assertDictEntry(form, {
+            "username": "rbq",
+            "content": comment_text,
+        })

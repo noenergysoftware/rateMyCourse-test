@@ -9,3 +9,7 @@ CACHES = {
         'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
     }
 }
+
+CSRF_TRUSTED_ORIGINS = [
+    "ratemycourse.tk"
+]

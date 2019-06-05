@@ -40,6 +40,7 @@ class LoginPage(BasicPage):
         return RegistPage(self.driver)
 
     def logIn(self, name, password):
+        rs()
         name_text = self.waitAppear_ID(self.name_text_id)
         name_text.send_keys(name)
         password_text = self.waitAppear_ID(self.password_text_id)

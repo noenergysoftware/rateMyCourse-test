@@ -56,11 +56,11 @@
   "fields": {
     "username": "ming",
     "mail": "ming@test.com",
+    "profile_photo": "https://i.loli.net/2019/05/19/5ce0ea8b787c711513.jpg",
     "password": "95c90aa47733b9023c318d9914606339",
     "role": "S",
     "self_introduction": "mingming",
-    "gender": "M",
-    "profile_photo": "https://i.loli.net/2019/05/19/5ce0ea8b787c711513.jpg"
+    "gender": "M"
   }
 },
 {
@@ -69,11 +69,11 @@
   "fields": {
     "username": "hong",
     "mail": "hong@test.com",
+    "profile_photo": "https://i.loli.net/2019/05/19/5ce0f5cb0751013593.jpg",
     "password": "88163c52fdb7520d2da5295dcb52bff0",
     "role": "S",
     "self_introduction": "honghong",
-    "gender": "F",
-    "profile_photo": "https://i.loli.net/2019/05/19/5ce0f5cb0751013593.jpg"
+    "gender": "F"
   }
 },
 {
@@ -82,6 +82,7 @@
   "fields": {
     "username": "qiang",
     "mail": "qiang@test.com",
+    "profile_photo": "https://i.loli.net/2019/05/14/5cda6706c2f0861301.jpg",
     "password": "fcdb06a72af0516502e5fdccc9181ee0",
     "role": "T",
     "self_introduction": "qiangqiang",
@@ -94,6 +95,7 @@
   "fields": {
     "username": "slave",
     "mail": "slave@test.com",
+    "profile_photo": "https://i.loli.net/2019/05/14/5cda6706c2f0861301.jpg",
     "password": "03158cf39c6f316f9ce98a4e034cdc28",
     "role": "O",
     "self_introduction": "slaveslave",
@@ -106,6 +108,7 @@
   "fields": {
     "username": "police",
     "mail": "police@test.com",
+    "profile_photo": "https://i.loli.net/2019/05/14/5cda6706c2f0861301.jpg",
     "password": "814989b983fd853fb374e1676a06ade4",
     "role": "T",
     "self_introduction": "policepolice",
@@ -118,6 +121,7 @@
   "fields": {
     "username": "rbq",
     "mail": "rbq@test.com",
+    "profile_photo": "https://i.loli.net/2019/05/14/5cda6706c2f0861301.jpg",
     "password": "9c92c67a42ff4cb9f48f096dba2fdcea",
     "role": "O",
     "self_introduction": "",
@@ -1610,6 +1614,622 @@
   }
 },
 {
+  "model": "rateMyCourse.rankcache",
+  "pk": 14,
+  "fields": {
+    "course": 14,
+    "count": 0,
+    "difficulty_score": 0.0,
+    "funny_score": 0.0,
+    "gain_score": 0.0,
+    "recommend_score": 0.0,
+    "position": -1.0,
+    "people": 0
+  }
+},
+{
+  "model": "rateMyCourse.rankcache",
+  "pk": 15,
+  "fields": {
+    "course": 15,
+    "count": 0,
+    "difficulty_score": 0.0,
+    "funny_score": 0.0,
+    "gain_score": 0.0,
+    "recommend_score": 0.0,
+    "position": -1.0,
+    "people": 0
+  }
+},
+{
+  "model": "rateMyCourse.rankcache",
+  "pk": 16,
+  "fields": {
+    "course": 16,
+    "count": 0,
+    "difficulty_score": 0.0,
+    "funny_score": 0.0,
+    "gain_score": 0.0,
+    "recommend_score": 0.0,
+    "position": -1.0,
+    "people": 0
+  }
+},
+{
+  "model": "rateMyCourse.rankcache",
+  "pk": 17,
+  "fields": {
+    "course": 17,
+    "count": 0,
+    "difficulty_score": 0.0,
+    "funny_score": 0.0,
+    "gain_score": 0.0,
+    "recommend_score": 0.0,
+    "position": -1.0,
+    "people": 0
+  }
+},
+{
+  "model": "rateMyCourse.rankcache",
+  "pk": 18,
+  "fields": {
+    "course": 18,
+    "count": 0,
+    "difficulty_score": 0.0,
+    "funny_score": 0.0,
+    "gain_score": 0.0,
+    "recommend_score": 0.0,
+    "position": -1.0,
+    "people": 0
+  }
+},
+{
+  "model": "rateMyCourse.rankcache",
+  "pk": 19,
+  "fields": {
+    "course": 19,
+    "count": 0,
+    "difficulty_score": 0.0,
+    "funny_score": 0.0,
+    "gain_score": 0.0,
+    "recommend_score": 0.0,
+    "position": -1.0,
+    "people": 0
+  }
+},
+{
+  "model": "rateMyCourse.rankcache",
+  "pk": 20,
+  "fields": {
+    "course": 20,
+    "count": 0,
+    "difficulty_score": 0.0,
+    "funny_score": 0.0,
+    "gain_score": 0.0,
+    "recommend_score": 0.0,
+    "position": -1.0,
+    "people": 0
+  }
+},
+{
+  "model": "rateMyCourse.rankcache",
+  "pk": 21,
+  "fields": {
+    "course": 21,
+    "count": 0,
+    "difficulty_score": 0.0,
+    "funny_score": 0.0,
+    "gain_score": 0.0,
+    "recommend_score": 0.0,
+    "position": -1.0,
+    "people": 0
+  }
+},
+{
+  "model": "rateMyCourse.rankcache",
+  "pk": 22,
+  "fields": {
+    "course": 22,
+    "count": 0,
+    "difficulty_score": 0.0,
+    "funny_score": 0.0,
+    "gain_score": 0.0,
+    "recommend_score": 0.0,
+    "position": -1.0,
+    "people": 0
+  }
+},
+{
+  "model": "rateMyCourse.rankcache",
+  "pk": 23,
+  "fields": {
+    "course": 23,
+    "count": 0,
+    "difficulty_score": 0.0,
+    "funny_score": 0.0,
+    "gain_score": 0.0,
+    "recommend_score": 0.0,
+    "position": -1.0,
+    "people": 0
+  }
+},
+{
+  "model": "rateMyCourse.rankcache",
+  "pk": 24,
+  "fields": {
+    "course": 24,
+    "count": 0,
+    "difficulty_score": 0.0,
+    "funny_score": 0.0,
+    "gain_score": 0.0,
+    "recommend_score": 0.0,
+    "position": -1.0,
+    "people": 0
+  }
+},
+{
+  "model": "rateMyCourse.rankcache",
+  "pk": 25,
+  "fields": {
+    "course": 25,
+    "count": 0,
+    "difficulty_score": 0.0,
+    "funny_score": 0.0,
+    "gain_score": 0.0,
+    "recommend_score": 0.0,
+    "position": -1.0,
+    "people": 0
+  }
+},
+{
+  "model": "rateMyCourse.rankcache",
+  "pk": 26,
+  "fields": {
+    "course": 26,
+    "count": 0,
+    "difficulty_score": 0.0,
+    "funny_score": 0.0,
+    "gain_score": 0.0,
+    "recommend_score": 0.0,
+    "position": -1.0,
+    "people": 0
+  }
+},
+{
+  "model": "rateMyCourse.rankcache",
+  "pk": 27,
+  "fields": {
+    "course": 27,
+    "count": 0,
+    "difficulty_score": 0.0,
+    "funny_score": 0.0,
+    "gain_score": 0.0,
+    "recommend_score": 0.0,
+    "position": -1.0,
+    "people": 0
+  }
+},
+{
+  "model": "rateMyCourse.rankcache",
+  "pk": 28,
+  "fields": {
+    "course": 28,
+    "count": 0,
+    "difficulty_score": 0.0,
+    "funny_score": 0.0,
+    "gain_score": 0.0,
+    "recommend_score": 0.0,
+    "position": -1.0,
+    "people": 0
+  }
+},
+{
+  "model": "rateMyCourse.rankcache",
+  "pk": 29,
+  "fields": {
+    "course": 29,
+    "count": 0,
+    "difficulty_score": 0.0,
+    "funny_score": 0.0,
+    "gain_score": 0.0,
+    "recommend_score": 0.0,
+    "position": -1.0,
+    "people": 0
+  }
+},
+{
+  "model": "rateMyCourse.rankcache",
+  "pk": 30,
+  "fields": {
+    "course": 30,
+    "count": 0,
+    "difficulty_score": 0.0,
+    "funny_score": 0.0,
+    "gain_score": 0.0,
+    "recommend_score": 0.0,
+    "position": -1.0,
+    "people": 0
+  }
+},
+{
+  "model": "rateMyCourse.rankcache",
+  "pk": 31,
+  "fields": {
+    "course": 31,
+    "count": 0,
+    "difficulty_score": 0.0,
+    "funny_score": 0.0,
+    "gain_score": 0.0,
+    "recommend_score": 0.0,
+    "position": -1.0,
+    "people": 0
+  }
+},
+{
+  "model": "rateMyCourse.rankcache",
+  "pk": 32,
+  "fields": {
+    "course": 32,
+    "count": 0,
+    "difficulty_score": 0.0,
+    "funny_score": 0.0,
+    "gain_score": 0.0,
+    "recommend_score": 0.0,
+    "position": -1.0,
+    "people": 0
+  }
+},
+{
+  "model": "rateMyCourse.rankcache",
+  "pk": 33,
+  "fields": {
+    "course": 33,
+    "count": 0,
+    "difficulty_score": 0.0,
+    "funny_score": 0.0,
+    "gain_score": 0.0,
+    "recommend_score": 0.0,
+    "position": -1.0,
+    "people": 0
+  }
+},
+{
+  "model": "rateMyCourse.rankcache",
+  "pk": 34,
+  "fields": {
+    "course": 34,
+    "count": 0,
+    "difficulty_score": 0.0,
+    "funny_score": 0.0,
+    "gain_score": 0.0,
+    "recommend_score": 0.0,
+    "position": -1.0,
+    "people": 0
+  }
+},
+{
+  "model": "rateMyCourse.rankcache",
+  "pk": 35,
+  "fields": {
+    "course": 35,
+    "count": 0,
+    "difficulty_score": 0.0,
+    "funny_score": 0.0,
+    "gain_score": 0.0,
+    "recommend_score": 0.0,
+    "position": -1.0,
+    "people": 0
+  }
+},
+{
+  "model": "rateMyCourse.rankcache",
+  "pk": 36,
+  "fields": {
+    "course": 36,
+    "count": 0,
+    "difficulty_score": 0.0,
+    "funny_score": 0.0,
+    "gain_score": 0.0,
+    "recommend_score": 0.0,
+    "position": -1.0,
+    "people": 0
+  }
+},
+{
+  "model": "rateMyCourse.rankcache",
+  "pk": 37,
+  "fields": {
+    "course": 37,
+    "count": 0,
+    "difficulty_score": 0.0,
+    "funny_score": 0.0,
+    "gain_score": 0.0,
+    "recommend_score": 0.0,
+    "position": -1.0,
+    "people": 0
+  }
+},
+{
+  "model": "rateMyCourse.rankcache",
+  "pk": 38,
+  "fields": {
+    "course": 38,
+    "count": 0,
+    "difficulty_score": 0.0,
+    "funny_score": 0.0,
+    "gain_score": 0.0,
+    "recommend_score": 0.0,
+    "position": -1.0,
+    "people": 0
+  }
+},
+{
+  "model": "rateMyCourse.rankcache",
+  "pk": 39,
+  "fields": {
+    "course": 39,
+    "count": 0,
+    "difficulty_score": 0.0,
+    "funny_score": 0.0,
+    "gain_score": 0.0,
+    "recommend_score": 0.0,
+    "position": -1.0,
+    "people": 0
+  }
+},
+{
+  "model": "rateMyCourse.rankcache",
+  "pk": 40,
+  "fields": {
+    "course": 40,
+    "count": 0,
+    "difficulty_score": 0.0,
+    "funny_score": 0.0,
+    "gain_score": 0.0,
+    "recommend_score": 0.0,
+    "position": -1.0,
+    "people": 0
+  }
+},
+{
+  "model": "rateMyCourse.rankcache",
+  "pk": 41,
+  "fields": {
+    "course": 41,
+    "count": 0,
+    "difficulty_score": 0.0,
+    "funny_score": 0.0,
+    "gain_score": 0.0,
+    "recommend_score": 0.0,
+    "position": -1.0,
+    "people": 0
+  }
+},
+{
+  "model": "rateMyCourse.rankcache",
+  "pk": 42,
+  "fields": {
+    "course": 42,
+    "count": 0,
+    "difficulty_score": 0.0,
+    "funny_score": 0.0,
+    "gain_score": 0.0,
+    "recommend_score": 0.0,
+    "position": -1.0,
+    "people": 0
+  }
+},
+{
+  "model": "rateMyCourse.rankcache",
+  "pk": 43,
+  "fields": {
+    "course": 43,
+    "count": 0,
+    "difficulty_score": 0.0,
+    "funny_score": 0.0,
+    "gain_score": 0.0,
+    "recommend_score": 0.0,
+    "position": -1.0,
+    "people": 0
+  }
+},
+{
+  "model": "rateMyCourse.rankcache",
+  "pk": 44,
+  "fields": {
+    "course": 44,
+    "count": 0,
+    "difficulty_score": 0.0,
+    "funny_score": 0.0,
+    "gain_score": 0.0,
+    "recommend_score": 0.0,
+    "position": -1.0,
+    "people": 0
+  }
+},
+{
+  "model": "rateMyCourse.rankcache",
+  "pk": 45,
+  "fields": {
+    "course": 45,
+    "count": 0,
+    "difficulty_score": 0.0,
+    "funny_score": 0.0,
+    "gain_score": 0.0,
+    "recommend_score": 0.0,
+    "position": -1.0,
+    "people": 0
+  }
+},
+{
+  "model": "rateMyCourse.rankcache",
+  "pk": 46,
+  "fields": {
+    "course": 46,
+    "count": 0,
+    "difficulty_score": 0.0,
+    "funny_score": 0.0,
+    "gain_score": 0.0,
+    "recommend_score": 0.0,
+    "position": -1.0,
+    "people": 0
+  }
+},
+{
+  "model": "rateMyCourse.rankcache",
+  "pk": 47,
+  "fields": {
+    "course": 47,
+    "count": 0,
+    "difficulty_score": 0.0,
+    "funny_score": 0.0,
+    "gain_score": 0.0,
+    "recommend_score": 0.0,
+    "position": -1.0,
+    "people": 0
+  }
+},
+{
+  "model": "rateMyCourse.rankcache",
+  "pk": 48,
+  "fields": {
+    "course": 48,
+    "count": 0,
+    "difficulty_score": 0.0,
+    "funny_score": 0.0,
+    "gain_score": 0.0,
+    "recommend_score": 0.0,
+    "position": -1.0,
+    "people": 0
+  }
+},
+{
+  "model": "rateMyCourse.rankcache",
+  "pk": 49,
+  "fields": {
+    "course": 49,
+    "count": 0,
+    "difficulty_score": 0.0,
+    "funny_score": 0.0,
+    "gain_score": 0.0,
+    "recommend_score": 0.0,
+    "position": -1.0,
+    "people": 0
+  }
+},
+{
+  "model": "rateMyCourse.rankcache",
+  "pk": 50,
+  "fields": {
+    "course": 50,
+    "count": 0,
+    "difficulty_score": 0.0,
+    "funny_score": 0.0,
+    "gain_score": 0.0,
+    "recommend_score": 0.0,
+    "position": -1.0,
+    "people": 0
+  }
+},
+{
+  "model": "rateMyCourse.rankcache",
+  "pk": 51,
+  "fields": {
+    "course": 51,
+    "count": 0,
+    "difficulty_score": 0.0,
+    "funny_score": 0.0,
+    "gain_score": 0.0,
+    "recommend_score": 0.0,
+    "position": -1.0,
+    "people": 0
+  }
+},
+{
+  "model": "rateMyCourse.rankcache",
+  "pk": 52,
+  "fields": {
+    "course": 52,
+    "count": 0,
+    "difficulty_score": 0.0,
+    "funny_score": 0.0,
+    "gain_score": 0.0,
+    "recommend_score": 0.0,
+    "position": -1.0,
+    "people": 0
+  }
+},
+{
+  "model": "rateMyCourse.rankcache",
+  "pk": 53,
+  "fields": {
+    "course": 53,
+    "count": 0,
+    "difficulty_score": 0.0,
+    "funny_score": 0.0,
+    "gain_score": 0.0,
+    "recommend_score": 0.0,
+    "position": -1.0,
+    "people": 0
+  }
+},
+{
+  "model": "rateMyCourse.rankcache",
+  "pk": 54,
+  "fields": {
+    "course": 54,
+    "count": 0,
+    "difficulty_score": 0.0,
+    "funny_score": 0.0,
+    "gain_score": 0.0,
+    "recommend_score": 0.0,
+    "position": -1.0,
+    "people": 0
+  }
+},
+{
+  "model": "rateMyCourse.teacherrankcache",
+  "pk": 1,
+  "fields": {
+    "teacher": 1,
+    "count": 0,
+    "difficulty_score": 1.0,
+    "funny_score": 2.0,
+    "gain_score": 3.0,
+    "recommend_score": 4.0,
+    "position": 1.0,
+    "people": 1
+  }
+},
+{
+  "model": "rateMyCourse.teacherrankcache",
+  "pk": 2,
+  "fields": {
+    "teacher": 2,
+    "count": 0,
+    "difficulty_score": 2.0,
+    "funny_score": 3.0,
+    "gain_score": 4.0,
+    "recommend_score": 5.0,
+    "position": 1.0,
+    "people": 2
+  }
+},
+{
+  "model": "rateMyCourse.teacherrankcache",
+  "pk": 3,
+  "fields": {
+    "teacher": 3,
+    "count": 0,
+    "difficulty_score": 5.0,
+    "funny_score": 5.0,
+    "gain_score": 5.0,
+    "recommend_score": 5.0,
+    "position": -1.0,
+    "people": 1
+  }
+},
+{
   "model": "rateMyCourse.comment",
   "pk": 1,
   "fields": {
@@ -2010,7 +2630,7 @@
   "pk": 2,
   "fields": {
     "password": "pbkdf2_sha256$120000$f3GQxdZQUzdU$OgNHHvNa8VxIGlU7MKtb1nnnQ1WCUgIpcOSNGJbtLnk=",
-    "last_login": "2019-05-07T08:27:16.807Z",
+    "last_login": "2019-06-05T03:03:35.275Z",
     "is_superuser": true,
     "username": "root",
     "first_name": "",
@@ -2045,6 +2665,14 @@
   "fields": {
     "session_data": "ODQxZTNjN2FkMDAzN2I3ZWE5ZjM3MTQ5ZjY4YWY5M2U1ZTc2Yzc0NDp7ImF1dGhfc2VzcyI6InJicSIsIl9zZXNzaW9uX2V4cGlyeSI6NzIwMH0=",
     "expire_date": "2019-05-07T09:18:54.237Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "71j3ltvau1xwu2orgcdgp9evzzdweegi",
+  "fields": {
+    "session_data": "NTVkNTQ2YWU5N2Y4ZDMyYWRhMTFjMjY0NzQ3OTlhOTgxOWY1YTY2Yjp7Il9hdXRoX3VzZXJfaWQiOiIyIiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQiLCJfYXV0aF91c2VyX2hhc2giOiIwYTNiNDg0MmJjYzQ3NDE5NDc5Y2NlZmIyYTM0YWE4OTZmOTdlZjM3In0=",
+    "expire_date": "2019-06-19T03:03:35.498Z"
   }
 },
 {
