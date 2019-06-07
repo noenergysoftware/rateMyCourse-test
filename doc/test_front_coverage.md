@@ -1,9 +1,21 @@
-# 基本流程
+本文档讲解了我们是如何使用JSCover来获得js代码文件的执行覆盖率的。如果只是想要使用该功能的话，可以直接跳到“封装后的执行流程”节。
+
+# 方法的概念性介绍
+1. 使用JSCover对js代码进行插桩，使得我们能够获得代码覆盖率。
+2. 对插桩后的代码执行测试样例。
+3. 将各测试样例的代码覆盖率导出保存起来。
+4. 合并各测试样例的代码覆盖率
+5. 使用合并后的代码覆盖率文件生成测试报告
+
+# 流程示意图
+![front_coverage.png](front_coverage.png)
+
+# 一般化的复杂实际流程
 0. 我们接下来会要启用local-storage，但在这个模式下生成的jscoverage.js文件是存在bug的。我们需要先用jscover在非local-storage模式下生成一个jscoverage.js，然后复制，找个地方保存下它，再继续操作。
     * 之所以需要启用local-storage，是为了让jscover的覆盖率变量在网页之间能够被共享，否则当我们切换页面的时候，旧页面的覆盖率变量就会丢失。
 1. jscover加工前端代码：使用filesystem模式，生成加入插桩代码后的前端代码，注意要启用local-storage模式。
 2. 将之前保存下来的非local-storage模式下的jscoverage.js拿出来，覆盖掉生成的local-storage模式下的jscoverage.js。
-3. 修改nginx的conf文件，使代理插桩后的前端代码（需要杀光nginx进程才能使得更改conf文件有效）
+3. 修改nginx的conf文件，使其代理插桩后的前端代码（需要杀光nginx进程才能使得更改conf文件有效）
 4. 修改测试代码，使得在每个webdriver要被销毁之前，调用jscoverage_serializeCoverageToJSON函数生成jscoverage.json文件。
     * 因为每个Testcase都有一个webdriver，所以我们为每一个testcase准备一个文件夹，然后在该文件夹下生成jscoverage.json文件。
 4. 运行测试样例。
@@ -14,7 +26,7 @@
 7. 使用edge打开jscoverage.html
     * 不能使用chrome，因为chrome禁止本地的文件访问。当然好像存在选项改，但还是直接Edge方便。
 
-# 封装后的详细流程
+# 封装后的简单执行流程
 1. 使用jscover插桩前端代码，示例命令：
     `java -Dfile.encoding=UTF-8 -jar test/JSCover-all.jar -fs --local-storage --no-branch --no-function --include-unloaded-js --no-instrument=/front_end/lib D:/code_concerned/ruangong/rateMyCourse_front D:/code_concerned/ruangong/rateMyCourse_front_coverage`
     * `Dfile.encoding=UTF-8`：这是为了避免插桩后的代码中的中文变成乱码
@@ -27,6 +39,7 @@
     * `D:/code_concerned/ruangong/rateMyCourse_front`：原代码
     * `D:/code_concerned/ruangong/rateMyCourse_front_coverage`：插桩后的代码的目录
 
+2. 用test/jscoverage.js覆盖掉插桩后的代码的目录下的jscoverage.js
 2. 运行测试样例
 3. 合并插桩记录，示例命令：
     `java -cp test/JSCover-all.jar jscover.report.Main --merge test/coverage/front/* D:/code_concerned/ruangong/rateMyCourse_front_coverage/`
@@ -37,5 +50,5 @@
 
 4. 使用edge打开插桩后的代码的目录下的jscoverage.html，查看结果。
 
-# 不使用Proxy的原因
-因为Proxy模式需要修改浏览器代理。而我们目前的本地测试环境使用了Fiddler作为浏览器代理，这两个代理也就冲突了。
+# 不使用JSCover的Proxy模式的原因
+因为JSCover的Proxy模式需要修改浏览器代理。而我们目前的本地测试环境使用了Fiddler作为浏览器代理，这两个代理也就冲突了。
