@@ -34,7 +34,6 @@ class BackCreateTC(BackPostCheckDBTC):
             ).exists()
         )
 
-    @tag("foreign")
     def test_make_comment(self):
         with LoginStatus(self, "hong", "hong"):
             self.postContainTest(
@@ -96,7 +95,6 @@ class BackCreateTC(BackPostCheckDBTC):
             }
         )
 
-    @tag("foreign")
     def test_make_rank(self):
         with LoginStatus(self, "hong", "hong"):
             self.postContainTest(
@@ -161,7 +159,6 @@ class BackUpdateTC(BackPostCheckDBTC):
             ).exists()
         )
 
-    @tag("foreign")
     def test_edit_comment(self):
         comment_ID = Comment.objects.get(content="rbq").id
         with LoginStatus(self, "rbq", "rbq"):
@@ -284,7 +281,6 @@ class BackUpdateTC(BackPostCheckDBTC):
                 }
             )
 
-    @tag("foreign")
     def test_make_rank(self):
         with LoginStatus(self, "rbq", "rbq"):
             self.postContainTest(

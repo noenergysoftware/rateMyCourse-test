@@ -4,9 +4,8 @@ from django.test import tag
 
 from test.front.page_objects import *
 from test.front.user_actions import *
-from .front_basic import FrontBasicTC, TAG_DB_MODIFY, TAG_FRONT
+from .front_basic import FrontBasicTC, TAG_DB_MODIFY
 
-@tag(TAG_FRONT)
 class FrontContentCheckTC(FrontBasicTC):
     def test_detail_course(self):
         page = HomePage(self.driver, self.domain)

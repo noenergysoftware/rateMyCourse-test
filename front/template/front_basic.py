@@ -8,8 +8,6 @@ from test.front.cover_saver import cover_saver
 from test.front.front_config import FS_COVER, PROXY_COVER
 
 TAG_DB_MODIFY = "db_modify"
-TAG_FRONT = "front"
-TAG_SPLIT = "split"
 
 class FrontBasicTC(TestCase):
     @classmethod

@@ -5,9 +5,8 @@ from django.test import tag
 
 from test.front.page_objects import *
 from test.front.user_actions import *
-from .front_basic import FrontBasicTC, TAG_DB_MODIFY, TAG_FRONT
+from .front_basic import FrontBasicTC, TAG_DB_MODIFY
 
-@tag(TAG_FRONT)
 class FrontHomeGoLogicTC(FrontBasicTC):
     def createInitPage(self):
         return HomePage(self.driver, self.domain)
@@ -39,7 +38,6 @@ class FrontHomeGoLogicTC(FrontBasicTC):
             page.checkIsSelf()
 
 
-@tag(TAG_FRONT)
 class FrontSearchGoLogicTC(FrontBasicTC):
     def createInitPage(self):
         homepage = HomePage(self.driver, self.domain)
@@ -74,7 +72,6 @@ class FrontSearchGoLogicTC(FrontBasicTC):
             page.checkIsSelf()
 
 
-@tag(TAG_FRONT)
 class FrontDetailGoLogicTC(FrontBasicTC):
     def createInitPage(self):
         homepage = HomePage(self.driver, self.domain)
@@ -114,7 +111,6 @@ class FrontDetailGoLogicTC(FrontBasicTC):
         commentpage.checkIsSelf()
 
 
-@tag(TAG_FRONT)
 class FrontCommentGoLogicTC(FrontBasicTC):
     def goInitPage(self, homepage):
         searchpage = homepage.search("rbq")
@@ -158,7 +154,6 @@ class FrontCommentGoLogicTC(FrontBasicTC):
             page.checkIsSelf()
 
 
-@tag(TAG_FRONT)
 class FrontRegistGoLogicTC(FrontBasicTC):
     def createInitPage(self):
         homepage = HomePage(self.driver, self.domain)
@@ -187,7 +182,6 @@ class FrontRegistGoLogicTC(FrontBasicTC):
         page.checkIsSelf()
 
 
-@tag(TAG_FRONT)
 class FrontLoginGoLogicTC(FrontBasicTC):
     def createInitPage(self):
         homepage = HomePage(self.driver, self.domain)
@@ -209,7 +203,6 @@ class FrontLoginGoLogicTC(FrontBasicTC):
         page.checkIsSelf()
 
 
-@tag(TAG_FRONT)
 class FrontPersonGoLogicTC(FrontBasicTC):
     @contextmanager
     def LogAndOpenPerson(self, name, password):

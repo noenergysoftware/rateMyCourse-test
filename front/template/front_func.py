@@ -6,10 +6,9 @@ from django.test import tag
 from test.front.page_objects import *
 from test.front.user_actions import *
 from test.front.util import rs
-from .front_basic import FrontBasicTC, TAG_DB_MODIFY, TAG_FRONT, TAG_SPLIT
+from .front_basic import FrontBasicTC, TAG_DB_MODIFY 
 
 
-@tag(TAG_FRONT)
 class FrontFuncLogInTC(FrontBasicTC):
     def test_login_exist_user(self):
         page = HomePage(self.driver, self.domain)
@@ -86,7 +85,6 @@ class FrontFuncLogInTC(FrontBasicTC):
             self.assertTrue(global_exist_flag, "Submitted Comment not Exist.")
 
 
-@tag(TAG_FRONT)
 class FrontFuncRegistTC(FrontBasicTC):
     @tag(TAG_DB_MODIFY)
     def test_regist_exist_user(self):
@@ -121,7 +119,6 @@ class FrontFuncRegistTC(FrontBasicTC):
         self.driver.delete_all_cookies()
 
 
-@tag(TAG_FRONT)
 class FrontFuncLogOutTC(FrontBasicTC):
     def checkIsLogOut(self, page):
         btn = page.waitAppear_ID(page.login_page_btn_id)
@@ -162,7 +159,6 @@ class FrontFuncLogOutTC(FrontBasicTC):
             page = page.goPersonPage()
 
 
-@tag(TAG_FRONT)
 class FrontFuncSearchTC(FrontBasicTC):
     def checkCourseExist(self, page, course_name):
         # TODO change split to check all results
@@ -219,7 +215,6 @@ class FrontFuncSearchTC(FrontBasicTC):
         self.assertEqual(page.getCourseNum(), 1)
 
 
-@tag(TAG_FRONT)
 class FrontFuncSplitPageTC(FrontBasicTC):
     '''This testcase need at least 9 pages.
     '''
