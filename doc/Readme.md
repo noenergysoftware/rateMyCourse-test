@@ -41,7 +41,7 @@
 3. gamma：通过鲁棒性、易用性检查。并通过alpha, beta阶段的回归测试。
 
 # 测试工具
-测试架构完全使用Django的django.test模块。
+测试模块完全使用Django的django.test模块。
 
 服务器端对两个测试点使用不同的做法：
 * 对于前测试点，因为需要在js代码中指定后端的域名+端口，所以无法使用django.test模块初始化时提供的具有随机端口的django测试服务器。所以我们每次进行前测试的时候，都需要手动在本地建立一个测试服务器，然后手动刷新一下它的数据库，将测试数据填充进去。
@@ -64,7 +64,7 @@
 因为我们使用了腾讯验证码作为安全措施，但这个措施会导致自动测试的不可行。解决方案是本地架设了一台假的腾讯验证码服务器，然后利用Fiddler劫持一切发送给真的腾讯验证码服务器上的请求给假的上面去，从而确保自动化测试的可行性。详见[劫持腾讯验证码服务器](rob_tx.md).
 
 端口情况：
-* nginx服务器，开在80端口，负责分发html, js文件。
+* nginx服务器，开在80端口，负责分发前端代码文件。
 * django服务器，开在随机用户端口，负责后端接口的供应。
 * faketx服务器，开在3668端口，负责假装自己是腾讯的验证码服务器
 * testcase进程，开在随机用户端口，负责调用selenium，然后selenium打开浏览器，请求nginx服务器获取网页文件，再通过ajax请求django服务器获取后端数据。
@@ -359,7 +359,9 @@ Mobile     | Firefox
 |          | Edge
 
 # 测试环境的缓存管理
-因为我们的项目使用了django提供的cache_page的FileCache来实现缓存机制，而测试环境下存在频繁而大量的数据变更，所以缓存机制对测试而言是个很麻烦的东西。因此我们不能使用FileCache，而是使用MemoryCache，也就是在test_settings.py中覆盖掉CACHES，转而使用LocMemCache，这样我们每次重启django服务器的时候缓存就会被清空。
+因为我们的项目使用了django提供的cache_page的FileCache来实现缓存机制，而测试环境下存在频繁而大量的数据变更，所以缓存机制对测试而言是个很麻烦的东西。因此我们不能使用FileCache，而是使用MemoryCache。
+
+最后的做法是在test_settings.py中覆盖掉CACHES，转而使用LocMemCache，这样我们每次重启django服务器的时候缓存就会被清空。
 
 # 测试结果
 详见[test_result.md](test_result.md)
