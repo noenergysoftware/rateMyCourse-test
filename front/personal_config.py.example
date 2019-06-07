@@ -1,2 +1,0 @@
-# 指示前测试点的覆盖率文件应该存到哪里去
-coverage_dir = "D:/coverage/"

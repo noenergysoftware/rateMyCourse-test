@@ -11,6 +11,3 @@ test.log
 # coverage
 coverage/
 JSCover-all.jar
-
-# sensitive infomation
-front/personal_config.py

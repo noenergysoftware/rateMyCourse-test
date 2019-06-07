@@ -351,9 +351,6 @@
 
 做法很简单，因为测试环境有一个统一的python入口：test_manage.py，所以我们在test_manage.py中引入这几个秘钥变量就可以了。
 
-# 针对本地测试环境的变量的管理
-前测试点测试中，有些变量是根据不同的本地测试环境需要发生变化的。这类变量都被放在[front/personal_config.py](../front/personal_config.py)中，你可以复制黏贴personal_config.py.example，然后略加修改即可。
-
 # 测试矩阵
 Platform   | Browser 
 :-:        | :-: 

@@ -11,6 +11,7 @@ class FrontHomeGoLogicTC(FrontBasicTC):
     def createInitPage(self):
         return HomePage(self.driver, self.domain)
 
+    @tag("kkk")
     def test_login(self):
         page = self.createInitPage()
         loginpage = page.goLoginPage()
@@ -45,6 +46,7 @@ class FrontSearchGoLogicTC(FrontBasicTC):
         searchpage.checkIsSelf()
         return searchpage
 
+    @tag("kkk")
     def test_home(self):
         searchpage = self.createInitPage()
         homepage = searchpage.goHomePage()
