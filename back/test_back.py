@@ -12,11 +12,7 @@ from rateMyCourse.models import (Comment, Course, MakeComment, TeachCourse,
 BACK_TEST_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # Test Cases
-@tag("back")
 class BackCreateTC(BackPostCheckDBTC):
-    @tag("auto")
-    def test_auto(self):
-        self.autoTest(os.path.join(BACK_TEST_DIR, "test_create.pd.json"))
 
     def test_sign_up(self):
         self.postContainTest(
@@ -134,11 +130,19 @@ class BackCreateTC(BackPostCheckDBTC):
         )
 
 
-@tag("back")
 class BackUpdateTC(BackPostCheckDBTC):
-    @tag("auto")
-    def test_auto(self):
-        self.autoTest(os.path.join(BACK_TEST_DIR, "test_update.pd.json"))
+    def test_update_user(self):
+        with LoginStatus(self, "rbq", "rbq"):
+            self.postAndCheck(
+                "/updateUser/",
+                "User",
+                {
+                    "username": "rbq",
+                    "role": "T",
+                    "gender": "M",
+                    "self_introduction": "hhh"
+                },
+            )
 
     def test_update_user_profile_photo(self):
         url = "https://www.example.com"
@@ -314,11 +318,107 @@ class BackUpdateTC(BackPostCheckDBTC):
         )
 
 
-@tag("back")
 class BackSearchTC(BackGetCheckBodyTC):
-    @tag("auto")
-    def test_auto(self):
-        self.autoTest(os.path.join(BACK_TEST_DIR, "test_search.gb.json"))
+    def test_search_teacher(self):
+        self.getAndCheck(
+            "/searchTeacher/",
+            {
+                "teacher_name": "qiang"
+            },
+            [
+                {
+                    "name": "qiang",
+                    "website": "http://www.qiang.com",
+                    "title": "First Qiang"
+                }
+            ],
+        )
+
+    def test_search_course(self):
+        self.getAndCheck(
+            "/searchCourse/",
+            {
+                "course_name": "如何进牢子"
+            },
+            [
+                {
+                    "name": "如何进牢子",
+                    "website": "http://www.jubao.com",
+                    "course_ID": "110",
+                    "description": "很简单",
+                    "course_type": "必修",
+                    "credit": 3
+                }
+            ]
+        )
+
+    def test_search_user(self):
+        self.getAndCheck(
+            "/searchUser/",
+            {
+                "username": "ming"
+            },
+            [
+                {
+                    "username": "ming",
+                    "mail": "ming@test.com",
+                    "role": "S",
+                    "gender": "M",
+                    "self_introduction": "mingming"
+                }
+            ]
+        )
+
+    def test_get_comment_by_course(self):
+        self.getAndCheck(
+            "/getCommentsByCourse/",
+            {
+                "course_ID": 110
+            },
+            [
+                {
+                    "username": "slave",
+                    "content": "我成功进去啦！"
+                },
+                {
+                    "username": "police",
+                    "content": "那你很棒棒哦"
+                }
+            ]
+        )
+
+    def test_search_course_by_department(self):
+        self.getAndCheck(
+            "/searchCourseByDepartment/",
+            {
+                "department": "Office",
+                "course_name": "论持久战"
+            },
+            [
+                {
+                    "name": "论持久战"
+                }
+            ]
+        )
+
+    def test_get_department(self):
+        self.getAndCheck(
+            "/getDepartment/",
+            {
+            },
+            [
+                {
+                    "name": "rbq"
+                },
+                {
+                    "name": "派出所",
+                    "website": "http://www.110.com"
+                },
+                {
+                    "name": "Office"
+                }
+            ]
+        )
 
     def test_get_user_profile_photo(self):
         with LoginStatus(self, "ming", "ming"):
@@ -456,7 +556,6 @@ class BackSearchTC(BackGetCheckBodyTC):
         self.assertEquals(retdict["rate"], 0)
 
 
-@tag("back")
 class BackHotCommentTC(BackGetCheckBodyTC):
     def test_get_hot_comment(self):
         course_ID = "110"
@@ -514,7 +613,6 @@ class BackHotCommentTC(BackGetCheckBodyTC):
                 )
 
 
-@tag("back")
 class BackAuthTC(BackBasicTestCase):
     def test_sign_in_with_username(self):
         try:
@@ -622,7 +720,6 @@ class BackAuthTC(BackBasicTestCase):
             self.client = Client()
 
 
-@tag("back")
 class BackCalRankTC(BackBasicTestCase):
     def test_simple_flush_rank(self):
         course_ID = "165486"

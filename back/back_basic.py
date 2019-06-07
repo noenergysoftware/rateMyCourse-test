@@ -112,57 +112,13 @@ class BackPostCheckDBTC(BackBasicTestCase):
             log.error("Error when checking body. Response is %s", response.content)
             raise e
 
-    def autoTest(self, testcase_file):
-        # Read Testcases from json
-        testcases = None
-        with open(testcase_file, "r", encoding="utf-8") as fd:
-            testcases = json.load(fd)
-
-        for case in testcases:
-            # Load json data
-            case_name = case[0]
-            url = case[1]
-            model_name = case[2]
-            prop_dict = case[3]
-            addition = {}
-            if len(case) > 4:
-                addition = case[4]
-
-            # Do Test
-            with self.subTest(case_name=case_name):
-                try:
-                    if addition and ("auth" in addition.keys()):
-                        auth_info = addition["auth"]
-                        with LoginStatus(self, auth_info["username"], auth_info["password"]):
-                            self.postAndCheck(
-                                url,
-                                model_name,
-                                prop_dict
-                            )
-                    else:
-                        self.postAndCheck(
-                            url,
-                            model_name,
-                            prop_dict
-                        )
-                except Exception as e:
-                    self.logError(str(e), case_name)
-                    raise e
-
-
 class BackGetCheckBodyTC(BackBasicTestCase):
     def setUp(self):
         super().setUp()
 
-    def getAndCheck(self, url, prop_dict, length, exp_list=[]):
+    def getAndCheck(self, url, prop_dict, exp_list=[]):
         body, retlist, response = self.getJsonBody(url, prop_dict)
         try:
-            self.assertDictEntry(
-                body,
-                {
-                    "length": length
-                }
-            )
             for i in range(len(exp_list)):
                 exist = False
                 for j in range(len(retlist)):
@@ -174,32 +130,3 @@ class BackGetCheckBodyTC(BackBasicTestCase):
             log.error("Error when checking body. Response is %s", response.content)
             raise e
 
-
-    def autoTest(self, testcase_file):
-        # Read Testcases from json
-        testcases = None
-        with open(testcase_file, "r", encoding="utf-8") as fd:
-            testcases = json.load(fd)
-
-        for case in testcases:
-            # Load json data
-            case_name = case[0]
-            url = case[1]
-            prop_dict = case[2]
-            length = case[3]
-            exp_list = []
-            if len(case) > 4:
-                exp_list = case[4]
-
-            # Do Test
-            with self.subTest(case_name=case_name):
-                try:
-                    self.getAndCheck(
-                        url,
-                        prop_dict,
-                        length,
-                        exp_list
-                    )
-                except Exception as e:
-                    self.logError(str(e), case_name)
-                    raise e
