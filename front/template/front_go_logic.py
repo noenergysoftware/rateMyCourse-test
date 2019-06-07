@@ -5,7 +5,7 @@ from django.test import tag
 
 from test.front.page_objects import *
 from test.front.user_actions import *
-from .front_basic import FrontBasicTC, TAG_DB_MODIFY
+from .front_basic import FrontBasicTC
 
 class FrontHomeGoLogicTC(FrontBasicTC):
     def createInitPage(self):
@@ -46,7 +46,6 @@ class FrontSearchGoLogicTC(FrontBasicTC):
         searchpage.checkIsSelf()
         return searchpage
 
-    @tag("kkk")
     def test_home(self):
         searchpage = self.createInitPage()
         homepage = searchpage.goHomePage()
@@ -145,7 +144,6 @@ class FrontCommentGoLogicTC(FrontBasicTC):
             page = page.goPersonPage()
             page.checkIsSelf()
 
-    @tag(TAG_DB_MODIFY)
     def test_detail(self):
         page = HomePage(self.driver, self.domain)
         with LogStatus(page, "rbq", "rbq") as page:
@@ -171,7 +169,6 @@ class FrontRegistGoLogicTC(FrontBasicTC):
         page = page.goLoginPage()
         page.checkIsSelf()
 
-    @tag(TAG_DB_MODIFY)
     def test_login_submit(self):
         page = self.createInitPage()
         page.fillForm(

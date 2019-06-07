@@ -6,7 +6,7 @@ from django.test import tag
 from test.front.page_objects import *
 from test.front.user_actions import *
 from test.front.util import rs
-from .front_basic import FrontBasicTC, TAG_DB_MODIFY 
+from .front_basic import FrontBasicTC
 
 
 class FrontFuncLogInTC(FrontBasicTC):
@@ -40,8 +40,6 @@ class FrontFuncLogInTC(FrontBasicTC):
             self.assertEqual(form["gender"], "M")
             self.assertEqual(form["intro"], "mingming")
 
-    @skip
-    @tag(TAG_DB_MODIFY)
     def test_comment(self):
         test_words = "test_login_comment_is_mine"
 
@@ -86,7 +84,6 @@ class FrontFuncLogInTC(FrontBasicTC):
 
 
 class FrontFuncRegistTC(FrontBasicTC):
-    @tag(TAG_DB_MODIFY)
     def test_regist_exist_user(self):
         page = HomePage(self.driver, self.domain)
         page = page.goRegistPage()
@@ -100,7 +97,6 @@ class FrontFuncRegistTC(FrontBasicTC):
         rs(min=3)
         page.checkIsSelf()
 
-    @tag(TAG_DB_MODIFY)
     def test_regist_not_exist_user(self):
         test_name = "__TRNEU__"
         test_pw = "abc123!@#"
@@ -316,7 +312,6 @@ class FrontFuncSplitPageTC(FrontBasicTC):
             page=page,
         )
 
-    @skip
     def test_detail_page(self):
         page = HomePage(self.driver, self.domain)
         page = page.search("rbq")
@@ -328,7 +323,6 @@ class FrontFuncSplitPageTC(FrontBasicTC):
 
 
 class FrontFuncPersonInfoTC(FrontBasicTC):
-    @tag(TAG_DB_MODIFY)
     def test_modify_form(self):
         page = HomePage(self.driver, self.domain)
         with LogStatus(page, "rbq", "rbq") as page:
@@ -349,7 +343,6 @@ class FrontFuncPersonInfoTC(FrontBasicTC):
             page.submit()
             self.assertDictEntry(page.getForm(), old_form)
 
-    @tag(TAG_DB_MODIFY)
     def test_modify_photo(self):
         page = HomePage(self.driver, self.domain)
         with LogStatus(page, "rbq", "rbq") as page:
@@ -381,7 +374,6 @@ class FrontFuncRateCommentTC(FrontBasicTC):
         self.assertEquals(page.isThumbDown(index), is_down)
         self.assertEquals(page.getCommentRateRank(index), rate_rank)
 
-    @tag(TAG_DB_MODIFY)
     def test_rate_comment(self):
         '''This testcase takes very long time, at least 20s'''
         page = HomePage(self.driver, self.domain)
@@ -499,7 +491,6 @@ class FrontFuncChildCommentTC(FrontBasicTC):
             "content": "那你很棒棒哦",
         })
 
-    @tag(TAG_DB_MODIFY)
     def test_create_new(self):
         page = HomePage(self.driver, self.domain)
         with LogStatus(page, "rbq", "rbq") as page:

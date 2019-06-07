@@ -321,10 +321,10 @@
 
 
 # 测试样例管理
-我们使用了django提供的tag来管理需要特殊对待的测试样例，使得在测试时可以选取测试样例执行。目前使用的tag包括
-* db_modify
-    * 用于前测试点，该测试样例会修改数据库，每次使用前需要刷新数据库，重新加载测试数据库。
-    * 待废弃
+我们使用了django提供的tag来管理需要特殊对待的测试样例，使得在测试时可以选取测试样例执行。目前使用的tag包括:
+* 无
+
+在我的不断努力下，已经没有需要特殊对待的测试样例了。
 
 
 # bug管理
@@ -335,16 +335,33 @@
     1. 若一切正常，关闭issue。
     2. 若出现问题，继续讨论解决。
 
-# 测试数据库
+# 测试数据
 使用`test/fixture.json`作为前测试点测试数据，`test/back_fixture.json`作为后测试点测试数据。
 
-通过以下指令导出：
+fixture可通过以下指令(back_fixtrue.json也是类似的指令)从数据库中导出：
 
     python test/test_manage.py dumpdata -e contenttypes -e admin -e auth.Permission --natural-foreign --indent=2 > test/fixture.json
 
 通过以下指令加载（注意是追加式的加载）：
 
     python test/test_manage.py loaddata test/fixture.json
+
+## 后测试点测试时的测试数据载入
+该工作完全交由django进行，我们在BackBasicTestCase中指定类属性fixtures，随后每次执行后测试时，django会自动根据该fixture创建一个测试数据库，随后都在该测试数据库上进行测试，直到测试结束，测试数据库自动销毁。
+
+一般地，可以通过执行该命令进行后测试：
+`python test/test_manage.py test test/back`
+
+## 前测试点测试时的测试数据载入
+这部分工作比较麻烦。因为前测试点需要一个具有固定端口的django服务器，而django自动创建的测试服务器是具有随机端口的。所以我们只能使用在测试开始前就启动的具有固定端口的django服务器的数据库作为测试数据库。
+
+为此我们构建了一个专门的TestRunner: ReloadTestRunner。该runner会在每次测试开始前自动地刷新数据库，并载入测试数据到数据库中。原理是简单地调用django内核中的flush和loaddata Command。
+
+一般地，可以通过执行该命令进行前测试：
+`python test/test_manage.py test test/front --testrunner=test.reload_runner.ReloadTestRunner`
+
+可以发现，和后测试的差别仅在于指定了test runner。事实上，后测试也可以指定这么一条，反正也没啥影响。
+
 
 # 测试环境下的秘钥管理
 因为我们的后端采用的方法是使用环境变量保存秘钥，然后在加载settings时读取秘钥，所以我们需要为测试环境也创造这些秘钥。

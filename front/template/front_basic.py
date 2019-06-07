@@ -6,8 +6,6 @@ from selenium.webdriver import DesiredCapabilities
 
 from test.front.cover_saver import cover_saver
 
-TAG_DB_MODIFY = "db_modify"
-
 class FrontBasicTC(TestCase):
     @classmethod
     def setUpClass(cls):
