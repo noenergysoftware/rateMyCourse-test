@@ -5,7 +5,6 @@ from selenium.webdriver.common.proxy import Proxy, ProxyType
 from selenium.webdriver import DesiredCapabilities
 
 from test.front.cover_saver import cover_saver
-from test.front.front_config import FS_COVER, PROXY_COVER
 
 TAG_DB_MODIFY = "db_modify"
 
@@ -18,8 +17,7 @@ class FrontBasicTC(TestCase):
 
     @classmethod
     def tearDownClass(cls):
-        if FS_COVER:
-            cover_saver.trySaveCoverageReport(cls.driver, name=cls.__name__)
+        cover_saver.trySaveCoverageReport(cls.driver, name=cls.__name__)
         cls.driver.close()
         super().tearDownClass()
 

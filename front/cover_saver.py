@@ -1,5 +1,5 @@
 import os
-from .front_config import COVERAGE_DIR
+from test.front.front_config import COVERAGE_DIR, MUST_FS_COVER
 
 class CoverSaver:
     def __init__(self):
@@ -8,6 +8,12 @@ class CoverSaver:
             os.mkdir(COVERAGE_DIR)
 
     def trySaveCoverageReport(self, driver, name=None):
+        has_jscover = driver.execute_script("return (typeof jscoverage_serializeCoverageToJSON) != \"undefined\"")
+        if not has_jscover:
+            if MUST_FS_COVER:
+                raise Exception("websites' code must be instrumented by JSCOVER since you have set MUST_FS_COVER true.")
+            return
+
         json_str = driver.execute_script("return jscoverage_serializeCoverageToJSON();")
 
         sub_dir = str(self.count)
