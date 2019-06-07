@@ -1,3 +1,10 @@
+# This file is not being used.
+# Because I have not found a good way to record log info.
+# However, the logger in this module can work well.
+# Sample Code:
+#   from .test_logger import log
+#   log.error("(%s) Test Fail. Response is [%s].\n\t%s", case_name, response.content, error_msg)
+
 import logging
 import sys
 import os

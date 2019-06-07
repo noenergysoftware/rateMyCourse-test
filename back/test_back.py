@@ -613,7 +613,7 @@ class BackHotCommentTC(BackGetCheckBodyTC):
                 )
 
 
-class BackAuthTC(BackBasicTestCase):
+class BackAuthTC(BackPostCheckDBTC):
     def test_sign_in_with_username(self):
         try:
             self.postContainTest(
