@@ -65,3 +65,25 @@ python覆盖率：
 * XSS攻击
 * Clickjacking攻击
 * 启用HSTS
+
+
+# Gamma阶段测试结果
+因为没有时间，所以Gamma阶段做的工作很少。
+
+测试样例总数目：110（含SubTest，所以直接看python unittest的报告的话是不准确的）
+
+## 前测试点
+commit: 9ce37a4fe68f55afb687025de7797800c8d5fb7b
+
+发现的bug：无
+
+js覆盖率：
+![gamma_front_coverage.png](gamma_front_coverage.png)
+
+## 后测试点
+commit: 443cb161baa64db789f31e57c02c64814aab5054
+
+发现的Bug: 无
+
+python覆盖率：
+![gamma_back_coverage.png](gamma_back_coverage.png)
