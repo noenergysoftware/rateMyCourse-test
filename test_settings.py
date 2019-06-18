@@ -1,5 +1,9 @@
 from flamenco.settings import *
 
+__CSRF_MIDWARE = "django.middleware.csrf.CsrfViewMiddleware"
+if __CSRF_MIDWARE in MIDDLEWARE:
+    MIDDLEWARE.remove(__CSRF_MIDWARE)
+
 FIXTURE_DIRS = [
     "test",
 ]
