@@ -379,10 +379,14 @@ PC         | Chrome
 Mobile     | Firefox
 |          | Edge
 
-# 测试环境的缓存管理
+# 测试环境下的django配置
+## 缓存管理
 因为我们的项目使用了django提供的cache_page的FileCache来实现缓存机制，而测试环境下存在频繁而大量的数据变更，所以缓存机制对测试而言是个很麻烦的东西。因此我们不能使用FileCache，而是使用MemoryCache。
 
 最后的做法是在test_settings.py中覆盖掉CACHES，转而使用LocMemCache，这样我们每次重启django服务器的时候缓存就会被清空。
+
+## CSRF
+测试环境下不知道为啥CSRF会出问题，我也没时间去研究明白到底为啥，所以测试环境下我就直接关掉它了。
 
 # 测试结果
 详见[test_result.md](test_result.md)
